@@ -1,0 +1,30 @@
+# Dependencies
+/node_modules
+/packages
+
+# Build results
+/build
+/dist
+/bin
+/obj
+
+# Rider
+.idea/
+*.sln.iml
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.sln.docstates
+
+# Log files
+*.log
+
+# Environment variables
+.env
+.env*.local
+
+# OS generated files
+.DS_Store
+Thumbs.db
