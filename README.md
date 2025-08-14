@@ -28,8 +28,8 @@ A aplicação será construída desde o início para suportar múltiplos inquili
 ### Aplicação Mobile
 *   **Framework:** React
 *   **Biblioteca de Componentes:** Material-UI
-*   **Tipo:** Progressive Web App (PWA)
 *   **Diretriz de Design:** Material UI (Google)
+*   **Tipo:** Progressive Web App (PWA)
 
 ### Banco de Dados
 *   **Tipo:** NoSQL
@@ -37,6 +37,8 @@ A aplicação será construída desde o início para suportar múltiplos inquili
 *   **Schema:** Compartilhado com um campo `TenantId` para isolamento de dados.
 
 ### Deploy
+*   **Plataforma:** OCI / AWS / GCP / Azure
+*   **Sistema Operacional:** Linux Ubuntu 22.04
 *   **Containerização:** Docker
 *   **Proxy Reverso:** Nginx
 
@@ -73,16 +75,15 @@ O sistema será dividido em três contêineres Docker distintos:
 
 A tabela abaixo resume os provedores de nuvem considerados para a hospedagem do projeto:
 
-| Provedor | Status | Custo/Mês | Recursos | Observações |
-|---|---|---|---|---|
-| 🟢 **Oracle Cloud** | ✅ Testado | **Grátis** | 1GB RAM | Always Free Tier |
-| 🟢 **Hostinger** | ✅ Testado | $8 | 2GB RAM | Boa performance |
-| 🟢 **DigitalOcean** | ✅ Testado | $12 | 2GB RAM | Documentação excelente |
-| 🟢 **Microsoft Azure** | ✅ Testado | $14 | 2GB RAM | Integração Microsoft |
-| 🟢 **AWS EC2** | ✅ Testado | $17 | 2GB RAM | Mais recursos |
-| 🟢 **Google Cloud** | ✅ Testado | $15 | 2GB RAM | Créditos iniciais |
-| 🟢 **Vultr** | ✅ Testado | $12 | 2GB RAM | Performance sólida |
-| 🟢 **Linode** | ✅ Testado | $12 | 2GB RAM | Suporte excelente |
+|       Provedor             Status     Custo/Mês    Recursos    Observações          |
+| 🟢 **Oracle Cloud**   | ✅ Testado | **Grátis** | 1GB RAM  | Always Free Tier      |
+| 🟢 **Hostinger**      | ✅ Testado | $8         | 2GB RAM  | Boa performance       |
+| 🟢 **DigitalOcean**   | ✅ Testado | $12        | 2GB RAM  | Documentação excelente|
+| 🟢 **Microsoft Azure**| ✅ Testado | $14        | 2GB RAM  | Integração Microsoft  |
+| 🟢 **AWS EC2**        | ✅ Testado | $17        | 2GB RAM  | Mais recursos         |
+| 🟢 **Google Cloud**   | ✅ Testado | $15        | 2GB RAM  | Créditos iniciais     |
+| 🟢 **Vultr**          | ✅ Testado | $12        | 2GB RAM  | Performance sólida    |
+| 🟢 **Linode**         | ✅ Testado | $12        | 2GB RAM  | Suporte excelente     |
 
 ## Estrutura do Projeto
 
