@@ -1,11 +1,11 @@
 # 💈 Projeto Barbearia (SaaS)
 
-[![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat&logo=dotnet)](https://dotnet.microsoft.com/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![Blazor](https://img.shields.io/badge/Blazor-512BD4?style=flat&logo=blazor&logoColor=white)](https://blazor.net/)
-[![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat&logo=angular&logoColor=white)](https://angular.io/)
-[![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
-[![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat&logo=nginx&logoColor=white)](https://nginx.org/)
+[![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat)](https://dotnet.microsoft.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=flat&logoColor=white)](https://www.mongodb.com/)
+[![Blazor](https://img.shields.io/badge/Blazor-512BD4?style=flat&logoColor=white)](https://blazor.net/)
+[![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat&logoColor=white)](https://angular.io/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logoColor=white)](https://www.docker.com/)
+[![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat&logoColor=white)](https://nginx.org/)
 
 Este documento descreve a arquitetura e as tecnologias escolhidas para o desenvolvimento do sistema de agendamento para barbearias, projetado como uma plataforma **Multi-Tenant (SaaS)**.
 
