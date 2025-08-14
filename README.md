@@ -36,6 +36,10 @@ A aplicação será construída desde o início para suportar múltiplos inquili
 *   **Sistema:** MongoDB
 *   **Schema:** Compartilhado com um campo `TenantId` para isolamento de dados.
 
+### Deploy
+*   **Containerização:** Docker
+*   **Proxy Reverso:** Nginx
+
 ## Arquitetura e Princípios de Design
 
 O desenvolvimento seguirá as melhores práticas para construir uma aplicação SaaS robusta, escalável e de fácil manutenção.
@@ -46,3 +50,71 @@ O desenvolvimento seguirá as melhores práticas para construir uma aplicação 
 *   **Test-Driven Development (TDD):** O desenvolvimento será orientado por testes, incluindo testes que garantam o correto isolamento de dados entre os inquilinos.
 *   **Repository Pattern:** A implementação do repositório garantirá que todas as operações de dados sejam automaticamente filtradas pelo `TenantId` do contexto da requisição.
 *   **Clean Code:** Serão aplicadas práticas de Clean Code.
+
+## Estratégia de Deploy (Cloud)
+
+A implantação do projeto será feita em um ambiente de nuvem, utilizando contêineres Docker para garantir consistência e escalabilidade.
+
+### Arquitetura de Contêineres
+
+O sistema será dividido em três contêineres Docker distintos:
+
+1.  **Backend (.NET API):** Um contêiner para a API backend.
+2.  **Frontend (Blazor & React):** Um contêiner servindo as aplicações frontend (a aplicação de desktop Blazor e a aplicação mobile PWA React).
+3.  **Banco de Dados (MongoDB):** Um contêiner dedicado para a instância do MongoDB.
+
+### Rede e Segurança
+
+*   **Proxy Reverso:** O Nginx atuará como um proxy reverso, direcionando o tráfego externo para os serviços apropriados.
+*   **Acesso Externo:** Apenas o contêiner do Frontend será exposto à internet através de portas específicas configuradas no servidor de nuvem.
+*   **Comunicação Interna:** A API e o Banco de Dados não serão acessíveis publicamente. A comunicação entre os contêineres (Frontend -> Backend -> Banco de Dados) ocorrerá em uma rede Docker privada, garantindo a segurança dos dados e da lógica de negócio.
+
+### Provedores de Nuvem Avaliados
+
+A tabela abaixo resume os provedores de nuvem considerados para a hospedagem do projeto:
+
+| Provedor | Status | Custo/Mês | Recursos | Observações |
+|---|---|---|---|---|
+| 🟢 **Oracle Cloud** | ✅ Testado | **Grátis** | 1GB RAM | Always Free Tier |
+| 🟢 **Hostinger** | ✅ Testado | $8 | 2GB RAM | Boa performance |
+| 🟢 **DigitalOcean** | ✅ Testado | $12 | 2GB RAM | Documentação excelente |
+| 🟢 **Microsoft Azure** | ✅ Testado | $14 | 2GB RAM | Integração Microsoft |
+| 🟢 **AWS EC2** | ✅ Testado | $17 | 2GB RAM | Mais recursos |
+| 🟢 **Google Cloud** | ✅ Testado | $15 | 2GB RAM | Créditos iniciais |
+| 🟢 **Vultr** | ✅ Testado | $12 | 2GB RAM | Performance sólida |
+| 🟢 **Linode** | ✅ Testado | $12 | 2GB RAM | Suporte excelente |
+
+## Estrutura do Projeto
+
+A estrutura de pastas do projeto foi desenhada para separar claramente as responsabilidades, seguindo os princípios da Clean Architecture.
+
+```
+/BarbeariaSaaS/
+|
+├── .git/
+├── MaterialDesign/
+|   ├── BarbeariaMobile/
+|   └── BardeariaDesktop/
+├── src/
+|   ├── Api/
+|   |   ├── Core/
+|   |   |   ├── Barbearia.Domain/
+|   |   |   └── Barbearia.Application/
+|   |   ├── Infrastructure/
+|   |   |   ├── Barbearia.Infrastructure.Data/
+|   |   |   └── Barbearia.Infrastructure.Identity/
+|   |   └── Presentation/
+|   |       └── Barbearia.Api/
+|   ├── Web.Desktop/
+|   └── Web.Mobile/
+|
+├── tests/
+|   ├── Api/
+|   |   ├── Barbearia.Domain.Tests/
+|   |   └── Barbearia.Application.Tests/
+|   └── Web.Desktop.Tests/
+|   └── Web.Mobile.Tests/
+|
+├── .gitignore
+└── README.md
+```
