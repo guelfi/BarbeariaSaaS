@@ -31,6 +31,13 @@ A aplicação será construída desde o início para suportar múltiplos inquili
 *   **Tipo:** Progressive Web App (PWA)
 *   **Diretriz de Design:** Material UI (Google)
 
+### 🖥️ Aplicação Administrativa SaaS
+*   **Propósito:** Dashboard para o administrador do SaaS, permitindo gerenciar barbearias associadas, criar planos de acesso, gerenciar recebimentos e outras funções administrativas.
+*   **Estilo:** Leve, elegante, moderno, clean e rápido.
+*   **Framework:** Blazor (para consistência com a aplicação desktop existente).
+*   **Biblioteca de Componentes:** MudBlazor (para consistência com a aplicação desktop existente).
+*   **Diretriz de Design:** Material UI (Google).
+
 ### 🗃️ Banco de Dados
 *   **Tipo:** NoSQL
 *   **Sistema:** MongoDB
@@ -109,7 +116,8 @@ A estrutura de pastas do projeto foi desenhada para separar claramente as respon
 |   |   └── Presentation/
 |   |       └── Barbearia.Api/
 |   ├── Web.Desktop/
-|   └── Web.Mobile/
+|   ├── Web.Mobile/
+|   └── Web.Admin/
 |
 ├── tests/
 |   ├── Api/
