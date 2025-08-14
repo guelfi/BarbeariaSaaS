@@ -143,36 +143,36 @@ A estrutura de pastas do projeto foi desenhada para separar claramente as respon
 ```
 /BarbeariaSaaS/
 |
-├── .git/                           # Controle de versão Git
-├── MaterialDesign/                 # Mockups e designs das interfaces
-|   ├── BarbeariaMobile/           # Designs mobile (17 arquivos PNG)
-|   └── BardeariaDesktop/          # Designs desktop (10 arquivos PNG)
-├── src/                           # Código fonte da aplicação
-|   ├── Api/                       # Backend .NET Core 8
-|   |   ├── Core/                  # Camada de domínio e aplicação
-|   |   |   ├── Barbearia.Domain/          # Entidades, agregados e regras de negócio
-|   |   |   └── Barbearia.Application/     # Casos de uso e serviços de aplicação
-|   |   ├── Infrastructure/        # Camada de infraestrutura
-|   |   |   ├── Barbearia.Infrastructure.Data/     # Acesso a dados MongoDB
+├── .git/                                          # Controle de versão Git
+├── MaterialDesign/                                # Mockups e designs das interfaces
+|   ├── BarbeariaMobile/                          # Designs mobile (17 arquivos PNG)
+|   └── BardeariaDesktop/                         # Designs desktop (10 arquivos PNG)
+├── src/                                          # Código fonte da aplicação
+|   ├── Api/                                      # Backend .NET Core 8
+|   |   ├── Core/                                 # Camada de domínio e aplicação
+|   |   |   ├── Barbearia.Domain/                # Entidades, agregados e regras de negócio
+|   |   |   └── Barbearia.Application/           # Casos de uso e serviços de aplicação
+|   |   ├── Infrastructure/                       # Camada de infraestrutura
+|   |   |   ├── Barbearia.Infrastructure.Data/   # Acesso a dados MongoDB
 |   |   |   └── Barbearia.Infrastructure.Identity/ # Autenticação JWT
-|   |   └── Presentation/          # Camada de apresentação
-|   |       └── Barbearia.Api/             # Controllers e configuração da API
-|   ├── Web.Desktop/               # Aplicação Blazor com MudBlazor
-|   ├── Web.Mobile/                # PWA Angular com Material-UI
-|   └── Web.Admin/                 # Dashboard admin SaaS (Blazor)
+|   |   └── Presentation/                         # Camada de apresentação
+|   |       └── Barbearia.Api/                   # Controllers e configuração da API
+|   ├── Web.Desktop/                              # Aplicação Blazor com MudBlazor
+|   ├── Web.Mobile/                               # PWA Angular com Material-UI
+|   └── Web.Admin/                                # Dashboard admin SaaS (Blazor)
 |
-├── tests/                         # Testes automatizados
-|   ├── Api/                       # Testes do backend
-|   |   ├── Barbearia.Domain.Tests/        # Testes unitários do domínio
-|   |   └── Barbearia.Application.Tests/   # Testes dos casos de uso
-|   ├── Web.Desktop.Tests/         # Testes da aplicação desktop
-|   └── Web.Mobile.Tests/          # Testes da aplicação mobile
+├── tests/                                        # Testes automatizados
+|   ├── Api/                                      # Testes do backend
+|   |   ├── Barbearia.Domain.Tests/              # Testes unitários do domínio
+|   |   └── Barbearia.Application.Tests/         # Testes dos casos de uso
+|   ├── Web.Desktop.Tests/                        # Testes da aplicação desktop
+|   └── Web.Mobile.Tests/                         # Testes da aplicação mobile
 |
-├── docs/                          # Documentação adicional
-├── specs/                         # Especificações e requisitos
-├── .gitignore                     # Arquivos ignorados pelo Git
-├── README.md                      # Documentação principal do projeto
-└── set_gemini_key.bat            # Script para configurar chave da API Gemini
+├── docs/                                         # Documentação adicional
+├── specs/                                        # Especificações e requisitos
+├── .gitignore                                    # Arquivos ignorados pelo Git
+├── README.md                                     # Documentação principal do projeto
+└── set_gemini_key.bat                           # Script para configurar chave da API Gemini
 ```
 
 ### 🎯 Status Atual do Desenvolvimento
