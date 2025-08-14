@@ -26,7 +26,7 @@ A aplicação será construída desde o início para suportar múltiplos inquili
 *   **Diretriz de Design:** Material UI (Google)
 
 ### 📱 Aplicação Mobile
-*   **Framework:** React
+*   **Framework:** Angular
 *   **Biblioteca de Componentes:** Material-UI
 *   **Tipo:** Progressive Web App (PWA)
 *   **Diretriz de Design:** Material UI (Google)
