@@ -6,6 +6,8 @@
 [![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat&logo=angular&logoColor=white)](https://angular.io/)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat&logo=nginx&logoColor=white)](https://nginx.org/)
+[![Cypress](https://img.shields.io/badge/Cypress-17202C?style=flat&logo=cypress&logoColor=white)](https://www.cypress.io/)
+[![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=postman&logoColor=white)](https://www.postman.com/)
 
 Este documento descreve a arquitetura e as tecnologias escolhidas para o desenvolvimento do sistema de agendamento para Barbearias, projetado como uma plataforma **Multi-Tenant (SaaS)**.
 
@@ -83,6 +85,12 @@ A aplicação será construída desde o início para suportar múltiplos inquili
 | **Framework** | Blazor Server | Dashboard para gestão do SaaS |
 | **UI Library** | MudBlazor | Consistência visual com desktop |
 | **Funcionalidades** | - | Gestão de tenants, planos e pagamentos |
+
+### 🧪 Testes e Qualidade
+| Componente | Tecnologia | Descrição |
+|------------|------------|-----------|
+| **Testes E2E** | Cypress | Testes automatizados End-to-End para validação completa do fluxo de usuário |
+| **Testes API** | Postman | Collections e environments para testes manuais e automatizados da API |
 
 ### ☁️ Infraestrutura
 | Componente | Tecnologia | Descrição |
@@ -167,7 +175,17 @@ A estrutura de pastas do projeto foi desenhada para separar claramente as respon
 |   |   ├── Barbearia.Domain.Tests/                 # Testes unitários do domínio
 |   |   └── Barbearia.Application.Tests/            # Testes dos casos de uso
 |   ├── Web.Desktop.Tests/                          # Testes da aplicação desktop
-|   └── Web.Mobile.Tests/                           # Testes da aplicação mobile
+|   ├── Web.Mobile.Tests/                           # Testes da aplicação mobile
+|   └── cypress/                                    # Testes E2E automatizados
+|       ├── e2e/                                    # Arquivos de teste Cypress
+|       ├── fixtures/                               # Dados de teste
+|       ├── support/                                # Comandos customizados e configurações
+|       └── cypress.config.js                       # Configuração do Cypress
+|
+├── postman/                                        # Coleções e ambientes Postman
+|   ├── collections/                                # Collections da API
+|   ├── environments/                               # Environments (dev, staging, prod)
+|   └── schemas/                                    # Schemas de validação JSON
 |
 ├── docs/                                           # Documentação adicional
 ├── specs/                                          # Especificações e requisitos
@@ -199,6 +217,8 @@ A estrutura de pastas do projeto foi desenhada para separar claramente as respon
 - MongoDB 7.0+
 - Docker & Docker Compose
 - VS Code / Kiro Dev
+- Cypress (para testes E2E)
+- Postman (para testes de API)
 - Gemini CLI
 
 ### Configuração do Ambiente
@@ -230,6 +250,12 @@ dotnet run --project src/Web.Desktop/
 
 # Executar aplicação Mobile (quando implementado)
 cd src/Web.Mobile && ng serve
+
+# Executar testes E2E com Cypress (quando implementado)
+npx cypress open
+
+# Executar testes de API com Postman (quando implementado)
+newman run postman/collections/api-tests.json -e postman/environments/development.json
 ```
 
 ## 📞 Contato e Contribuição
@@ -238,4 +264,4 @@ Para dúvidas, sugestões ou contribuições, entre em contato através dos cana
 
 ---
 
-**Desenvolvido com ❤️**
+**Desenvolvido com uso de AI**
