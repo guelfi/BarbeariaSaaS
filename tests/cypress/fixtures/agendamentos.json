@@ -1,0 +1,18 @@
+{
+  "agendamento_valido": {
+    "clienteId": "cliente-001",
+    "barbeiroId": "barbeiro-001",
+    "servicoId": "servico-001",
+    "dataHora": "2024-12-20T14:00:00Z",
+    "observacoes": "Corte degradê",
+    "tenantId": "tenant-001"
+  },
+  "agendamento_futuro": {
+    "clienteId": "cliente-002",
+    "barbeiroId": "barbeiro-001",
+    "servicoId": "servico-002",
+    "dataHora": "2024-12-25T10:30:00Z",
+    "observacoes": "Barba e bigode",
+    "tenantId": "tenant-001"
+  }
+}
