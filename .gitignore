@@ -25,6 +25,12 @@
 .env
 .env*.local
 
+# API Keys and sensitive files
+set_gemini_key.bat
+*_key.bat
+*.key
+appsettings.Development.json
+
 # OS generated files
 .DS_Store
 Thumbs.db
