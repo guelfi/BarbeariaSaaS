@@ -7,7 +7,7 @@
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat&logo=nginx&logoColor=white)](https://nginx.org/)
 
-Este documento descreve a arquitetura e as tecnologias escolhidas para o desenvolvimento do sistema de agendamento para barbearias, projetado como uma plataforma **Multi-Tenant (SaaS)**.
+Este documento descreve a arquitetura e as tecnologias escolhidas para o desenvolvimento do sistema de agendamento para Barbearias, projetado como uma plataforma **Multi-Tenant (SaaS)**.
 
 ## 📋 Índice
 
@@ -21,7 +21,7 @@ Este documento descreve a arquitetura e as tecnologias escolhidas para o desenvo
 
 ## 🚀 Visão Geral
 
-O projeto consiste em uma plataforma SaaS (Software as a Service) que permite a múltiplas barbearias ("inquilinos" ou "tenants") gerenciarem seus negócios de forma independente e segura. Cada barbearia terá acesso ao seu próprio ambiente dentro do sistema, que inclui uma API backend, uma aplicação desktop para administração e uma aplicação mobile para clientes.
+O projeto consiste em uma plataforma SaaS (Software as a Service) que permite a múltiplas Barbearias ("inquilinos" ou "tenants") gerenciarem seus negócios de forma independente e segura. Cada Barbearia terá acesso ao seu próprio ambiente dentro do sistema, que inclui uma API backend, uma aplicação dashboard web para administração e uma aplicação web mobile para clientes.
 
 ### 🎯 Funcionalidades Principais
 
@@ -34,13 +34,13 @@ O projeto consiste em uma plataforma SaaS (Software as a Service) que permite a 
 
 **Para Clientes:**
 - 📱 Agendamento via PWA mobile
-- 🔍 Busca de barbearias próximas
+- 🔍 Busca de Barbearias próximas
 - ⭐ Avaliação de serviços
 - 📅 Histórico de agendamentos
 - 🔔 Notificações push
 
 **Para Administradores SaaS:**
-- 🏢 Gestão de barbearias (tenants)
+- 🏢 Gestão de Barbearias (tenants)
 - 💳 Controle de planos e pagamentos
 - 📈 Analytics da plataforma
 - 🛠️ Configurações globais
@@ -50,7 +50,7 @@ O projeto consiste em uma plataforma SaaS (Software as a Service) que permite a 
 A aplicação será construída desde o início para suportar múltiplos inquilinos, garantindo segurança e isolamento de dados.
 
 *   **Modelo de Inquilinato:** Multi-tenancy será implementado em nível de aplicação com um **banco de dados compartilhado**.
-*   **Identificação do Inquilino:** A identificação do `TenantId` (ID da Barbearia) será feita através de um *claim* no **token JWT** do usuário após o login. Cada requisição à API conterá essa informação, garantindo que o usuário só possa acessar os dados da sua própria barbearia.
+*   **Identificação do Inquilino:** A identificação do `TenantId` (ID da Barbearia) será feita através de um *claim* no **token JWT** do usuário após o login. Cada requisição à API conterá essa informação, garantindo que o usuário só possa acessar os dados da sua própria Barbearia.
 *   **Isolamento de Dados:** No MongoDB, todos os documentos relevantes (Agendamentos, Clientes, Serviços, etc.) conterão um campo `TenantId`. A camada de acesso a dados (Repository Pattern) será responsável por filtrar automaticamente todas as consultas com base no `TenantId` do usuário autenticado, prevenindo qualquer vazamento de dados entre inquilinos.
 
 ## 🛠️ Stack de Tecnologia
@@ -63,14 +63,14 @@ A aplicação será construída desde o início para suportar múltiplos inquili
 | **Banco de Dados** | MongoDB | 7.0+ | NoSQL com schema compartilhado |
 | **ORM** | MongoDB.Driver | - | Driver oficial para .NET |
 
-### 💻 Aplicação Desktop
+### 💻 Aplicação Dashboard Web
 | Componente | Tecnologia | Descrição |
 |------------|------------|-----------|
 | **Framework** | Blazor Server | Interface administrativa responsiva |
 | **UI Library** | MudBlazor | Componentes Material Design |
 | **Styling** | Material UI | Design system do Google |
 
-### 📱 Aplicação Mobile
+### 📱 Aplicação Mobile Web 
 | Componente | Tecnologia | Descrição |
 |------------|------------|-----------|
 | **Framework** | Angular | PWA para clientes |
