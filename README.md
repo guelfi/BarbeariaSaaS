@@ -1,15 +1,15 @@
 # 💈 Projeto Barbearia (SaaS)
 
-[![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat)](https://dotnet.microsoft.com/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=flat&logoColor=white)](https://www.mongodb.com/)
-[![Blazor](https://img.shields.io/badge/Blazor-512BD4?style=flat&logoColor=white)](https://blazor.net/)
-[![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat&logoColor=white)](https://angular.io/)
-[![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logoColor=white)](https://www.docker.com/)
-[![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat&logoColor=white)](https://nginx.org/)
+[![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat&logo=dotnet)](https://dotnet.microsoft.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Blazor](https://img.shields.io/badge/Blazor-512BD4?style=flat&logo=blazor&logoColor=white)](https://blazor.net/)
+[![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat&logo=angular&logoColor=white)](https://angular.io/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat&logo=nginx&logoColor=white)](https://nginx.org/)
 
 Este documento descreve a arquitetura e as tecnologias escolhidas para o desenvolvimento do sistema de agendamento para barbearias, projetado como uma plataforma **Multi-Tenant (SaaS)**.
 
-## � VÍndice
+## 📋 Índice
 
 - [🚀 Visão Geral](#-visão-geral)
 - [🏛️ Arquitetura Multi-Tenant](#️-arquitetura-multi-tenant-saas)
@@ -70,14 +70,14 @@ A aplicação será construída desde o início para suportar múltiplos inquili
 | **UI Library** | MudBlazor | Componentes Material Design |
 | **Styling** | Material UI | Design system do Google |
 
-### �️ Aplicação Mobile
+### 📱 Aplicação Mobile
 | Componente | Tecnologia | Descrição |
 |------------|------------|-----------|
 | **Framework** | Angular | PWA para clientes |
 | **UI Library** | Angular Material | Componentes Material Design |
 | **Tipo** | Progressive Web App | Experiência nativa no mobile |
 
-### �️ Aaplicação Administrativa SaaS
+### 🖥️ Aplicação Administrativa SaaS
 | Componente | Tecnologia | Descrição |
 |------------|------------|-----------|
 | **Framework** | Blazor Server | Dashboard para gestão do SaaS |
@@ -146,34 +146,34 @@ A estrutura de pastas do projeto foi desenhada para separar claramente as respon
 |
 ├── .git/                                           # Controle de versão Git
 ├── MaterialDesign/                                 # Mockups e designs das interfaces
-|   ├── BarbeariaMobile/                           # Designs mobile (17 arquivos PNG)
-|   └── BardeariaDesktop/                          # Designs desktop (10 arquivos PNG)
-├── src/                                           # Código fonte da aplicação
-|   ├── Api/                                       # Backend .NET Core 8
-|   |   ├── Core/                                  # Camada de domínio e aplicação
-|   |   |   ├── Barbearia.Domain/                 # Entidades, agregados e regras de negócio
-|   |   |   └── Barbearia.Application/            # Casos de uso e serviços de aplicação
-|   |   ├── Infrastructure/                        # Camada de infraestrutura
-|   |   |   ├── Barbearia.Infrastructure.Data/    # Acesso a dados MongoDB
-|   |   |   └── Barbearia.Infrastructure.Identity/ # Autenticação JWT
-|   |   └── Presentation/                          # Camada de apresentação
-|   |       └── Barbearia.Api/                    # Controllers e configuração da API
-|   ├── Web.Desktop/                               # Aplicação Blazor com MudBlazor
-|   ├── Web.Mobile/                                # PWA Angular com Material-UI
-|   └── Web.Admin/                                 # Dashboard admin SaaS (Blazor)
+|   ├── BarbeariaMobile/                            # Designs mobile (17 arquivos PNG)
+|   └── BardeariaDesktop/                           # Designs desktop (10 arquivos PNG)
+├── src/                                            # Código fonte da aplicação
+|   ├── Api/                                        # Backend .NET Core 8
+|   |   ├── Core/                                   # Camada de domínio e aplicação
+|   |   |   ├── Barbearia.Domain/                   # Entidades, agregados e regras de negócio
+|   |   |   └── Barbearia.Application/              # Casos de uso e serviços de aplicação
+|   |   ├── Infrastructure/                         # Camada de infraestrutura
+|   |   |   ├── Barbearia.Infrastructure.Data/      # Acesso a dados MongoDB
+|   |   |   └── Barbearia.Infrastructure.Identity/  # Autenticação JWT
+|   |   └── Presentation/                           # Camada de apresentação
+|   |       └── Barbearia.Api/                      # Controllers e configuração da API
+|   ├── Web.Desktop/                                # Aplicação Blazor com MudBlazor
+|   ├── Web.Mobile/                                 # PWA Angular com Material-UI
+|   └── Web.Admin/                                  # Dashboard admin SaaS (Blazor)
 |
-├── tests/                                         # Testes automatizados
-|   ├── Api/                                       # Testes do backend
-|   |   ├── Barbearia.Domain.Tests/               # Testes unitários do domínio
-|   |   └── Barbearia.Application.Tests/          # Testes dos casos de uso
-|   ├── Web.Desktop.Tests/                         # Testes da aplicação desktop
-|   └── Web.Mobile.Tests/                          # Testes da aplicação mobile
+├── tests/                                          # Testes automatizados
+|   ├── Api/                                        # Testes do backend
+|   |   ├── Barbearia.Domain.Tests/                 # Testes unitários do domínio
+|   |   └── Barbearia.Application.Tests/            # Testes dos casos de uso
+|   ├── Web.Desktop.Tests/                          # Testes da aplicação desktop
+|   └── Web.Mobile.Tests/                           # Testes da aplicação mobile
 |
-├── docs/                                          # Documentação adicional
-├── specs/                                         # Especificações e requisitos
-├── .gitignore                                     # Arquivos ignorados pelo Git
-├── README.md                                      # Documentação principal do projeto
-└── set_gemini_key.bat                            # Script para configurar chave da API Gemini
+├── docs/                                           # Documentação adicional
+├── specs/                                          # Especificações e requisitos
+├── .gitignore                                      # Arquivos ignorados pelo Git
+├── README.md                                       # Documentação principal do projeto
+└── set_gemini_key.bat                              # Script para configurar chave da API Gemini
 ```
 
 ### 🎯 Status Atual do Desenvolvimento
@@ -198,7 +198,7 @@ A estrutura de pastas do projeto foi desenhada para separar claramente as respon
 - Node.js 18+ (para Angular)
 - MongoDB 7.0+
 - Docker & Docker Compose
-- VS Code com Kiro Dev
+- VS Code / Kiro Dev
 - Gemini CLI
 
 ### Configuração do Ambiente
@@ -238,4 +238,4 @@ Para dúvidas, sugestões ou contribuições, entre em contato através dos cana
 
 ---
 
-**Desenvolvido com ❤️ para revolucionar o mercado de barbearias**
+**Desenvolvido com ❤️**
