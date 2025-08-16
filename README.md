@@ -305,4 +305,4 @@ Para dúvidas, sugestões ou contribuições, entre em contato através dos cana
 
 ---
 
-**Desenvolvido com uso de AI**
+**Desenvolvido com uso de IA** 🧠
