@@ -4,6 +4,7 @@
 [![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Blazor](https://img.shields.io/badge/Blazor-512BD4?style=flat&logo=blazor&logoColor=white)](https://blazor.net/)
 [![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat&logo=angular&logoColor=white)](https://angular.io/)
+[![Sass](https://img.shields.io/badge/Sass-CC6699?style=flat&logo=sass&logoColor=white)](https://sass-lang.com/)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat&logo=nginx&logoColor=white)](https://nginx.org/)
 [![Cypress](https://img.shields.io/badge/Cypress-17202C?style=flat&logo=cypress&logoColor=white)](https://www.cypress.io/)
@@ -70,21 +71,31 @@ A aplicação será construída desde o início para suportar múltiplos inquili
 |------------|------------|-----------|
 | **Framework** | Blazor Server | Interface administrativa responsiva |
 | **UI Library** | MudBlazor | Componentes Material Design |
-| **Styling** | Material UI | Design system do Google |
+| **Styling** | Material UI + Sass/SCSS | Design system do Google com pré-processador CSS |
 
 ### 📱 Aplicação Mobile Web 
 | Componente | Tecnologia | Descrição |
 |------------|------------|-----------|
 | **Framework** | Angular | PWA para clientes |
 | **UI Library** | Angular Material | Componentes Material Design |
+| **Styling** | Sass/SCSS | Pré-processador CSS para estilos modulares e reutilizáveis |
 | **Tipo** | Progressive Web App | Experiência nativa no mobile |
 
 ### 🖥️ Aplicação Administrativa SaaS
 | Componente | Tecnologia | Descrição |
 |------------|------------|-----------|
 | **Framework** | Blazor Server | Dashboard para gestão do SaaS |
-| **UI Library** | MudBlazor | Consistência visual com desktop |
+| **UI Library** | MudBlazor | Componentes Material Design |
+| **Styling** | Sass/SCSS | Pré-processador CSS para temas e customizações |
 | **Funcionalidades** | - | Gestão de tenants, planos e pagamentos |
+
+### 🎨 Estilização e Design
+| Componente | Tecnologia | Descrição |
+|------------|------------|-----------|
+| **Pré-processador** | Sass/SCSS | Variáveis, mixins, funções e aninhamento para CSS modular |
+| **Metodologia** | BEM + SCSS | Organização de classes CSS com nomenclatura consistente |
+| **Temas** | CSS Custom Properties | Variáveis CSS nativas para temas dinâmicos |
+| **Responsividade** | CSS Grid + Flexbox | Layout responsivo e moderno |
 
 ### 🧪 Testes e Qualidade
 | Componente | Tecnologia | Descrição |
@@ -166,9 +177,38 @@ A estrutura de pastas do projeto foi desenhada para separar claramente as respon
 |   |   |   └── Barbearia.Infrastructure.Identity/  # Autenticação JWT
 |   |   └── Presentation/                           # Camada de apresentação
 |   |       └── Barbearia.Api/                      # Controllers e configuração da API
-|   ├── Web.Desktop/                                # Aplicação Blazor com MudBlazor
-|   ├── Web.Mobile/                                 # PWA Angular com Material-UI
+|   ├── Web.Desktop/                                # Aplicação Angular Desktop
+|   |   ├── src/                                    # Código fonte Angular
+|   |   ├── assets/                                 # Recursos estáticos
+|   |   └── styles/                                 # Arquivos Sass/SCSS
+|   |       ├── abstracts/                          # Variáveis, mixins, funções
+|   |       ├── base/                               # Reset, tipografia, elementos base
+|   |       ├── components/                         # Estilos de componentes
+|   |       ├── layout/                             # Header, footer, sidebar, grid
+|   |       ├── pages/                              # Estilos específicos de páginas
+|   |       ├── themes/                             # Temas claro/escuro
+|   |       └── main.scss                           # Arquivo principal de importação
+|   ├── Web.Mobile/                                 # PWA Angular Mobile
+|   |   ├── src/                                    # Código fonte Angular PWA
+|   |   ├── assets/                                 # Recursos estáticos mobile
+|   |   └── styles/                                 # Arquivos Sass/SCSS mobile
+|   |       ├── abstracts/                          # Variáveis mobile, breakpoints
+|   |       ├── base/                               # Reset mobile, tipografia touch
+|   |       ├── components/                         # Componentes mobile-first
+|   |       ├── layout/                             # Layouts mobile responsivos
+|   |       ├── pages/                              # Páginas específicas mobile
+|   |       ├── themes/                             # Temas mobile (claro/escuro)
+|   |       └── main.scss                           # Arquivo principal mobile
 |   └── Web.Admin/                                  # Dashboard admin SaaS (Blazor)
+|       ├── wwwroot/                                # Recursos estáticos Blazor
+|       └── Styles/                                 # Arquivos Sass/SCSS admin
+|           ├── abstracts/                          # Variáveis admin, cores SaaS
+|           ├── base/                               # Base styles para admin
+|           ├── components/                         # Componentes MudBlazor customizados
+|           ├── layout/                             # Layouts administrativos
+|           ├── pages/                              # Páginas admin específicas
+|           ├── themes/                             # Temas administrativos
+|           └── main.scss                           # Arquivo principal admin
 |
 ├── tests/                                          # Testes automatizados
 |   ├── Api/                                        # Testes do backend
@@ -214,6 +254,7 @@ A estrutura de pastas do projeto foi desenhada para separar claramente as respon
 ### Pré-requisitos
 - .NET 8.0 SDK
 - Node.js 18+ (para Angular)
+- Sass/SCSS (para pré-processamento CSS)
 - MongoDB 7.0+
 - Docker & Docker Compose
 - VS Code / Kiro Dev

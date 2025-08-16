@@ -1,9 +1,9 @@
 {
   "admin": {
-    "email": "admin@barbearia.com",
-    "password": "Admin123!",
+    "email": "guelfi@msn.com",
+    "password": "@5ST73EA4x",
     "role": "admin",
-    "tenantId": "tenant-001"
+    "tenantId": "saas-admin"
   },
   "barbeiro": {
     "email": "barbeiro@barbearia.com",

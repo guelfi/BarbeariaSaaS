@@ -1,0 +1,41 @@
+// ==========================================================================
+// Variables - Web Mobile (PWA)
+// ==========================================================================
+
+// Mobile-first approach with touch-friendly sizes
+
+// Colors (Material Design inspired)
+$primary-color: #DD0031;
+$primary-light: #FF5252;
+$primary-dark: #B71C1C;
+$secondary-color: #512BD4;
+$accent-color: #FF6C37;
+
+// Touch-friendly spacing
+$touch-target-min: 44px; // Minimum touch target size
+$spacing-touch: 12px;     // Touch-friendly spacing
+
+// Mobile typography
+$font-size-caption: 0.75rem;  // 12px
+$font-size-body2: 0.875rem;   // 14px
+$font-size-body1: 1rem;       // 16px
+$font-size-subtitle: 1.125rem; // 18px
+$font-size-title: 1.25rem;    // 20px
+$font-size-headline: 1.5rem;  // 24px
+$font-size-display: 2rem;     // 32px
+
+// Mobile breakpoints
+$mobile-xs: 320px;
+$mobile-sm: 375px;
+$mobile-md: 414px;
+$mobile-lg: 768px;
+
+// Safe areas for notched devices
+$safe-area-top: env(safe-area-inset-top);
+$safe-area-bottom: env(safe-area-inset-bottom);
+$safe-area-left: env(safe-area-inset-left);
+$safe-area-right: env(safe-area-inset-right);
+
+// PWA specific
+$pwa-header-height: 56px;
+$pwa-bottom-nav-height: 56px;

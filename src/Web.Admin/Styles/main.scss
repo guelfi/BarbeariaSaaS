@@ -1,0 +1,39 @@
+// ==========================================================================
+// Main SCSS - Web Admin (SaaS Dashboard)
+// ==========================================================================
+
+// 1. Abstracts
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+// 2. Base
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/base';
+
+// 3. Layout
+@import 'layout/sidebar';
+@import 'layout/header';
+@import 'layout/main';
+@import 'layout/dashboard-grid';
+
+// 4. Components
+@import 'components/buttons';
+@import 'components/forms';
+@import 'components/cards';
+@import 'components/tables';
+@import 'components/charts';
+@import 'components/stats';
+@import 'components/modals';
+
+// 5. Pages
+@import 'pages/login';
+@import 'pages/dashboard';
+@import 'pages/tenants';
+@import 'pages/analytics';
+@import 'pages/billing';
+@import 'pages/settings';
+
+// 6. Themes
+@import 'themes/admin-light';
+@import 'themes/admin-dark';
