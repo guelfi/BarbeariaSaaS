@@ -13,15 +13,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 // Shared Components
-import { PwaStatusComponent } from './components/pwa-status/pwa-status.component';
 import { LgpdBannerComponent } from './components/lgpd-banner/lgpd-banner.component';
 
 @NgModule({
   declarations: [
-    PwaStatusComponent,
     LgpdBannerComponent
   ],
   imports: [
@@ -38,8 +35,7 @@ import { LgpdBannerComponent } from './components/lgpd-banner/lgpd-banner.compon
     MatSnackBarModule,
     MatDividerModule,
     MatCheckboxModule,
-    MatTooltipModule,
-    MatBottomSheetModule
+    MatTooltipModule
   ],
   exports: [
     // Angular Material
@@ -53,10 +49,8 @@ import { LgpdBannerComponent } from './components/lgpd-banner/lgpd-banner.compon
     MatDividerModule,
     MatCheckboxModule,
     MatTooltipModule,
-    MatBottomSheetModule,
     
     // Shared Components
-    PwaStatusComponent,
     LgpdBannerComponent
   ]
 })

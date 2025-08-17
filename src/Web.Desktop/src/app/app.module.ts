@@ -16,6 +16,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
+import { PoliticaPrivacidadeComponent } from './pages/politica-privacidade/politica-privacidade.component';
 
 // Core Services
 import { AuthService } from './core/services/auth.service';
@@ -23,7 +25,8 @@ import { AuthGuard } from './core/guards/auth.guard';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PoliticaPrivacidadeComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +34,7 @@ import { AuthGuard } from './core/guards/auth.guard';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SharedModule,
     
     // Angular Material
     MatButtonModule,

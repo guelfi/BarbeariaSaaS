@@ -20,6 +20,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
+import { PoliticaPrivacidadeComponent } from './pages/politica-privacidade/politica-privacidade.component';
 
 // Core Services
 import { AuthService } from './core/services/auth.service';
@@ -30,7 +31,8 @@ import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PoliticaPrivacidadeComponent
   ],
   imports: [
     BrowserModule,

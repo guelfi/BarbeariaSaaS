@@ -1,0 +1,148 @@
+<!-- LGPD Banner -->
+<div 
+  class="lgpd-banner" 
+  [@slideUp]="isVisible ? 'visible' : 'hidden'"
+  [class.visible]="isVisible"
+  role="dialog"
+  aria-labelledby="lgpd-title"
+  aria-describedby="lgpd-description">
+  
+  <div class="lgpd-content">
+    
+    <!-- Ícone LGPD -->
+    <div class="lgpd-icon">
+      <mat-icon>security</mat-icon>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="lgpd-text">
+      <h3 id="lgpd-title" class="lgpd-title">
+        Proteção de Dados Pessoais - LGPD
+      </h3>
+      
+      <p id="lgpd-description" class="lgpd-description">
+        Utilizamos cookies e tecnologias similares para melhorar sua experiência, personalizar conteúdo e analisar o tráfego. 
+        Ao continuar navegando, você concorda com nossa 
+        <button type="button" class="link-button" (click)="openPrivacyPolicy()">
+          Política de Privacidade
+        </button> 
+        e 
+        <button type="button" class="link-button" (click)="openTermsOfUse()">
+          Termos de Uso
+        </button>.
+      </p>
+
+      <!-- Detalhes Expandidos -->
+      <div class="lgpd-details" [class.expanded]="showDetails">
+        <div class="cookie-categories">
+          
+          <div class="cookie-category">
+            <mat-icon class="category-icon">check_circle</mat-icon>
+            <div class="category-info">
+              <strong>Cookies Essenciais</strong>
+              <p>Necessários para o funcionamento básico do site (sempre ativos)</p>
+            </div>
+          </div>
+
+          <div class="cookie-category">
+            <mat-icon class="category-icon">analytics</mat-icon>
+            <div class="category-info">
+              <strong>Cookies de Analytics</strong>
+              <p>Nos ajudam a entender como você usa o site para melhorar a experiência</p>
+            </div>
+          </div>
+
+          <div class="cookie-category">
+            <mat-icon class="category-icon">campaign</mat-icon>
+            <div class="category-info">
+              <strong>Cookies de Marketing</strong>
+              <p>Utilizados para personalizar anúncios e medir a eficácia das campanhas</p>
+            </div>
+          </div>
+
+          <div class="cookie-category">
+            <mat-icon class="category-icon">tune</mat-icon>
+            <div class="category-info">
+              <strong>Cookies de Preferências</strong>
+              <p>Lembram suas configurações e preferências para personalizar sua experiência</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="lgpd-rights">
+          <h4>Seus Direitos sob a LGPD:</h4>
+          <ul>
+            <li>Confirmação da existência de tratamento de dados</li>
+            <li>Acesso aos seus dados pessoais</li>
+            <li>Correção de dados incompletos, inexatos ou desatualizados</li>
+            <li>Anonimização, bloqueio ou eliminação de dados</li>
+            <li>Portabilidade dos dados</li>
+            <li>Eliminação dos dados tratados com consentimento</li>
+            <li>Revogação do consentimento</li>
+          </ul>
+          <p class="contact-info">
+            Para exercer seus direitos, entre em contato: 
+            <a href="mailto:privacidade@barbeariasaas.com.br">privacidade@barbeariasaas.com.br</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botões de Ação -->
+    <div class="lgpd-actions">
+      
+      <!-- Botão de Detalhes -->
+      <button 
+        mat-button 
+        class="details-button"
+        (click)="toggleDetails()"
+        [attr.aria-expanded]="showDetails"
+        aria-controls="lgpd-details">
+        <mat-icon>{{ showDetails ? 'expand_less' : 'expand_more' }}</mat-icon>
+        {{ showDetails ? 'Menos detalhes' : 'Mais detalhes' }}
+      </button>
+
+      <!-- Botões de Consentimento -->
+      <div class="consent-buttons">
+        <button 
+          mat-stroked-button 
+          color="primary"
+          class="essential-button"
+          (click)="acceptEssential()"
+          aria-label="Aceitar apenas cookies essenciais">
+          Apenas Essenciais
+        </button>
+        
+        <button 
+          mat-raised-button 
+          color="primary"
+          class="accept-button"
+          (click)="acceptAll()"
+          aria-label="Aceitar todos os cookies">
+          <mat-icon>check</mat-icon>
+          Aceitar Todos
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Botão de Fechar -->
+  <button 
+    mat-icon-button 
+    class="close-button"
+    (click)="acceptEssential()"
+    aria-label="Fechar banner e aceitar apenas cookies essenciais">
+    <mat-icon>close</mat-icon>
+  </button>
+
+</div>
+
+<!-- Overlay -->
+<div 
+  class="lgpd-overlay" 
+  [class.visible]="isVisible && showDetails"
+  (click)="showDetails = false">
+</div>
