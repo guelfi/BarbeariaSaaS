@@ -1,0 +1,82 @@
+// ==========================================================================
+// PWA Safe Areas Support
+// ==========================================================================
+
+// Safe area support for devices with notch/dynamic island
+:root {
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-right: env(safe-area-inset-right, 0px);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-inset-left: env(safe-area-inset-left, 0px);
+}
+
+// App container with safe area support
+.app-container {
+  min-height: 100vh;
+  min-height: calc(100vh - var(--safe-area-inset-top) - var(--safe-area-inset-bottom));
+  padding-top: var(--safe-area-inset-top);
+  padding-right: var(--safe-area-inset-right);
+  padding-bottom: var(--safe-area-inset-bottom);
+  padding-left: var(--safe-area-inset-left);
+}
+
+// Header adjustments for safe areas
+.app-header {
+  padding-top: calc(16px + var(--safe-area-inset-top));
+  padding-right: calc(16px + var(--safe-area-inset-right));
+  padding-left: calc(16px + var(--safe-area-inset-left));
+}
+
+// Bottom navigation/actions safe area
+.bottom-actions {
+  padding-bottom: calc(16px + var(--safe-area-inset-bottom));
+  padding-right: calc(16px + var(--safe-area-inset-right));
+  padding-left: calc(16px + var(--safe-area-inset-left));
+}
+
+// Fixed elements adjustments
+.fixed-top {
+  top: var(--safe-area-inset-top);
+}
+
+.fixed-bottom {
+  bottom: var(--safe-area-inset-bottom);
+}
+
+.fixed-left {
+  left: var(--safe-area-inset-left);
+}
+
+.fixed-right {
+  right: var(--safe-area-inset-right);
+}
+
+// Fullscreen modal adjustments
+.fullscreen-modal {
+  padding-top: var(--safe-area-inset-top);
+  padding-right: var(--safe-area-inset-right);
+  padding-bottom: var(--safe-area-inset-bottom);
+  padding-left: var(--safe-area-inset-left);
+}
+
+// Viewport units that respect safe areas
+.full-height {
+  height: 100vh;
+  height: calc(100vh - var(--safe-area-inset-top) - var(--safe-area-inset-bottom));
+}
+
+.full-width {
+  width: 100vw;
+  width: calc(100vw - var(--safe-area-inset-left) - var(--safe-area-inset-right));
+}
+
+// Status bar color for iOS
+@supports (-webkit-appearance: none) {
+  .status-bar-light {
+    background-color: var(--primary-color);
+  }
+  
+  .status-bar-dark {
+    background-color: var(--surface-color);
+  }
+}

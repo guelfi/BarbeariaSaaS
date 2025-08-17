@@ -1,0 +1,277 @@
+@page "/login"
+@using BarbeariaSaaS.Web.Admin.Models
+@using BarbeariaSaaS.Web.Admin.Services
+@using Microsoft.AspNetCore.WebUtilities
+@inject IAuthService AuthService
+@inject NavigationManager Navigation
+@inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Login - Barbearia SaaS Admin</PageTitle>
+
+<div class="admin-login-container">
+    <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center justify-center" Style="min-height: 100vh;">
+        <MudCard Class="admin-login-card pa-8" Style="width: 100%; max-width: 400px;">
+            
+            <!-- Logo and Header -->
+            <MudCardContent Class="text-center mb-6">
+                <div class="login-logo mb-4">
+                    <MudIcon Icon="@Icons.Material.Filled.ContentCut" 
+                             Size="Size.Large" 
+                             Style="font-size: 4rem; color: var(--admin-primary);" />
+                </div>
+                <MudText Typo="Typo.h4" Class="mb-2" Style="color: var(--admin-text-primary); font-weight: 600;">
+                    Admin Dashboard
+                </MudText>
+                <MudText Typo="Typo.body1" Style="color: var(--admin-text-secondary);">
+                    Acesse o painel administrativo do SaaS
+                </MudText>
+            </MudCardContent>
+
+            <!-- Login Form -->
+            <MudForm @ref="form" @onsubmit="HandleLogin" @onsubmit:preventDefault="true">
+                <MudCardContent>
+                    
+                    <!-- Error Message -->
+                    @if (!string.IsNullOrEmpty(errorMessage))
+                    {
+                        <MudAlert Severity="Severity.Error" Class="mb-4" ShowCloseIcon="true" CloseIconClicked="ClearError">
+                            @errorMessage
+                        </MudAlert>
+                    }
+
+                    <!-- Email Field -->
+                    <MudTextField @bind-Value="loginRequest.Email"
+                                  Label="Email"
+                                  Variant="Variant.Outlined"
+                                  InputType="InputType.Email"
+                                  Required="true"
+                                  RequiredError="Email é obrigatório"
+                                  Class="mb-4"
+                                  FullWidth="true"
+                                  Disabled="isLoading"
+                                  Adornment="Adornment.Start"
+                                  AdornmentIcon="@Icons.Material.Filled.Email" />
+
+                    <!-- Password Field -->
+                    <MudTextField @bind-Value="loginRequest.Password"
+                                  Label="Senha"
+                                  Variant="Variant.Outlined"
+                                  InputType="@passwordInputType"
+                                  Required="true"
+                                  RequiredError="Senha é obrigatória"
+                                  Class="mb-6"
+                                  FullWidth="true"
+                                  Disabled="isLoading"
+                                  Adornment="Adornment.End"
+                                  AdornmentIcon="@passwordIcon"
+                                  OnAdornmentClick="TogglePasswordVisibility" />
+
+                    <!-- Login Button -->
+                    <MudButton ButtonType="ButtonType.Submit"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Size="Size.Large"
+                               FullWidth="true"
+                               Class="mb-4"
+                               Disabled="isLoading">
+                        @if (isLoading)
+                        {
+                            <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
+                            <span>Entrando...</span>
+                        }
+                        else
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.Login" Class="mr-2" />
+                            <span>Entrar</span>
+                        }
+                    </MudButton>
+
+                    <!-- Additional Info -->
+                    <MudText Typo="Typo.caption" 
+                             Class="text-center" 
+                             Style="color: var(--admin-text-tertiary);">
+                        Acesso restrito a administradores do sistema
+                    </MudText>
+
+                </MudCardContent>
+            </MudForm>
+
+        </MudCard>
+    </MudContainer>
+</div>
+
+<style>
+    .admin-login-container {
+        background: linear-gradient(135deg, var(--admin-primary) 0%, #2D1B69 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .admin-login-card {
+        background-color: var(--admin-card-bg) !important;
+        border: 1px solid var(--admin-card-border);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+        border-radius: 12px !important;
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    .login-logo {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+    }
+
+    /* Custom MudBlazor overrides */
+    .mud-input-outlined .mud-input-outlined-border {
+        border-color: var(--admin-input-border) !important;
+    }
+
+    .mud-input-outlined:hover .mud-input-outlined-border {
+        border-color: var(--admin-primary) !important;
+    }
+
+    .mud-input-outlined.mud-input-focused .mud-input-outlined-border {
+        border-color: var(--admin-primary) !important;
+        border-width: 2px !important;
+    }
+
+    .mud-button-filled-primary {
+        background-color: var(--admin-primary) !important;
+        color: white !important;
+        font-weight: 600 !important;
+        text-transform: none !important;
+        border-radius: 8px !important;
+        padding: 12px 24px !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .mud-button-filled-primary:hover {
+        background-color: var(--admin-primary-dark) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(var(--admin-primary), 0.4) !important;
+    }
+
+    .mud-button-filled-primary:disabled {
+        background-color: var(--admin-text-tertiary) !important;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+</style>
+
+@code {
+    private MudForm form = new();
+    private LoginRequest loginRequest = new();
+    private string errorMessage = string.Empty;
+    private bool isLoading = false;
+    private bool showPassword = false;
+    private string returnUrl = "/development";
+
+    private InputType passwordInputType => showPassword ? InputType.Text : InputType.Password;
+    private string passwordIcon => showPassword ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Get return URL from query parameters
+        var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("returnUrl", out var returnUrlValue))
+        {
+            returnUrl = returnUrlValue.FirstOrDefault() ?? "/development";
+        }
+
+        // Check if already authenticated
+        if (AuthService.IsAuthenticated())
+        {
+            Navigation.NavigateTo(returnUrl);
+            return;
+        }
+
+        // Set default admin credentials for demo
+        loginRequest.Email = "guelfi@msn.com";
+        loginRequest.Password = "@5ST73EA4x";
+    }
+
+    private async Task HandleLogin()
+    {
+        if (isLoading) return;
+
+        try
+        {
+            isLoading = true;
+            errorMessage = string.Empty;
+            StateHasChanged();
+
+            // Validate form
+            await form.Validate();
+            if (!form.IsValid)
+            {
+                return;
+            }
+
+            // Attempt login
+            var result = await AuthService.LoginAsync(loginRequest);
+
+            if (result.Success)
+            {
+                Snackbar.Add($"Bem-vindo, {result.User?.Name}!", Severity.Success);
+                
+                // Small delay for better UX
+                await Task.Delay(500);
+                
+                Navigation.NavigateTo(returnUrl);
+            }
+            else
+            {
+                errorMessage = result.Message ?? "Erro desconhecido durante o login";
+                
+                // Add haptic feedback simulation
+                await JSRuntime.InvokeVoidAsync("eval", @"
+                    if (navigator.vibrate) {
+                        navigator.vibrate([100, 100, 100]);
+                    }
+                ");
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Erro interno do servidor. Tente novamente.";
+            Console.WriteLine($"Login error: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private void TogglePasswordVisibility()
+    {
+        showPassword = !showPassword;
+    }
+
+    private void ClearError()
+    {
+        errorMessage = string.Empty;
+    }
+}

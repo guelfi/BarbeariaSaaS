@@ -1,0 +1,220 @@
+<!-- Mobile Register Container -->
+<div class="mobile-register-container">
+  
+  <!-- Status Bar Spacer -->
+  <div class="status-bar-spacer"></div>
+
+  <!-- Header -->
+  <div class="mobile-header">
+    <button mat-icon-button (click)="navigateToLogin()" class="back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="header-content">
+      <mat-icon class="brand-icon">person_add</mat-icon>
+      <h1 class="brand-title">Criar Conta</h1>
+      <p class="brand-subtitle">Junte-se à nossa comunidade</p>
+    </div>
+  </div>
+
+  <!-- Register Card -->
+  <div class="mobile-content">
+    <mat-card class="mobile-register-card">
+      
+      <!-- Welcome Section -->
+      <div class="welcome-section">
+        <h2>Cadastre-se</h2>
+        <p>Preencha seus dados para criar sua conta</p>
+      </div>
+
+      <!-- Form -->
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="mobile-register-form">
+        
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="mobile-error-message">
+          <mat-icon>error_outline</mat-icon>
+          <span>{{ errorMessage }}</span>
+          <button mat-icon-button (click)="errorMessage = ''" class="close-error">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+
+        <!-- Nome Field -->
+        <mat-form-field appearance="outline" class="mobile-form-field">
+          <mat-label>Nome Completo</mat-label>
+          <input 
+            matInput 
+            formControlName="nome"
+            placeholder="Seu nome completo"
+            [disabled]="isLoading"
+            autocomplete="name">
+          <mat-icon matSuffix color="primary">person</mat-icon>
+          <mat-error *ngIf="nome?.hasError('required')">
+            Nome é obrigatório
+          </mat-error>
+          <mat-error *ngIf="nome?.hasError('minlength')">
+            Nome deve ter pelo menos 2 caracteres
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Email Field -->
+        <mat-form-field appearance="outline" class="mobile-form-field">
+          <mat-label>Email</mat-label>
+          <input 
+            matInput 
+            type="email" 
+            formControlName="email"
+            placeholder="seu@email.com"
+            [disabled]="isLoading"
+            autocomplete="email">
+          <mat-icon matSuffix color="primary">email</mat-icon>
+          <mat-error *ngIf="email?.hasError('required')">
+            Email é obrigatório
+          </mat-error>
+          <mat-error *ngIf="email?.hasError('email')">
+            Email inválido
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Telefone Field -->
+        <mat-form-field appearance="outline" class="mobile-form-field">
+          <mat-label>Telefone</mat-label>
+          <input 
+            matInput 
+            formControlName="telefone"
+            placeholder="(11) 99999-9999"
+            (input)="formatPhone($event)"
+            [disabled]="isLoading"
+            autocomplete="tel">
+          <mat-icon matSuffix color="primary">phone</mat-icon>
+          <mat-error *ngIf="telefone?.hasError('required')">
+            Telefone é obrigatório
+          </mat-error>
+          <mat-error *ngIf="telefone?.hasError('pattern')">
+            Formato inválido. Use: (11) 99999-9999
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Barbearia Selection -->
+        <mat-form-field appearance="outline" class="mobile-form-field">
+          <mat-label>Barbearia</mat-label>
+          <mat-select formControlName="tenantId" [disabled]="isLoading">
+            <mat-option *ngFor="let barbearia of barbearias" [value]="barbearia.id">
+              <div class="barbearia-option">
+                <span class="barbearia-name">{{ barbearia.nome }}</span>
+                <span class="barbearia-address">{{ barbearia.endereco }}</span>
+              </div>
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix color="primary">store</mat-icon>
+          <mat-error *ngIf="tenantId?.hasError('required')">
+            Selecione uma barbearia
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Password Field -->
+        <mat-form-field appearance="outline" class="mobile-form-field">
+          <mat-label>Senha</mat-label>
+          <input 
+            matInput 
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="senha"
+            placeholder="Mínimo 6 caracteres"
+            [disabled]="isLoading"
+            autocomplete="new-password">
+          <button 
+            mat-icon-button 
+            matSuffix 
+            type="button"
+            (click)="togglePasswordVisibility()"
+            [disabled]="isLoading"
+            class="password-toggle">
+            <mat-icon color="primary">{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="senha?.hasError('required')">
+            Senha é obrigatória
+          </mat-error>
+          <mat-error *ngIf="senha?.hasError('minlength')">
+            Senha deve ter pelo menos 6 caracteres
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Confirm Password Field -->
+        <mat-form-field appearance="outline" class="mobile-form-field">
+          <mat-label>Confirmar Senha</mat-label>
+          <input 
+            matInput 
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            formControlName="confirmarSenha"
+            placeholder="Digite a senha novamente"
+            [disabled]="isLoading"
+            autocomplete="new-password">
+          <button 
+            mat-icon-button 
+            matSuffix 
+            type="button"
+            (click)="toggleConfirmPasswordVisibility()"
+            [disabled]="isLoading"
+            class="password-toggle">
+            <mat-icon color="primary">{{ showConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="confirmarSenha?.hasError('required')">
+            Confirmação de senha é obrigatória
+          </mat-error>
+          <mat-error *ngIf="confirmarSenha?.hasError('passwordMismatch')">
+            Senhas não coincidem
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Terms Checkbox -->
+        <div class="terms-section">
+          <mat-checkbox formControlName="aceitarTermos" [disabled]="isLoading" class="terms-checkbox">
+            Aceito os <a href="#" target="_blank">termos de uso</a> e 
+            <a href="#" target="_blank">política de privacidade</a>
+          </mat-checkbox>
+          <mat-error *ngIf="aceitarTermos?.hasError('required') && aceitarTermos?.touched" class="terms-error">
+            Você deve aceitar os termos para continuar
+          </mat-error>
+        </div>
+
+        <!-- Register Button -->
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit"
+          class="mobile-register-button"
+          [disabled]="isLoading || registerForm.invalid">
+          <div class="button-content">
+            <mat-spinner *ngIf="isLoading" diameter="20" class="button-spinner"></mat-spinner>
+            <mat-icon *ngIf="!isLoading">person_add</mat-icon>
+            <span>{{ isLoading ? 'Criando conta...' : 'Criar Conta' }}</span>
+          </div>
+        </button>
+
+        <!-- Login Link -->
+        <div class="login-section">
+          <p class="login-text">Já tem uma conta?</p>
+          <button 
+            mat-button 
+            type="button"
+            class="mobile-login-link"
+            (click)="navigateToLogin()"
+            [disabled]="isLoading">
+            <span>Fazer Login</span>
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
+
+      </form>
+
+    </mat-card>
+  </div>
+
+  <!-- Footer -->
+  <div class="mobile-footer">
+    <p>© 2024 Barbearia SaaS</p>
+  </div>
+
+  <!-- Safe Area Bottom -->
+  <div class="safe-area-bottom"></div>
+
+</div>

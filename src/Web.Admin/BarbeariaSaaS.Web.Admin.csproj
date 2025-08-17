@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>BarbeariaSaaS.Web.Admin</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MudBlazor" Version="6.11.2" />
+    <PackageReference Include="MudBlazor.ThemeManager" Version="1.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+    <PackageReference Include="System.Text.Json" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\Auth\" />
+    <Folder Include="Components\Dashboard\" />
+    <Folder Include="Components\Shared\" />
+    <Folder Include="Services\" />
+    <Folder Include="Models\" />
+    <Folder Include="Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Styles\**\*.scss" />
+  </ItemGroup>
+
+  <Target Name="CompileSass" BeforeTargets="Build">
+    <Exec Command="sass Styles/main.scss:wwwroot/css/main.css --style=compressed" 
+          ContinueOnError="false" 
+          Condition="Exists('Styles/main.scss')" />
+  </Target>
+
+</Project>

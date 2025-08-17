@@ -35,3 +35,8 @@
 // 6. Themes
 @import 'themes/light';
 @import 'themes/dark';
+// 7.
+ PWA & Mobile Specific
+@import 'pwa/safe-areas';
+@import 'pwa/offline';
+@import 'pwa/performance';

@@ -1,0 +1,116 @@
+// ==========================================================================
+// Dark Theme - Web Desktop
+// ==========================================================================
+
+[data-theme="dark"] {
+  // Override CSS custom properties for dark theme
+  --color-primary: #{lighten($primary-color, 10%)};
+  --color-primary-light: #{lighten($primary-color, 20%)};
+  --color-primary-dark: #{$primary-color};
+  
+  // Background colors (inverted)
+  --bg-primary: #{$gray-900};
+  --bg-secondary: #{$gray-800};
+  --bg-tertiary: #{$gray-700};
+  --bg-overlay: rgba(0, 0, 0, 0.8);
+  
+  // Text colors (inverted)
+  --text-primary: #{$gray-100};
+  --text-secondary: #{$gray-300};
+  --text-tertiary: #{$gray-400};
+  --text-inverse: #{$gray-900};
+  
+  // Border colors
+  --border-primary: #{$gray-600};
+  --border-secondary: #{$gray-700};
+  
+  // Component specific colors
+  --input-bg: #{$gray-800};
+  --input-border: #{$gray-600};
+  --input-placeholder: #{$gray-400};
+  
+  --card-bg: #{$gray-800};
+  --card-border: #{$gray-700};
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  
+  --navbar-bg: #{$gray-800};
+  --navbar-text: #{$gray-200};
+  --navbar-border: #{$gray-700};
+  
+  --sidebar-bg: #{$gray-900};
+  --sidebar-text: #{$gray-200};
+  --sidebar-hover: #{$gray-700};
+  
+  // Apply dark theme styles
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  
+  // Login page specific
+  .login-container {
+    background: linear-gradient(135deg, #{darken($primary-color, 20%)} 0%, #{darken($secondary-color, 20%)} 100%);
+  }
+  
+  .login-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+  }
+  
+  // Form elements
+  .form-input {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--text-primary);
+    
+    &:focus {
+      border-color: var(--input-focus-border);
+      box-shadow: 0 0 0 3px rgba(var(--color-primary), 0.2);
+    }
+    
+    &::placeholder {
+      color: var(--input-placeholder);
+    }
+  }
+  
+  // Scrollbar styling for dark theme
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-primary);
+    border-radius: 4px;
+    
+    &:hover {
+      background: var(--text-tertiary);
+    }
+  }
+  
+  // Selection styling
+  ::selection {
+    background-color: rgba(var(--color-primary), 0.3);
+    color: var(--text-primary);
+  }
+  
+  // Focus indicators
+  *:focus {
+    outline-color: var(--color-primary);
+  }
+}
+
+// Dark theme toggle animation
+.theme-transition {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+// Prefers dark color scheme
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @extend [data-theme="dark"];
+  }
+}

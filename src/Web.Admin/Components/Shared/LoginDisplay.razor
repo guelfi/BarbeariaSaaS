@@ -1,0 +1,111 @@
+@using BarbeariaSaaS.Web.Admin.Services
+@inject AuthStateService AuthState
+@inject IAuthService AuthService
+@inject NavigationManager Navigation
+@inject ISnackbar Snackbar
+
+<div class="login-display">
+    @if (AuthState.IsAuthenticated)
+    {
+        <MudMenu Icon="@Icons.Material.Filled.AccountCircle" 
+                 Color="Color.Inherit" 
+                 Direction="Direction.Bottom" 
+                 OffsetX="true">
+            <ActivatorContent>
+                <MudButton Variant="Variant.Text" 
+                           Color="Color.Inherit" 
+                           StartIcon="@Icons.Material.Filled.AccountCircle"
+                           Class="user-menu-button">
+                    @AuthState.GetUserDisplayName()
+                </MudButton>
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem Icon="@Icons.Material.Filled.Person">
+                    <div class="user-info">
+                        <MudText Typo="Typo.body2" Class="font-weight-bold">
+                            @AuthState.CurrentUser?.Name
+                        </MudText>
+                        <MudText Typo="Typo.caption" Style="color: var(--admin-text-secondary);">
+                            @AuthState.CurrentUser?.Email
+                        </MudText>
+                    </div>
+                </MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Icon="@Icons.Material.Filled.Settings" OnClick="NavigateToSettings">
+                    Configurações
+                </MudMenuItem>
+                <MudMenuItem Icon="@Icons.Material.Filled.Help" OnClick="ShowHelp">
+                    Ajuda
+                </MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Icon="@Icons.Material.Filled.Logout" 
+                             OnClick="HandleLogout"
+                             Style="color: var(--admin-danger);">
+                    Sair
+                </MudMenuItem>
+            </ChildContent>
+        </MudMenu>
+    }
+</div>
+
+<style>
+    .login-display {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+    }
+
+    .user-menu-button {
+        color: var(--admin-text-primary) !important;
+        text-transform: none !important;
+        font-weight: 500 !important;
+    }
+
+    .user-info {
+        padding: 8px 0;
+        min-width: 200px;
+    }
+
+    .mud-menu-item {
+        transition: background-color 0.2s ease !important;
+    }
+
+    .mud-menu-item:hover {
+        background-color: var(--admin-bg-tertiary) !important;
+    }
+</style>
+
+@code {
+    private async Task HandleLogout()
+    {
+        try
+        {
+            var success = await AuthService.LogoutAsync();
+            
+            if (success)
+            {
+                Snackbar.Add("Logout realizado com sucesso", Severity.Info);
+                Navigation.NavigateTo("/login");
+            }
+            else
+            {
+                Snackbar.Add("Erro durante logout", Severity.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Logout error: {ex.Message}");
+            Snackbar.Add("Erro interno durante logout", Severity.Error);
+        }
+    }
+
+    private void NavigateToSettings()
+    {
+        Navigation.NavigateTo("/settings");
+    }
+
+    private void ShowHelp()
+    {
+        Snackbar.Add("Funcionalidade de ajuda em desenvolvimento", Severity.Info);
+    }
+}

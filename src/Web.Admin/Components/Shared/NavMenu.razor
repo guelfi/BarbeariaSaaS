@@ -1,0 +1,79 @@
+@using BarbeariaSaaS.Web.Admin.Services
+@inject AuthStateService AuthState
+
+<div class="admin-sidebar">
+    <div class="sidebar-logo">
+        <MudIcon Icon="@Icons.Material.Filled.ContentCut" Size="Size.Medium" Class="mr-2" />
+        <MudText Typo="Typo.h6">Barbearia SaaS</MudText>
+    </div>
+
+    <MudNavMenu>
+        <MudNavLink Href="/development" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Dashboard">
+            Dashboard
+        </MudNavLink>
+        
+        <MudNavLink Href="/tenants" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Business">
+            Barbearias
+        </MudNavLink>
+        
+        <MudNavLink Href="/users" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.People">
+            Usuários
+        </MudNavLink>
+        
+        <MudNavLink Href="/analytics" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Analytics">
+            Analytics
+        </MudNavLink>
+        
+        <MudNavLink Href="/billing" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Payment">
+            Faturamento
+        </MudNavLink>
+        
+        <MudNavLink Href="/settings" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Settings">
+            Configurações
+        </MudNavLink>
+    </MudNavMenu>
+</div>
+
+<style>
+    .admin-sidebar {
+        width: 280px;
+        height: 100vh;
+        background-color: var(--admin-sidebar-bg);
+        color: var(--admin-sidebar-text);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    .sidebar-logo {
+        padding: 20px;
+        border-bottom: 1px solid var(--admin-sidebar-hover);
+        display: flex;
+        align-items: center;
+        color: var(--admin-sidebar-text);
+    }
+
+    .mud-nav-menu {
+        padding: 20px 0;
+    }
+
+    .mud-nav-link {
+        color: var(--admin-sidebar-text) !important;
+        padding: 12px 20px !important;
+        margin: 4px 12px !important;
+        border-radius: 8px !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .mud-nav-link:hover {
+        background-color: var(--admin-sidebar-hover) !important;
+        transform: translateX(4px);
+    }
+
+    .mud-nav-link.active {
+        background-color: var(--admin-sidebar-active) !important;
+        font-weight: 600 !important;
+    }
+</style>

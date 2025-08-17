@@ -1,0 +1,334 @@
+// ==========================================================================
+// Mixins - Web Admin (SaaS Dashboard)
+// ==========================================================================
+
+// Admin responsive breakpoints
+@mixin admin-respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: 576px) { @content; }
+  }
+  @if $breakpoint == md {
+    @media (min-width: 768px) { @content; }
+  }
+  @if $breakpoint == lg {
+    @media (min-width: 992px) { @content; }
+  }
+  @if $breakpoint == xl {
+    @media (min-width: 1200px) { @content; }
+  }
+  @if $breakpoint == xxl {
+    @media (min-width: 1400px) { @content; }
+  }
+}
+
+// Admin layout mixins
+@mixin admin-sidebar {
+  width: $sidebar-width;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $admin-primary;
+  color: white;
+  z-index: $z-fixed;
+  transition: width 0.3s ease;
+  
+  &.collapsed {
+    width: $sidebar-collapsed-width;
+  }
+  
+  @include admin-respond-to(md) {
+    position: relative;
+  }
+}
+
+@mixin admin-main-content {
+  margin-left: $sidebar-width;
+  min-height: 100vh;
+  background-color: #F8F9FA;
+  transition: margin-left 0.3s ease;
+  
+  &.sidebar-collapsed {
+    margin-left: $sidebar-collapsed-width;
+  }
+  
+  @include admin-respond-to(md) {
+    margin-left: 0;
+  }
+}
+
+@mixin admin-header {
+  height: $header-height;
+  background-color: white;
+  border-bottom: 1px solid #DEE2E6;
+  padding: 0 $content-padding;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: $z-sticky;
+}
+
+// Admin card styles
+@mixin admin-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: $card-padding;
+  margin-bottom: $card-margin;
+  border: 1px solid #E9ECEF;
+  
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+  }
+}
+
+@mixin admin-card-header {
+  padding-bottom: $component-spacing;
+  margin-bottom: $component-spacing;
+  border-bottom: 1px solid #E9ECEF;
+  
+  h3 {
+    margin: 0;
+    font-size: $admin-font-size-lg;
+    font-weight: 600;
+    color: $admin-primary;
+  }
+}
+
+// Admin button styles
+@mixin admin-button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-family: $admin-font-family;
+  font-size: $admin-font-size-sm;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  &:focus {
+    outline: 2px solid $admin-primary;
+    outline-offset: 2px;
+  }
+}
+
+@mixin admin-button-primary {
+  @include admin-button-base;
+  background-color: $admin-primary;
+  color: white;
+  
+  &:hover:not(:disabled) {
+    background-color: darken($admin-primary, 10%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba($admin-primary, 0.3);
+  }
+}
+
+@mixin admin-button-success {
+  @include admin-button-base;
+  background-color: $admin-success;
+  color: white;
+  
+  &:hover:not(:disabled) {
+    background-color: darken($admin-success, 10%);
+  }
+}
+
+@mixin admin-button-danger {
+  @include admin-button-base;
+  background-color: $admin-danger;
+  color: white;
+  
+  &:hover:not(:disabled) {
+    background-color: darken($admin-danger, 10%);
+  }
+}
+
+@mixin admin-button-outline {
+  @include admin-button-base;
+  background-color: transparent;
+  color: $admin-primary;
+  border: 1px solid $admin-primary;
+  
+  &:hover:not(:disabled) {
+    background-color: $admin-primary;
+    color: white;
+  }
+}
+
+// Admin form styles
+@mixin admin-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #CED4DA;
+  border-radius: 6px;
+  font-family: $admin-font-family;
+  font-size: $admin-font-size-base;
+  background-color: white;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: $admin-primary;
+    box-shadow: 0 0 0 3px rgba($admin-primary, 0.1);
+  }
+  
+  &::placeholder {
+    color: #6C757D;
+  }
+  
+  &:disabled {
+    background-color: #E9ECEF;
+    color: #6C757D;
+    cursor: not-allowed;
+  }
+}
+
+@mixin admin-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #495057;
+  font-size: $admin-font-size-sm;
+}
+
+// Admin table styles
+@mixin admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  th {
+    background-color: $table-header-bg;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid $table-border-color;
+  }
+  
+  td {
+    padding: 12px;
+    border-bottom: 1px solid $table-border-color;
+    
+    &:hover {
+      background-color: $table-hover-bg;
+    }
+  }
+  
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+// Admin status badges
+@mixin admin-badge($color) {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: $admin-font-size-xs;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background-color: rgba($color, 0.1);
+  color: $color;
+  border: 1px solid rgba($color, 0.2);
+}
+
+@mixin admin-badge-success {
+  @include admin-badge($tenant-active);
+}
+
+@mixin admin-badge-warning {
+  @include admin-badge($tenant-trial);
+}
+
+@mixin admin-badge-danger {
+  @include admin-badge($tenant-expired);
+}
+
+@mixin admin-badge-secondary {
+  @include admin-badge($tenant-inactive);
+}
+
+// Admin animations
+@mixin admin-fade-in($duration: 0.3s) {
+  animation: adminFadeIn $duration ease-out;
+}
+
+@keyframes adminFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@mixin admin-slide-in-right($duration: 0.3s) {
+  animation: adminSlideInRight $duration ease-out;
+}
+
+@keyframes adminSlideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Dashboard specific mixins
+@mixin dashboard-stat-card {
+  @include admin-card;
+  text-align: center;
+  
+  .stat-value {
+    font-size: $admin-font-size-3xl;
+    font-weight: 700;
+    color: $admin-primary;
+    margin-bottom: 8px;
+  }
+  
+  .stat-label {
+    font-size: $admin-font-size-sm;
+    color: #6C757D;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .stat-change {
+    font-size: $admin-font-size-xs;
+    margin-top: 8px;
+    
+    &.positive {
+      color: $admin-success;
+    }
+    
+    &.negative {
+      color: $admin-danger;
+    }
+  }
+}

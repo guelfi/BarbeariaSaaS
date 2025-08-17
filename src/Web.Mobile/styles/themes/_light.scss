@@ -1,0 +1,187 @@
+// ==========================================================================
+// Light Theme - Web Mobile (PWA)
+// ==========================================================================
+
+:root {
+  // Mobile-specific primary colors
+  --mobile-primary: #{$primary-color};
+  --mobile-primary-light: #{$primary-light};
+  --mobile-primary-dark: #{$primary-dark};
+  --mobile-secondary: #{$secondary-color};
+  --mobile-accent: #{$accent-color};
+  
+  // Mobile background colors
+  --mobile-bg-primary: #FFFFFF;
+  --mobile-bg-secondary: #F8F9FA;
+  --mobile-bg-tertiary: #F1F3F4;
+  --mobile-bg-overlay: rgba(0, 0, 0, 0.5);
+  
+  // Mobile text colors
+  --mobile-text-primary: #212121;
+  --mobile-text-secondary: #757575;
+  --mobile-text-tertiary: #9E9E9E;
+  --mobile-text-inverse: #FFFFFF;
+  
+  // Mobile component colors
+  --mobile-card-bg: #FFFFFF;
+  --mobile-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --mobile-input-bg: #FFFFFF;
+  --mobile-input-border: #E0E0E0;
+  --mobile-input-focus: var(--mobile-primary);
+  
+  // PWA specific colors
+  --pwa-header-bg: var(--mobile-primary);
+  --pwa-header-text: #FFFFFF;
+  --pwa-nav-bg: #FFFFFF;
+  --pwa-nav-border: #E0E0E0;
+  --pwa-nav-text: #757575;
+  --pwa-nav-active: var(--mobile-primary);
+  
+  // Status bar colors for PWA
+  --status-bar-style: dark-content;
+  --theme-color: var(--mobile-primary);
+}
+
+// Light theme specific styles
+[data-theme="light"] {
+  background-color: var(--mobile-bg-secondary);
+  color: var(--mobile-text-primary);
+  
+  // PWA header
+  .pwa-header {
+    background-color: var(--pwa-header-bg);
+    color: var(--pwa-header-text);
+  }
+  
+  // PWA bottom navigation
+  .pwa-bottom-nav {
+    background-color: var(--pwa-nav-bg);
+    border-top: 1px solid var(--pwa-nav-border);
+    color: var(--pwa-nav-text);
+    
+    .nav-item.active {
+      color: var(--pwa-nav-active);
+    }
+  }
+  
+  // Mobile login page
+  .mobile-login-container {
+    background: linear-gradient(135deg, var(--mobile-primary) 0%, var(--mobile-secondary) 100%);
+    min-height: 100vh;
+    @include safe-area-padding;
+  }
+  
+  .mobile-login-card {
+    background-color: var(--mobile-card-bg);
+    box-shadow: var(--mobile-card-shadow);
+    border-radius: 16px;
+    margin: 20px;
+    padding: 24px;
+  }
+  
+  // Mobile form elements
+  .mobile-input {
+    background-color: var(--mobile-input-bg);
+    border: 2px solid var(--mobile-input-border);
+    color: var(--mobile-text-primary);
+    
+    &:focus {
+      border-color: var(--mobile-input-focus);
+      box-shadow: 0 0 0 3px rgba(var(--mobile-primary), 0.1);
+    }
+    
+    &::placeholder {
+      color: var(--mobile-text-tertiary);
+    }
+  }
+  
+  // Mobile buttons
+  .mobile-btn-primary {
+    background-color: var(--mobile-primary);
+    color: var(--mobile-text-inverse);
+    
+    &:hover, &:active {
+      background-color: var(--mobile-primary-dark);
+    }
+  }
+  
+  .mobile-btn-secondary {
+    background-color: transparent;
+    color: var(--mobile-primary);
+    border: 2px solid var(--mobile-primary);
+    
+    &:hover, &:active {
+      background-color: var(--mobile-primary);
+      color: var(--mobile-text-inverse);
+    }
+  }
+  
+  // Mobile cards
+  .mobile-card {
+    background-color: var(--mobile-card-bg);
+    box-shadow: var(--mobile-card-shadow);
+  }
+  
+  // Mobile lists
+  .mobile-list-item {
+    background-color: var(--mobile-card-bg);
+    border-bottom: 1px solid var(--mobile-input-border);
+    
+    &:hover, &:active {
+      background-color: var(--mobile-bg-tertiary);
+    }
+  }
+  
+  // Mobile modals and sheets
+  .mobile-modal-overlay {
+    background-color: var(--mobile-bg-overlay);
+  }
+  
+  .mobile-bottom-sheet {
+    background-color: var(--mobile-card-bg);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+  
+  // Mobile loading states
+  .mobile-skeleton {
+    background: linear-gradient(90deg, #F0F0F0 25%, #E0E0E0 50%, #F0F0F0 75%);
+    background-size: 200% 100%;
+    animation: mobileSkeletonLoading 1.5s infinite;
+  }
+  
+  @keyframes mobileSkeletonLoading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+}
+
+// iOS specific styles
+.ios {
+  [data-theme="light"] {
+    --mobile-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    
+    .mobile-input {
+      border-radius: 10px;
+    }
+    
+    .mobile-btn-primary {
+      border-radius: 10px;
+    }
+  }
+}
+
+// Android specific styles
+.android {
+  [data-theme="light"] {
+    --mobile-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    
+    .mobile-input {
+      border-radius: 8px;
+    }
+    
+    .mobile-btn-primary {
+      border-radius: 8px;
+    }
+  }
+}

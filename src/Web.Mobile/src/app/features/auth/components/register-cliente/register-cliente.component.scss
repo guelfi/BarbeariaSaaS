@@ -1,0 +1,449 @@
+@import '../../../../../styles/abstracts/variables';
+@import '../../../../../styles/abstracts/mixins';
+
+.mobile-register-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, $accent-color 0%, darken($accent-color, 20%) 100%);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+  @include mobile-fade-in;
+
+  // Add subtle pattern overlay
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
+
+.status-bar-spacer {
+  height: $safe-area-top;
+  background: transparent;
+}
+
+.mobile-header {
+  padding: 16px 20px 24px;
+  color: white;
+  position: relative;
+  z-index: 1;
+
+  .back-button {
+    @include touch-target;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    margin-bottom: 16px;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  .header-content {
+    text-align: center;
+
+    .brand-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 12px;
+      animation: pulse 2s infinite;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    }
+
+    .brand-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .brand-subtitle {
+      font-size: 16px;
+      opacity: 0.9;
+      margin: 0;
+      font-weight: 300;
+    }
+  }
+}
+
+.mobile-content {
+  flex: 1;
+  padding: 0 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.mobile-register-card {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px);
+  border-radius: 24px !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+  padding: 32px 24px !important;
+  margin-bottom: 20px;
+  @include mobile-slide-up;
+
+  @include mobile-sm {
+    margin: 0 0 10px 0;
+    border-radius: 20px !important;
+    padding: 24px 20px !important;
+  }
+}
+
+.welcome-section {
+  text-align: center;
+  margin-bottom: 32px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: $gray-900;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 16px;
+    color: $gray-600;
+    margin: 0;
+  }
+}
+
+.mobile-register-form {
+  .mobile-form-field {
+    width: 100%;
+    margin-bottom: 20px;
+
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+
+    .mat-form-field-outline {
+      border-radius: 12px;
+    }
+
+    .mat-form-field-infix {
+      padding: 16px 0;
+    }
+
+    input {
+      font-size: 16px; // Prevent zoom on iOS
+      @include mobile-input;
+    }
+
+    .password-toggle {
+      @include touch-target;
+    }
+
+    // Barbearia select styling
+    .mat-select {
+      font-size: 16px;
+    }
+
+    .barbearia-option {
+      display: flex;
+      flex-direction: column;
+      padding: 4px 0;
+
+      .barbearia-name {
+        font-weight: 500;
+        color: $gray-900;
+      }
+
+      .barbearia-address {
+        font-size: 12px;
+        color: $gray-600;
+        margin-top: 2px;
+      }
+    }
+  }
+
+  .mobile-error-message {
+    display: flex;
+    align-items: center;
+    background: rgba($error-color, 0.1);
+    color: $error-color;
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border-left: 4px solid $error-color;
+    position: relative;
+
+    mat-icon:first-child {
+      margin-right: 12px;
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+
+    span {
+      flex: 1;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .close-error {
+      @include touch-target;
+      margin-left: 8px;
+      
+      mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  .terms-section {
+    margin-bottom: 24px;
+
+    .terms-checkbox {
+      font-size: 14px;
+      line-height: 1.4;
+
+      a {
+        color: $accent-color;
+        text-decoration: none;
+        font-weight: 500;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .terms-error {
+      font-size: 12px;
+      color: $error-color;
+      margin-top: 8px;
+      display: block;
+    }
+  }
+
+  .mobile-register-button {
+    @include touch-button-primary;
+    width: 100%;
+    height: 56px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    background-color: $accent-color;
+    box-shadow: 0 4px 12px rgba($accent-color, 0.3);
+
+    &:hover {
+      background-color: darken($accent-color, 5%);
+    }
+
+    .button-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .button-spinner {
+        margin-right: 12px;
+      }
+
+      mat-icon {
+        margin-right: 8px;
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    &:active {
+      @include haptic-feedback;
+    }
+  }
+
+  .login-section {
+    text-align: center;
+
+    .login-text {
+      color: $gray-600;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .mobile-login-link {
+      @include touch-target;
+      color: $accent-color;
+      font-size: 16px;
+      font-weight: 500;
+      text-transform: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+
+      &:hover, &:active {
+        background-color: rgba($accent-color, 0.1);
+        @include haptic-feedback;
+      }
+
+      mat-icon {
+        margin-left: 8px;
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}
+
+.mobile-footer {
+  text-align: center;
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  position: relative;
+  z-index: 1;
+
+  p {
+    margin: 0;
+  }
+}
+
+.safe-area-bottom {
+  height: $safe-area-bottom;
+  background: transparent;
+}
+
+// Animations
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+// Angular Material Overrides
+::ng-deep {
+  .mobile-register-card {
+    .mat-card {
+      padding: 0 !important;
+    }
+  }
+
+  .mat-form-field-appearance-outline {
+    .mat-form-field-outline {
+      color: $gray-300;
+    }
+
+    &.mat-focused .mat-form-field-outline-thick {
+      color: $accent-color;
+    }
+
+    .mat-form-field-label {
+      color: $gray-600;
+    }
+
+    &.mat-focused .mat-form-field-label {
+      color: $accent-color;
+    }
+  }
+
+  .mat-raised-button.mat-primary {
+    background-color: $accent-color;
+    
+    &:hover {
+      background-color: darken($accent-color, 5%);
+    }
+  }
+
+  .mat-checkbox-checked .mat-checkbox-background {
+    background-color: $accent-color;
+  }
+
+  .mat-select-panel {
+    border-radius: 12px;
+    margin-top: 8px;
+
+    .mat-option {
+      padding: 12px 16px;
+      min-height: auto;
+    }
+  }
+
+  .success-snackbar {
+    background-color: $success-color !important;
+    color: white !important;
+  }
+}
+
+// Device-specific optimizations
+@media screen and (max-height: 700px) {
+  .mobile-header {
+    padding: 12px 20px 16px;
+
+    .brand-icon {
+      font-size: 40px !important;
+      width: 40px !important;
+      height: 40px !important;
+    }
+
+    .brand-title {
+      font-size: 24px !important;
+    }
+  }
+
+  .mobile-register-card {
+    padding: 20px 16px !important;
+  }
+
+  .welcome-section {
+    margin-bottom: 20px;
+  }
+
+  .mobile-form-field {
+    margin-bottom: 16px !important;
+  }
+}
+
+// Landscape orientation
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .mobile-register-container {
+    .mobile-header {
+      padding: 8px 20px 12px;
+
+      .brand-icon {
+        font-size: 32px !important;
+        width: 32px !important;
+        height: 32px !important;
+      }
+
+      .brand-title {
+        font-size: 20px !important;
+      }
+    }
+
+    .mobile-content {
+      padding: 0 20px 10px;
+    }
+
+    .welcome-section {
+      margin-bottom: 16px;
+
+      h2 {
+        font-size: 20px;
+      }
+    }
+  }
+}

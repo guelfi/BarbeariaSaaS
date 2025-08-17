@@ -1,0 +1,206 @@
+// ==========================================================================
+// Mixins - Web Mobile (PWA)
+// ==========================================================================
+
+// Mobile-first responsive breakpoints
+@mixin mobile-xs {
+  @media (min-width: #{$mobile-xs}) { @content; }
+}
+
+@mixin mobile-sm {
+  @media (min-width: #{$mobile-sm}) { @content; }
+}
+
+@mixin mobile-md {
+  @media (min-width: #{$mobile-md}) { @content; }
+}
+
+@mixin mobile-lg {
+  @media (min-width: #{$mobile-lg}) { @content; }
+}
+
+// Touch-friendly components
+@mixin touch-target {
+  min-height: $touch-target-min;
+  min-width: $touch-target-min;
+  padding: $spacing-touch;
+}
+
+@mixin touch-button {
+  @include touch-target;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: $font-size-body1;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  
+  &:active {
+    transform: scale(0.98);
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+@mixin touch-button-primary {
+  @include touch-button;
+  background-color: $primary-color;
+  color: white;
+  
+  &:hover:not(:disabled) {
+    background-color: $primary-dark;
+  }
+  
+  &:focus {
+    outline: 2px solid $primary-light;
+    outline-offset: 2px;
+  }
+}
+
+// Mobile input styles
+@mixin mobile-input {
+  width: 100%;
+  min-height: $touch-target-min;
+  padding: $spacing-touch;
+  border: 2px solid #E0E0E0;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: $font-size-body1;
+  background-color: white;
+  transition: border-color 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+  
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+  }
+  
+  &::placeholder {
+    color: #9E9E9E;
+  }
+  
+  &:disabled {
+    background-color: #F5F5F5;
+    color: #9E9E9E;
+    cursor: not-allowed;
+  }
+}
+
+// Safe area support for notched devices
+@mixin safe-area-padding {
+  padding-top: max($spacing-md, $safe-area-top);
+  padding-bottom: max($spacing-md, $safe-area-bottom);
+  padding-left: max($spacing-md, $safe-area-left);
+  padding-right: max($spacing-md, $safe-area-right);
+}
+
+@mixin safe-area-top {
+  padding-top: max($spacing-md, $safe-area-top);
+}
+
+@mixin safe-area-bottom {
+  padding-bottom: max($spacing-md, $safe-area-bottom);
+}
+
+// Mobile card styles
+@mixin mobile-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+  
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+  }
+}
+
+// Mobile animations
+@mixin mobile-fade-in($duration: 0.3s) {
+  animation: mobileFadeIn $duration ease-out;
+}
+
+@keyframes mobileFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@mixin mobile-slide-up($duration: 0.3s) {
+  animation: mobileSlideUp $duration ease-out;
+}
+
+@keyframes mobileSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// PWA specific mixins
+@mixin pwa-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $pwa-header-height;
+  background-color: $primary-color;
+  color: white;
+  z-index: $z-fixed;
+  @include safe-area-top;
+}
+
+@mixin pwa-content {
+  padding-top: calc(#{$pwa-header-height} + #{$safe-area-top});
+  padding-bottom: calc(#{$pwa-bottom-nav-height} + #{$safe-area-bottom});
+  min-height: 100vh;
+}
+
+@mixin pwa-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: $pwa-bottom-nav-height;
+  background-color: white;
+  border-top: 1px solid #E0E0E0;
+  z-index: $z-fixed;
+  @include safe-area-bottom;
+}
+
+// Haptic feedback simulation
+@mixin haptic-feedback {
+  &:active {
+    animation: hapticPulse 0.1s ease-out;
+  }
+}
+
+@keyframes hapticPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}

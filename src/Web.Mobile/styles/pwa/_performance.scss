@@ -1,0 +1,163 @@
+// ==========================================================================
+// PWA Performance Optimizations
+// ==========================================================================
+
+// Hardware acceleration for smooth animations
+.hw-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+// Smooth scrolling
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+// Optimize touch interactions
+.touch-optimized {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+// Reduce motion for accessibility
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .mat-card {
+    border: 2px solid var(--on-surface-color);
+  }
+  
+  .mat-button {
+    border: 1px solid currentColor;
+  }
+}
+
+// Dark mode preference
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+// Loading states with skeleton screens
+.skeleton {
+  background: linear-gradient(90deg, 
+    rgba(var(--on-surface-rgb), 0.1) 25%, 
+    rgba(var(--on-surface-rgb), 0.2) 50%, 
+    rgba(var(--on-surface-rgb), 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+// Optimize images for mobile
+img {
+  max-width: 100%;
+  height: auto;
+  
+  &.lazy {
+    opacity: 0;
+    transition: opacity 0.3s;
+    
+    &.loaded {
+      opacity: 1;
+    }
+  }
+}
+
+// Critical rendering path optimization
+.above-fold {
+  contain: layout style paint;
+}
+
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+// 60fps animations
+.smooth-animation {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+// Touch feedback
+.touch-feedback {
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(var(--primary-rgb), 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  
+  &:active::after {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+// Memory optimization for large lists
+.virtual-scroll {
+  contain: strict;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+// Battery optimization
+@media (prefers-reduced-motion: reduce) {
+  .battery-save {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+// Network-aware loading
+.slow-connection {
+  .high-quality-image {
+    display: none;
+  }
+  
+  .low-quality-image {
+    display: block;
+  }
+}
+
+.fast-connection {
+  .high-quality-image {
+    display: block;
+  }
+  
+  .low-quality-image {
+    display: none;
+  }
+}

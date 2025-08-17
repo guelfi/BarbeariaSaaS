@@ -1,0 +1,147 @@
+<!-- Mobile Development Container -->
+<div class="mobile-development-container" *ngIf="!isLoading">
+  
+  <!-- Status Bar Spacer -->
+  <div class="status-bar-spacer"></div>
+
+  <!-- Header -->
+  <div class="mobile-header">
+    <div class="header-content">
+      <div class="brand-section">
+        <mat-icon class="brand-icon">content_cut</mat-icon>
+        <div class="brand-text">
+          <h1 class="brand-title">Barbearia SaaS</h1>
+          <p class="brand-subtitle">Cliente</p>
+        </div>
+      </div>
+      
+      <div class="connection-status" [class.offline]="!isOnline">
+        <mat-icon>{{ isOnline ? 'wifi' : 'wifi_off' }}</mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="mobile-content">
+    
+    <!-- Welcome Section -->
+    <div class="welcome-section">
+      <mat-icon class="construction-icon">construction</mat-icon>
+      <h2>App em Desenvolvimento</h2>
+      <p class="welcome-text">
+        Olá, <strong>{{ currentUser?.name }}</strong>! 
+        Estamos criando a melhor experiência para você encontrar e agendar serviços em barbearias.
+      </p>
+    </div>
+
+    <!-- User Info Card -->
+    <mat-card class="user-info-card">
+      <mat-card-content>
+        <div class="user-info-content">
+          <div class="user-avatar">{{ getUserInitials() }}</div>
+          <div class="user-details">
+            <h3>{{ currentUser?.name }}</h3>
+            <p class="user-email">{{ currentUser?.email }}</p>
+            <div class="user-badges">
+              <span class="badge primary">{{ currentUser?.role }}</span>
+              <span class="badge secondary" *ngIf="!isOnline">Offline</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Features Section -->
+    <div class="features-section">
+      <h3 class="section-title">Funcionalidades em Desenvolvimento</h3>
+      <p class="section-subtitle">
+        Acompanhe o progresso das funcionalidades que estão sendo criadas para você
+      </p>
+
+      <div class="features-list">
+        <mat-card *ngFor="let feature of features; let i = index" 
+                  class="feature-card"
+                  [style.animation-delay.ms]="i * 100"
+                  (click)="onFeatureClick(feature)">
+          <mat-card-content>
+            <div class="feature-header">
+              <div class="feature-icon" [class]="feature.color">
+                <mat-icon>{{ feature.icon }}</mat-icon>
+              </div>
+              <div class="feature-info">
+                <h4>{{ feature.title }}</h4>
+                <div class="feature-status">
+                  <mat-icon class="status-icon">{{ getStatusIcon(feature.status) }}</mat-icon>
+                  <span>{{ feature.status }}</span>
+                </div>
+              </div>
+            </div>
+            
+            <p class="feature-description">{{ feature.description }}</p>
+            
+            <div class="progress-section">
+              <div class="progress-header">
+                <span class="progress-label">Progresso</span>
+                <span class="progress-value">{{ feature.progress }}%</span>
+              </div>
+              <mat-progress-bar 
+                [value]="feature.progress" 
+                [color]="getProgressColor(feature.progress)"
+                mode="determinate">
+              </mat-progress-bar>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Action Section -->
+    <div class="action-section">
+      <mat-card class="action-card">
+        <mat-card-content>
+          <div class="action-content">
+            <mat-icon class="action-icon">rocket_launch</mat-icon>
+            <h3>Em breve!</h3>
+            <p>Enquanto desenvolvemos, você pode explorar o app ou sair para testar outras funcionalidades.</p>
+            
+            <div class="action-buttons">
+              <button mat-raised-button color="primary" (click)="onRefresh()" class="action-button">
+                <mat-icon>refresh</mat-icon>
+                Atualizar App
+              </button>
+              <button mat-stroked-button color="accent" (click)="onLogout()" class="action-button">
+                <mat-icon>logout</mat-icon>
+                Sair
+              </button>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Footer -->
+    <div class="mobile-footer">
+      <p>© 2024 Barbearia SaaS</p>
+      <p>Versão 1.0.0 - PWA</p>
+    </div>
+
+  </div>
+
+  <!-- Safe Area Bottom -->
+  <div class="safe-area-bottom"></div>
+
+</div>
+
+<!-- Loading State -->
+<div *ngIf="isLoading" class="loading-container">
+  <div class="loading-content">
+    <mat-icon class="loading-icon">content_cut</mat-icon>
+    <h2>Carregando...</h2>
+    <p>Preparando seu app</p>
+    <div class="loading-dots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+</div>

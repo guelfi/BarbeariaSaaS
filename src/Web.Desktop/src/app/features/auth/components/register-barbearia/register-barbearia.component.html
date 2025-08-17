@@ -1,0 +1,323 @@
+<!-- Register Container -->
+<div class="register-container">
+  <div class="register-content">
+    
+    <!-- Header -->
+    <div class="register-header">
+      <button mat-icon-button (click)="navigateToLogin()" class="back-button">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="header-content">
+        <mat-icon class="brand-icon">business</mat-icon>
+        <h1>Cadastrar Barbearia</h1>
+        <p>Junte-se à nossa plataforma e revolucione sua barbearia</p>
+      </div>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="progress-container">
+      <div class="progress-steps">
+        <div class="step" [class.active]="currentStep >= 1" [class.completed]="currentStep > 1">
+          <div class="step-number">1</div>
+          <span>Dados da Barbearia</span>
+        </div>
+        <div class="step" [class.active]="currentStep >= 2" [class.completed]="currentStep > 2">
+          <div class="step-number">2</div>
+          <span>Endereço</span>
+        </div>
+        <div class="step" [class.active]="currentStep >= 3" [class.completed]="currentStep > 3">
+          <div class="step-number">3</div>
+          <span>Responsável</span>
+        </div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="(currentStep / totalSteps) * 100"></div>
+      </div>
+    </div>
+
+    <!-- Form Card -->
+    <mat-card class="register-card">
+      <mat-card-content>
+        
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="error-message" [@slideIn]>
+          <mat-icon>error</mat-icon>
+          <span>{{ errorMessage }}</span>
+        </div>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          
+          <!-- Step 1: Dados da Barbearia -->
+          <div *ngIf="currentStep === 1" class="form-step" [@slideIn]>
+            <h2>Dados da Barbearia</h2>
+            <p class="step-description">Vamos começar com as informações básicas da sua barbearia</p>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Nome da Barbearia</mat-label>
+              <input 
+                matInput 
+                formControlName="nomeBarbearia"
+                placeholder="Ex: Barbearia Central"
+                [disabled]="isLoading">
+              <mat-icon matSuffix>store</mat-icon>
+              <mat-error *ngIf="nomeBarbearia?.hasError('required')">
+                Nome da barbearia é obrigatório
+              </mat-error>
+              <mat-error *ngIf="nomeBarbearia?.hasError('minlength')">
+                Nome deve ter pelo menos 2 caracteres
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Telefone</mat-label>
+              <input 
+                matInput 
+                formControlName="telefone"
+                placeholder="(11) 99999-9999"
+                (input)="formatPhone($event)"
+                [disabled]="isLoading">
+              <mat-icon matSuffix>phone</mat-icon>
+              <mat-error *ngIf="telefone?.hasError('required')">
+                Telefone é obrigatório
+              </mat-error>
+              <mat-error *ngIf="telefone?.hasError('pattern')">
+                Formato inválido. Use: (11) 99999-9999
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Step 2: Endereço -->
+          <div *ngIf="currentStep === 2" class="form-step" [@slideIn]>
+            <h2>Endereço da Barbearia</h2>
+            <p class="step-description">Onde seus clientes poderão encontrar você</p>
+
+            <div class="form-row">
+              <mat-form-field appearance="outline" class="half-width">
+                <mat-label>CEP</mat-label>
+                <input 
+                  matInput 
+                  formControlName="cep"
+                  placeholder="00000-000"
+                  (input)="formatCep($event)"
+                  [disabled]="isLoading">
+                <mat-icon matSuffix>location_on</mat-icon>
+                <mat-error *ngIf="cep?.hasError('required')">
+                  CEP é obrigatório
+                </mat-error>
+                <mat-error *ngIf="cep?.hasError('pattern')">
+                  Formato inválido. Use: 00000-000
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="half-width">
+                <mat-label>Estado</mat-label>
+                <input 
+                  matInput 
+                  formControlName="estado"
+                  placeholder="SP"
+                  [disabled]="isLoading">
+                <mat-error *ngIf="estado?.hasError('required')">
+                  Estado é obrigatório
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Rua</mat-label>
+              <input 
+                matInput 
+                formControlName="rua"
+                placeholder="Rua das Flores"
+                [disabled]="isLoading">
+              <mat-error *ngIf="rua?.hasError('required')">
+                Rua é obrigatória
+              </mat-error>
+            </mat-form-field>
+
+            <div class="form-row">
+              <mat-form-field appearance="outline" class="quarter-width">
+                <mat-label>Número</mat-label>
+                <input 
+                  matInput 
+                  formControlName="numero"
+                  placeholder="123"
+                  [disabled]="isLoading">
+                <mat-error *ngIf="numero?.hasError('required')">
+                  Número é obrigatório
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="half-width">
+                <mat-label>Bairro</mat-label>
+                <input 
+                  matInput 
+                  formControlName="bairro"
+                  placeholder="Centro"
+                  [disabled]="isLoading">
+                <mat-error *ngIf="bairro?.hasError('required')">
+                  Bairro é obrigatório
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="quarter-width">
+                <mat-label>Cidade</mat-label>
+                <input 
+                  matInput 
+                  formControlName="cidade"
+                  placeholder="São Paulo"
+                  [disabled]="isLoading">
+                <mat-error *ngIf="cidade?.hasError('required')">
+                  Cidade é obrigatória
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Step 3: Dados do Responsável -->
+          <div *ngIf="currentStep === 3" class="form-step" [@slideIn]>
+            <h2>Dados do Responsável</h2>
+            <p class="step-description">Quem será o administrador da barbearia no sistema</p>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Email do Responsável</mat-label>
+              <input 
+                matInput 
+                type="email"
+                formControlName="emailResponsavel"
+                placeholder="responsavel@barbearia.com"
+                [disabled]="isLoading">
+              <mat-icon matSuffix>email</mat-icon>
+              <mat-error *ngIf="emailResponsavel?.hasError('required')">
+                Email é obrigatório
+              </mat-error>
+              <mat-error *ngIf="emailResponsavel?.hasError('email')">
+                Email inválido
+              </mat-error>
+              <mat-error *ngIf="emailResponsavel?.hasError('emailTaken')">
+                Este email já está em uso
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Senha</mat-label>
+              <input 
+                matInput 
+                [type]="showPassword ? 'text' : 'password'"
+                formControlName="senha"
+                placeholder="Mínimo 8 caracteres"
+                [disabled]="isLoading">
+              <button 
+                mat-icon-button 
+                matSuffix 
+                type="button"
+                (click)="togglePasswordVisibility()"
+                [disabled]="isLoading">
+                <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+              <mat-error *ngIf="senha?.hasError('required')">
+                Senha é obrigatória
+              </mat-error>
+              <mat-error *ngIf="senha?.hasError('minlength')">
+                Senha deve ter pelo menos 8 caracteres
+              </mat-error>
+              <mat-error *ngIf="senha?.hasError('weakPassword')">
+                Senha muito fraca. Use maiúsculas, minúsculas, números e símbolos
+              </mat-error>
+              <mat-hint *ngIf="senha?.value && !senha?.hasError('required')">
+                <div class="password-strength">
+                  <span>Força da senha: </span>
+                  <span [class]="'strength-' + getPasswordStrength()">
+                    {{ getPasswordStrength() === 'weak' ? 'Fraca' : 
+                       getPasswordStrength() === 'medium' ? 'Média' : 'Forte' }}
+                  </span>
+                </div>
+              </mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Confirmar Senha</mat-label>
+              <input 
+                matInput 
+                [type]="showConfirmPassword ? 'text' : 'password'"
+                formControlName="confirmarSenha"
+                placeholder="Digite a senha novamente"
+                [disabled]="isLoading">
+              <button 
+                mat-icon-button 
+                matSuffix 
+                type="button"
+                (click)="toggleConfirmPasswordVisibility()"
+                [disabled]="isLoading">
+                <mat-icon>{{ showConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+              <mat-error *ngIf="confirmarSenha?.hasError('required')">
+                Confirmação de senha é obrigatória
+              </mat-error>
+              <mat-error *ngIf="confirmarSenha?.hasError('passwordMismatch')">
+                Senhas não coincidem
+              </mat-error>
+            </mat-form-field>
+
+            <div class="terms-section">
+              <mat-checkbox formControlName="aceitarTermos" [disabled]="isLoading">
+                Aceito os <a href="#" target="_blank">termos de uso</a> e 
+                <a href="#" target="_blank">política de privacidade</a>
+              </mat-checkbox>
+              <mat-error *ngIf="aceitarTermos?.hasError('required') && aceitarTermos?.touched">
+                Você deve aceitar os termos para continuar
+              </mat-error>
+            </div>
+          </div>
+
+          <!-- Navigation Buttons -->
+          <div class="form-navigation">
+            <button 
+              *ngIf="currentStep > 1"
+              mat-stroked-button 
+              type="button"
+              (click)="previousStep()"
+              [disabled]="isLoading"
+              class="nav-button">
+              <mat-icon>arrow_back</mat-icon>
+              Voltar
+            </button>
+
+            <div class="spacer"></div>
+
+            <button 
+              *ngIf="currentStep < totalSteps"
+              mat-raised-button 
+              color="primary"
+              type="button"
+              (click)="nextStep()"
+              [disabled]="isLoading"
+              class="nav-button">
+              Próximo
+              <mat-icon>arrow_forward</mat-icon>
+            </button>
+
+            <button 
+              *ngIf="currentStep === totalSteps"
+              mat-raised-button 
+              color="primary"
+              type="submit"
+              [disabled]="isLoading || registerForm.invalid"
+              class="nav-button submit-button">
+              <mat-spinner *ngIf="isLoading" diameter="20" class="button-spinner"></mat-spinner>
+              <mat-icon *ngIf="!isLoading">check</mat-icon>
+              {{ isLoading ? 'Cadastrando...' : 'Finalizar Cadastro' }}
+            </button>
+          </div>
+
+        </form>
+
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Footer -->
+    <div class="register-footer">
+      <p>Já tem uma conta? <a (click)="navigateToLogin()">Fazer login</a></p>
+    </div>
+
+  </div>
+</div>

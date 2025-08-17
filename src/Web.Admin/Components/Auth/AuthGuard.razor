@@ -1,0 +1,74 @@
+@using BarbeariaSaaS.Web.Admin.Services
+@inject AuthStateService AuthState
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+
+@if (AuthState.IsAuthenticated)
+{
+    @ChildContent
+}
+else
+{
+    <div class="auth-guard-loading">
+        <MudProgressCircular Indeterminate="true" Size="Size.Large" />
+        <MudText Typo="Typo.h6" Class="mt-4">Verificando autenticação...</MudText>
+    </div>
+}
+
+<style>
+    .auth-guard-loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: var(--admin-bg-secondary);
+        color: var(--admin-text-primary);
+    }
+</style>
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Check authentication state
+        if (!AuthState.IsAuthenticated)
+        {
+            // Small delay to prevent flash
+            await Task.Delay(100);
+            
+            // Get current URL for return after login
+            var currentUrl = Navigation.ToBaseRelativePath(Navigation.Uri);
+            var returnUrl = currentUrl == "" ? "/development" : $"/{currentUrl}";
+            
+            // Redirect to login with return URL
+            Navigation.NavigateTo($"/login?returnUrl={Uri.EscapeDataString(returnUrl)}");
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        // Subscribe to auth state changes
+        AuthState.StateChanged += OnAuthStateChanged;
+    }
+
+    private void OnAuthStateChanged(object? sender, Models.AuthState newState)
+    {
+        if (!newState.IsAuthenticated)
+        {
+            // Get current URL for return after login
+            var currentUrl = Navigation.ToBaseRelativePath(Navigation.Uri);
+            var returnUrl = currentUrl == "" ? "/development" : $"/{currentUrl}";
+            
+            Navigation.NavigateTo($"/login?returnUrl={Uri.EscapeDataString(returnUrl)}");
+        }
+        
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        AuthState.StateChanged -= OnAuthStateChanged;
+    }
+}

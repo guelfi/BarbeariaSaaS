@@ -1,0 +1,166 @@
+<!-- Mobile Login Container -->
+<div class="mobile-login-container">
+  
+  <!-- Status Bar Spacer -->
+  <div class="status-bar-spacer"></div>
+
+  <!-- Header -->
+  <div class="mobile-header">
+    <div class="header-content">
+      <div class="brand-logo">
+        <mat-icon class="brand-icon">content_cut</mat-icon>
+        <h1 class="brand-title">Barbearia</h1>
+      </div>
+      <p class="brand-subtitle">Agende seu horário</p>
+    </div>
+    
+    <!-- Network Status -->
+    <div *ngIf="isOffline" class="offline-indicator">
+      <mat-icon>wifi_off</mat-icon>
+      <span>Modo Offline</span>
+    </div>
+  </div>
+
+  <!-- Login Card -->
+  <div class="mobile-content">
+    <mat-card class="mobile-login-card">
+      
+      <!-- Welcome Section -->
+      <div class="welcome-section">
+        <h2>Bem-vindo de volta!</h2>
+        <p>Entre com sua conta para agendar serviços</p>
+      </div>
+
+      <!-- Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="mobile-login-form">
+        
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="mobile-error-message">
+          <mat-icon>error_outline</mat-icon>
+          <span>{{ errorMessage }}</span>
+          <button mat-icon-button (click)="errorMessage = ''" class="close-error">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+
+        <!-- Email Field -->
+        <mat-form-field appearance="outline" class="mobile-form-field">
+          <mat-label>Email</mat-label>
+          <input 
+            matInput 
+            type="email" 
+            formControlName="email"
+            placeholder="seu@email.com"
+            [disabled]="isLoading"
+            autocomplete="email">
+          <mat-icon matSuffix color="primary">email</mat-icon>
+          <mat-error *ngIf="email?.hasError('required')">
+            Email é obrigatório
+          </mat-error>
+          <mat-error *ngIf="email?.hasError('email')">
+            Email inválido
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Password Field -->
+        <mat-form-field appearance="outline" class="mobile-form-field">
+          <mat-label>Senha</mat-label>
+          <input 
+            matInput 
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Sua senha"
+            [disabled]="isLoading"
+            autocomplete="current-password">
+          <button 
+            mat-icon-button 
+            matSuffix 
+            type="button"
+            (click)="togglePasswordVisibility()"
+            [attr.aria-label]="showPassword ? 'Ocultar senha' : 'Mostrar senha'"
+            [disabled]="isLoading"
+            class="password-toggle">
+            <mat-icon color="primary">{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="password?.hasError('required')">
+            Senha é obrigatória
+          </mat-error>
+          <mat-error *ngIf="password?.hasError('minlength')">
+            Senha deve ter pelo menos 6 caracteres
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Barbearia Selection -->
+        <div class="barbearia-selection">
+          <button 
+            mat-stroked-button 
+            type="button"
+            (click)="openBarbeariaSelection()"
+            class="select-barbearia-button"
+            [disabled]="isLoading">
+            <mat-icon>location_on</mat-icon>
+            <span>Escolher Barbearia</span>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+
+        <!-- Login Button -->
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit"
+          class="mobile-login-button"
+          [disabled]="isLoading">
+          <div class="button-content">
+            <mat-spinner *ngIf="isLoading" diameter="20" class="button-spinner"></mat-spinner>
+            <mat-icon *ngIf="!isLoading">login</mat-icon>
+            <span>{{ isLoading ? 'Entrando...' : 'Entrar' }}</span>
+          </div>
+        </button>
+
+        <!-- Forgot Password -->
+        <div class="forgot-password">
+          <a href="#" class="forgot-link">Esqueci minha senha</a>
+        </div>
+
+        <!-- Divider -->
+        <div class="mobile-divider">
+          <mat-divider></mat-divider>
+          <span class="divider-text">ou</span>
+          <mat-divider></mat-divider>
+        </div>
+
+        <!-- Register Section -->
+        <div class="register-section">
+          <p class="register-text">Primeira vez aqui?</p>
+          <button 
+            mat-stroked-button 
+            color="accent" 
+            type="button"
+            class="mobile-register-button"
+            (click)="navigateToRegister()"
+            [disabled]="isLoading">
+            <mat-icon>person_add</mat-icon>
+            <span>Criar Conta</span>
+          </button>
+        </div>
+
+      </form>
+
+    </mat-card>
+  </div>
+
+  <!-- Footer -->
+  <div class="mobile-footer">
+    <p>© 2024 Barbearia SaaS</p>
+    <div class="footer-links">
+      <a href="#">Termos</a>
+      <span>•</span>
+      <a href="#">Privacidade</a>
+    </div>
+  </div>
+
+  <!-- Safe Area Bottom -->
+  <div class="safe-area-bottom"></div>
+
+</div>

@@ -1,0 +1,161 @@
+<!-- Development Container -->
+<div class="development-container" *ngIf="!isLoading">
+  
+  <!-- Header -->
+  <mat-toolbar class="development-header">
+    <div class="header-content">
+      <div class="brand-section">
+        <mat-icon class="brand-icon">content_cut</mat-icon>
+        <span class="brand-title">Barbearia SaaS</span>
+      </div>
+      
+      <div class="user-section">
+        <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+          <div class="user-avatar">{{ getUserInitials() }}</div>
+          <span class="user-name">{{ currentUser?.name }}</span>
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        
+        <mat-menu #userMenu="matMenu">
+          <div class="user-menu-header">
+            <div class="user-info">
+              <div class="user-avatar large">{{ getUserInitials() }}</div>
+              <div class="user-details">
+                <div class="name">{{ currentUser?.name }}</div>
+                <div class="email">{{ currentUser?.email }}</div>
+                <div class="role">{{ currentUser?.role }}</div>
+              </div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="onRefresh()">
+            <mat-icon>refresh</mat-icon>
+            <span>Atualizar</span>
+          </button>
+          <button mat-menu-item (click)="onLogout()">
+            <mat-icon>logout</mat-icon>
+            <span>Sair</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </mat-toolbar>
+
+  <!-- Main Content -->
+  <div class="development-content">
+    
+    <!-- Welcome Section -->
+    <div class="welcome-section">
+      <div class="welcome-content">
+        <mat-icon class="construction-icon">construction</mat-icon>
+        <h1>Sistema em Desenvolvimento</h1>
+        <p class="welcome-subtitle">
+          Olá, <strong>{{ currentUser?.name }}</strong>! Bem-vindo ao painel da sua barbearia.
+          Estamos trabalhando para trazer as melhores funcionalidades para você.
+        </p>
+      </div>
+    </div>
+
+    <!-- User Info Card -->
+    <mat-card class="user-info-card">
+      <mat-card-content>
+        <div class="user-info-content">
+          <div class="user-avatar-section">
+            <div class="user-avatar extra-large">{{ getUserInitials() }}</div>
+          </div>
+          <div class="user-details-section">
+            <h2>{{ currentUser?.name }}</h2>
+            <p class="user-email">{{ currentUser?.email }}</p>
+            <mat-chip-list>
+              <mat-chip [color]="getStatusColor('Em desenvolvimento')" selected>
+                {{ currentUser?.role }}
+              </mat-chip>
+              <mat-chip color="accent" selected>
+                Tenant: {{ currentUser?.tenantId }}
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Features Roadmap -->
+    <div class="features-section">
+      <h2 class="section-title">Roadmap de Funcionalidades</h2>
+      <p class="section-subtitle">
+        Acompanhe o progresso das funcionalidades que estão sendo desenvolvidas para sua barbearia
+      </p>
+
+      <div class="features-grid">
+        <mat-card *ngFor="let feature of features; let i = index" 
+                  class="feature-card"
+                  [style.animation-delay.ms]="i * 100">
+          <mat-card-header>
+            <div mat-card-avatar class="feature-avatar">
+              <mat-icon>{{ feature.icon }}</mat-icon>
+            </div>
+            <mat-card-title>{{ feature.title }}</mat-card-title>
+            <mat-card-subtitle>
+              <mat-chip [color]="getStatusColor(feature.status)" selected size="small">
+                {{ feature.status }}
+              </mat-chip>
+            </mat-card-subtitle>
+          </mat-card-header>
+          
+          <mat-card-content>
+            <p>{{ feature.description }}</p>
+            
+            <div class="progress-section">
+              <div class="progress-header">
+                <span class="progress-label">Progresso</span>
+                <span class="progress-value">{{ feature.progress }}%</span>
+              </div>
+              <mat-progress-bar 
+                [value]="feature.progress" 
+                [color]="getProgressColor(feature.progress)"
+                mode="determinate">
+              </mat-progress-bar>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Action Section -->
+    <div class="action-section">
+      <mat-card class="action-card">
+        <mat-card-content>
+          <div class="action-content">
+            <div class="action-text">
+              <h3>Pronto para começar?</h3>
+              <p>Enquanto desenvolvemos as funcionalidades, você pode explorar o sistema ou sair para testar outras áreas.</p>
+            </div>
+            <div class="action-buttons">
+              <button mat-raised-button color="primary" (click)="onRefresh()" class="action-button">
+                <mat-icon>refresh</mat-icon>
+                Atualizar Página
+              </button>
+              <button mat-stroked-button color="accent" (click)="onLogout()" class="action-button">
+                <mat-icon>logout</mat-icon>
+                Sair do Sistema
+              </button>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Footer -->
+    <div class="development-footer">
+      <p>© 2024 Barbearia SaaS - Versão 1.0.0 - Desenvolvido com ❤️ usando Angular + Material UI</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- Loading State -->
+<div *ngIf="isLoading" class="loading-container">
+  <mat-icon class="loading-icon">content_cut</mat-icon>
+  <h2>Carregando...</h2>
+  <p>Preparando seu painel de controle</p>
+</div>
