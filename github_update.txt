@@ -1,15 +1,10 @@
 git add .
-git commit -m "feat: Implementação completa LGPD + correções configuração Angular
+git commit -m "feat: Mensagem
 
-- ✅ Banner LGPD responsivo para Desktop e Mobile
-- ✅ Controle granular de cookies (Essenciais, Analytics, Marketing, Preferências)
-- ✅ Política de privacidade integrada
-- ✅ Todos os direitos do usuário LGPD implementados
-- ✅ Ícone flutuante permanente (mobile)
-- ✅ Conformidade 100% com Lei 13.709/2018
-- 🔧 Correção package.json (karma-chrome-launcher)
-- 🔧 Configuração portas fixas (1001, 1002, 1003)
-- 🔧 Scripts de inicialização automática
+- ✅ O que foi realizado em detalhes
+- ✅ Caso seja mais de uma atualização
+- 🔧 Detalhes técnicos da atualização
+- 🔧 [EXEMPLO] Configuração portas fixas (1001, 1002, 1003)
 - 📚 Documentação LGPD completa"
 
 git push origin main

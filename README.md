@@ -1,10 +1,18 @@
 # Barbearia SaaS - Sistema Multi-Frontend
+[![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat&logo=dotnet)](https://dotnet.microsoft.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Blazor](https://img.shields.io/badge/Blazor-512BD4?style=flat&logo=blazor&logoColor=white)](https://blazor.net/)
+[![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat&logo=angular&logoColor=white)](https://angular.io/)
+[![Sass](https://img.shields.io/badge/Sass-CC6699?style=flat&logo=sass&logoColor=white)](https://sass-lang.com/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat&logo=nginx&logoColor=white)](https://nginx.org/)
+[![Cypress](https://img.shields.io/badge/Cypress-17202C?style=flat&logo=cypress&logoColor=white)](https://www.cypress.io/)
+[![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=postman&logoColor=white)](https://www.postman.com/)
 
 ![LGPD Compliant](https://img.shields.io/badge/LGPD-Compliant-green?style=for-the-badge&logo=shield&logoColor=white)
 ![Privacy](https://img.shields.io/badge/Privacy-Protected-blue?style=for-the-badge&logo=security&logoColor=white)
 ![Brazil](https://img.shields.io/badge/Made_in-Brazil-yellow?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSIjMDA5NzM5Ii8+CjxwYXRoIGQ9Ik0xMiA2TDE4IDEyTDEyIDE4TDYgMTJMMTIgNloiIGZpbGw9IiNGRkRGMDAiLz4KPC9zdmc+)
-![Angular](https://img.shields.io/badge/Angular-17-red?style=for-the-badge&logo=angular&logoColor=white)
-![Blazor](https://img.shields.io/badge/Blazor-Server-purple?style=for-the-badge&logo=blazor&logoColor=white)
+
 
 > **🔒 100% Conforme com a LGPD (Lei 13.709/2018)** - Proteção completa de dados pessoais implementada
 
