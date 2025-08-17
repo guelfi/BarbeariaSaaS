@@ -127,9 +127,9 @@ BarbeariaSaaS/
 │   └── Web.Mobile/         # Angular PWA + Material UI
 ├── tests/
 │   ├── cypress/            # Testes E2E
-│   └── Api/               # Testes unitários C#
-├── .kiro/specs/           # Documentação do projeto
-└── scripts/               # Scripts de execução
+│   └── Api/                # Testes unitários C#
+├── .kiro/specs/            # Documentação do projeto
+└── scripts/                # Scripts de execução
 ```
 
 ## 🎨 Tecnologias Utilizadas
@@ -236,7 +236,7 @@ src/[Frontend]/
 │   ├── features/          # Módulos de funcionalidades
 │   └── styles/            # Estilos SCSS
 ├── tests/                 # Testes específicos
-└── assets/               # Assets estáticos
+└── assets/                # Assets estáticos
 ```
 
 ### Comandos Úteis
