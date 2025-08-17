@@ -150,43 +150,43 @@
     - Adicionar verificação de autenticação em páginas protegidas
     - _Requirements: 4.4, 4.5_
 
-- [ ] 10. Implementar validações e tratamento de erros
-  - [ ] 10.1 Criar sistema de validação de formulários
+- [x] 10. Implementar validações e tratamento de erros
+  - [x] 10.1 Criar sistema de validação de formulários
     - Implementar validações client-side para todos os campos
     - Adicionar mensagens de erro específicas e claras em português
     - Criar feedback visual consistente entre frontends
     - Implementar mensagens de validação personalizadas (ex: "Email é obrigatório", "Senha deve ter pelo menos 8 caracteres")
     - _Requirements: 6.3, 7.5, 8.5_
 
-  - [ ] 10.2 Implementar tratamento de erros de autenticação
+  - [x] 10.2 Implementar tratamento de erros de autenticação
     - Criar enum de tipos de erro padronizado com mensagens em português
     - Implementar exibição de erros específica por frontend ("Credenciais inválidas", "Usuário não encontrado")
     - Adicionar logging de erros para debugging
     - Configurar mensagens de erro amigáveis ao usuário
     - _Requirements: 4.3, 6.3_
 
-- [ ] 11. Implementar animações e transições
-  - [ ] 11.1 Criar animações de entrada e saída
+- [x] 11. Implementar animações e transições
+  - [x] 11.1 Criar animações de entrada e saída
     - Implementar fade-in para carregamento de páginas
     - Adicionar slide-up para modais e formulários
     - Criar transições suaves entre estados de loading
     - _Requirements: 6.2, 6.5_
 
-  - [ ] 11.2 Otimizar animações para performance
+  - [x] 11.2 Otimizar animações para performance
     - Usar transform e opacity para animações GPU-aceleradas
     - Implementar will-change para otimização
     - Adicionar prefers-reduced-motion para acessibilidade
     - _Requirements: 6.2, 3.8_
 
-- [ ] 12. Implementar testes automatizados
-  - [ ] 12.1 Criar testes unitários para serviços de autenticação
+- [x] 12. Implementar testes automatizados
+  - [x] 12.1 Criar testes unitários para serviços de autenticação
     - Testar lógica de validação de credenciais
     - Verificar gerenciamento de estado de autenticação
     - Testar cenários de erro e edge cases
     - Incluir testes para mensagens de erro em português
     - _Requirements: 4.1, 4.2, 4.3_
 
-  - [ ] 12.2 Criar testes E2E com Cypress
+  - [x] 12.2 Criar testes E2E com Cypress
     - Implementar testes de fluxo completo de login
     - Testar cadastros de barbearia e cliente
     - Verificar navegação entre telas
@@ -194,14 +194,14 @@
     - Validar exibição de mensagens em português
     - _Requirements: 1.4, 2.5, 3.5, 7.3, 8.3_
 
-- [ ] 13. Otimizar performance e acessibilidade
-  - [ ] 13.1 Implementar otimizações de bundle
+- [x] 13. Otimizar performance e acessibilidade
+  - [x] 13.1 Implementar otimizações de bundle
     - Configurar lazy loading para módulos de autenticação
     - Implementar tree shaking para componentes não utilizados
     - Otimizar imagens e assets estáticos
     - _Requirements: 6.4, 3.8_
 
-  - [ ] 13.2 Implementar recursos de acessibilidade
+  - [x] 13.2 Implementar recursos de acessibilidade
     - Adicionar labels e ARIA attributes apropriados em português
     - Implementar navegação por teclado
     - Testar com screen readers

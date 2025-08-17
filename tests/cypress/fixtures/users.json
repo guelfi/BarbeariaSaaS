@@ -2,19 +2,57 @@
   "admin": {
     "email": "guelfi@msn.com",
     "password": "@5ST73EA4x",
+    "name": "Administrador SaaS",
     "role": "admin",
     "tenantId": "saas-admin"
   },
   "barbeiro": {
-    "email": "barbeiro@barbearia.com",
+    "email": "barbeiro@barbearia.com", 
     "password": "Barbeiro123!",
+    "name": "João Silva",
     "role": "barbeiro",
-    "tenantId": "tenant-001"
+    "tenantId": "tenant-001",
+    "barbearia": "Barbearia Central"
   },
   "cliente": {
     "email": "cliente@email.com",
     "password": "Cliente123!",
+    "name": "Maria Santos", 
     "role": "cliente",
-    "tenantId": "tenant-001"
+    "tenantId": "tenant-001",
+    "telefone": "(11) 99999-9999"
+  },
+  "invalidUsers": {
+    "wrongPassword": {
+      "email": "barbeiro@barbearia.com",
+      "password": "senhaerrada"
+    },
+    "wrongEmail": {
+      "email": "naoexiste@email.com", 
+      "password": "qualquersenha"
+    },
+    "emptyFields": {
+      "email": "",
+      "password": ""
+    },
+    "invalidEmail": {
+      "email": "emailinvalido",
+      "password": "senha123"
+    }
+  },
+  "testUsers": {
+    "newBarbearia": {
+      "nome": "Barbearia Teste E2E",
+      "email": "teste.e2e@barbearia.com",
+      "senha": "TesteE2E@123",
+      "telefone": "(11) 88888-8888",
+      "endereco": "Rua Teste E2E, 123"
+    },
+    "newCliente": {
+      "nome": "Cliente Teste E2E",
+      "email": "cliente.e2e@teste.com", 
+      "senha": "ClienteE2E@123",
+      "telefone": "(11) 77777-7777"
+    }
   }
 }

@@ -6,13 +6,13 @@ import { Subject, takeUntil } from 'rxjs';
 
 import { AuthService } from '@core/services/auth.service';
 import { LoginRequest, AuthError } from '@core/models/auth.models';
-import { slideIn, fadeIn } from '@shared/animations/animations';
+import { slideIn, fadeIn, slideInFromLeft, slideInFromRight, scaleIn, staggerAnimation } from '@shared/animations/animations';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  animations: [slideIn, fadeIn]
+  animations: [slideIn, fadeIn, slideInFromLeft, slideInFromRight, scaleIn, staggerAnimation]
 })
 export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;

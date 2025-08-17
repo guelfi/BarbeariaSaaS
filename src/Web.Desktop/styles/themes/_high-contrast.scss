@@ -1,0 +1,212 @@
+// ==========================================================================
+// High Contrast Theme - Web Desktop
+// ==========================================================================
+
+@media (prefers-contrast: high) {
+  :root {
+    // High contrast colors
+    --primary-color: #000000;
+    --secondary-color: #ffffff;
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --border-color: #000000;
+    --error-color: #ff0000;
+    --success-color: #008000;
+    --warning-color: #ff8c00;
+    --info-color: #0000ff;
+    
+    // Focus indicators
+    --focus-color: #0000ff;
+    --focus-width: 3px;
+  }
+
+  // Override Material Design colors for high contrast
+  .mat-primary {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  .mat-accent {
+    background-color: #0000ff !important;
+    color: #ffffff !important;
+  }
+
+  .mat-warn {
+    background-color: #ff0000 !important;
+    color: #ffffff !important;
+  }
+
+  // Form fields
+  .mat-form-field {
+    .mat-form-field-outline {
+      color: #000000 !important;
+      border-width: 2px !important;
+    }
+
+    .mat-form-field-outline-thick {
+      border-width: 3px !important;
+    }
+
+    .mat-form-field-label {
+      color: #000000 !important;
+      font-weight: bold !important;
+    }
+
+    .mat-input-element {
+      color: #000000 !important;
+      background-color: #ffffff !important;
+      border: 2px solid #000000 !important;
+    }
+
+    &.mat-focused {
+      .mat-form-field-outline-thick {
+        color: var(--focus-color) !important;
+        border-width: var(--focus-width) !important;
+      }
+    }
+  }
+
+  // Buttons
+  .mat-button, .mat-raised-button, .mat-stroked-button {
+    border: 2px solid #000000 !important;
+    font-weight: bold !important;
+    
+    &:focus {
+      outline: var(--focus-width) solid var(--focus-color) !important;
+      outline-offset: 2px !important;
+    }
+
+    &:disabled {
+      background-color: #cccccc !important;
+      color: #666666 !important;
+      border-color: #666666 !important;
+    }
+  }
+
+  .mat-raised-button {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+
+    &:hover:not(:disabled) {
+      background-color: #333333 !important;
+    }
+  }
+
+  .mat-stroked-button {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+
+    &:hover:not(:disabled) {
+      background-color: #f0f0f0 !important;
+    }
+  }
+
+  // Icons
+  .mat-icon {
+    color: inherit !important;
+  }
+
+  // Cards
+  .mat-card {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    box-shadow: none !important;
+  }
+
+  // Error messages
+  .mat-error {
+    color: #ff0000 !important;
+    font-weight: bold !important;
+    background-color: #ffffff !important;
+    padding: 4px !important;
+    border: 1px solid #ff0000 !important;
+  }
+
+  // Snackbar
+  .mat-snack-bar-container {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  // Login specific styles
+  .login-container {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .login-card {
+    background-color: #ffffff !important;
+    border: 3px solid #000000 !important;
+    box-shadow: none !important;
+  }
+
+  .login-branding {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+
+    .brand-icon {
+      color: #ffffff !important;
+    }
+
+    .feature-item {
+      border: 1px solid #ffffff !important;
+      
+      .mat-icon {
+        color: #ffffff !important;
+      }
+    }
+  }
+
+  // Error message
+  .error-message {
+    background-color: #ffffff !important;
+    color: #ff0000 !important;
+    border: 2px solid #ff0000 !important;
+    font-weight: bold !important;
+  }
+
+  // Focus management
+  *:focus {
+    outline: var(--focus-width) solid var(--focus-color) !important;
+    outline-offset: 2px !important;
+  }
+
+  // Remove animations for better accessibility
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  // Ensure sufficient color contrast
+  a {
+    color: #0000ff !important;
+    text-decoration: underline !important;
+    font-weight: bold !important;
+
+    &:visited {
+      color: #800080 !important;
+    }
+
+    &:hover, &:focus {
+      background-color: #ffff00 !important;
+      color: #000000 !important;
+    }
+  }
+
+  // Loading indicators
+  .mat-progress-spinner circle {
+    stroke: #000000 !important;
+    stroke-width: 4px !important;
+  }
+
+  .mat-spinner circle {
+    stroke: #000000 !important;
+    stroke-width: 4px !important;
+  }
+}

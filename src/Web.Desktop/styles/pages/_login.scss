@@ -7,13 +7,15 @@
   @include flex-center;
   background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
   padding: $spacing-md;
+  @include hw-accelerated;
 }
 
 .login-card {
   @include card;
   width: 100%;
   max-width: 400px;
-  @include fade-in;
+  @include fade-animation;
+  @include hw-accelerated;
   
   .login-header {
     text-align: center;
@@ -85,6 +87,7 @@
       
       .login-btn {
         @include button-primary;
+        @include button-hover-optimized;
         width: 100%;
         margin-bottom: $spacing-md;
       }
@@ -113,5 +116,7 @@
     margin-bottom: $spacing-md;
     font-size: $font-size-sm;
     border-left: 4px solid $error-color;
+    @include slide-animation(down, 10px, 0.3s);
+    @include respect-reduced-motion;
   }
 }

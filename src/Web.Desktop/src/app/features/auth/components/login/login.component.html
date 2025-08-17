@@ -3,15 +3,15 @@
   <div class="login-content">
     
     <!-- Left Side - Branding -->
-    <div class="login-branding">
-      <div class="brand-logo">
+    <div class="login-branding" [@slideInFromLeft]>
+      <div class="brand-logo" [@scaleIn]>
         <mat-icon class="brand-icon">content_cut</mat-icon>
         <h1 class="brand-title">Barbearia SaaS</h1>
       </div>
-      <p class="brand-subtitle">
+      <p class="brand-subtitle" [@fadeIn]>
         Sistema completo de gestão para sua barbearia
       </p>
-      <div class="brand-features">
+      <div class="brand-features" [@staggerAnimation]>
         <div class="feature-item">
           <mat-icon>event</mat-icon>
           <span>Agendamentos Online</span>
@@ -32,11 +32,11 @@
     </div>
 
     <!-- Right Side - Login Form -->
-    <div class="login-form-container">
-      <mat-card class="login-card">
+    <div class="login-form-container" [@slideInFromRight]>
+      <mat-card class="login-card" [@scaleIn]>
         
         <!-- Header -->
-        <mat-card-header class="login-header">
+        <mat-card-header class="login-header" [@fadeIn]>
           <mat-card-title>Acesso à Barbearia</mat-card-title>
           <mat-card-subtitle>Entre com suas credenciais</mat-card-subtitle>
         </mat-card-header>
@@ -59,12 +59,17 @@
                 type="email" 
                 formControlName="email"
                 placeholder="seu@email.com"
-                [disabled]="isLoading">
-              <mat-icon matSuffix>email</mat-icon>
-              <mat-error *ngIf="email?.hasError('required')">
+                [disabled]="isLoading"
+                aria-label="Campo de email para login"
+                aria-describedby="email-help email-error"
+                autocomplete="email"
+                data-cy="desktop-email">
+              <mat-icon matSuffix aria-hidden="true">email</mat-icon>
+              <mat-hint id="email-help">Digite seu endereço de email</mat-hint>
+              <mat-error id="email-error" *ngIf="email?.hasError('required')">
                 Email é obrigatório
               </mat-error>
-              <mat-error *ngIf="email?.hasError('email')">
+              <mat-error id="email-error" *ngIf="email?.hasError('email')">
                 Email inválido
               </mat-error>
             </mat-form-field>
@@ -77,20 +82,27 @@
                 [type]="showPassword ? 'text' : 'password'"
                 formControlName="password"
                 placeholder="Sua senha"
-                [disabled]="isLoading">
+                [disabled]="isLoading"
+                aria-label="Campo de senha para login"
+                aria-describedby="password-help password-error"
+                autocomplete="current-password"
+                data-cy="desktop-password">
               <button 
                 mat-icon-button 
                 matSuffix 
                 type="button"
                 (click)="togglePasswordVisibility()"
                 [attr.aria-label]="showPassword ? 'Ocultar senha' : 'Mostrar senha'"
-                [disabled]="isLoading">
-                <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                [attr.aria-pressed]="showPassword"
+                [disabled]="isLoading"
+                data-cy="desktop-password-toggle">
+                <mat-icon aria-hidden="true">{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
               </button>
-              <mat-error *ngIf="password?.hasError('required')">
+              <mat-hint id="password-help">Digite sua senha (mínimo 6 caracteres)</mat-hint>
+              <mat-error id="password-error" *ngIf="password?.hasError('required')">
                 Senha é obrigatória
               </mat-error>
-              <mat-error *ngIf="password?.hasError('minlength')">
+              <mat-error id="password-error" *ngIf="password?.hasError('minlength')">
                 Senha deve ter pelo menos 6 caracteres
               </mat-error>
             </mat-form-field>
@@ -109,9 +121,11 @@
               color="primary" 
               type="submit"
               class="login-button full-width"
-              [disabled]="isLoading">
-              <mat-spinner *ngIf="isLoading" diameter="20" class="button-spinner"></mat-spinner>
-              <mat-icon *ngIf="!isLoading">login</mat-icon>
+              [disabled]="isLoading"
+              [attr.aria-label]="isLoading ? 'Fazendo login, aguarde...' : 'Fazer login na barbearia'"
+              data-cy="desktop-login-button">
+              <mat-spinner *ngIf="isLoading" diameter="20" class="button-spinner" aria-hidden="true"></mat-spinner>
+              <mat-icon *ngIf="!isLoading" aria-hidden="true">login</mat-icon>
               <span>{{ isLoading ? 'Entrando...' : 'Entrar' }}</span>
             </button>
 

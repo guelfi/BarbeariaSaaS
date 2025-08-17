@@ -51,7 +51,11 @@
                                   FullWidth="true"
                                   Disabled="isLoading"
                                   Adornment="Adornment.Start"
-                                  AdornmentIcon="@Icons.Material.Filled.Email" />
+                                  AdornmentIcon="@Icons.Material.Filled.Email"
+                                  HelperText="Digite seu endereço de email administrativo"
+                                  aria-label="Campo de email para login administrativo"
+                                  AutoComplete="email"
+                                  data-cy="admin-email" />
 
                     <!-- Password Field -->
                     <MudTextField @bind-Value="loginRequest.Password"
@@ -65,7 +69,11 @@
                                   Disabled="isLoading"
                                   Adornment="Adornment.End"
                                   AdornmentIcon="@passwordIcon"
-                                  OnAdornmentClick="TogglePasswordVisibility" />
+                                  OnAdornmentClick="TogglePasswordVisibility"
+                                  HelperText="Digite sua senha administrativa (mínimo 8 caracteres)"
+                                  aria-label="Campo de senha para login administrativo"
+                                  AutoComplete="current-password"
+                                  data-cy="admin-password" />
 
                     <!-- Login Button -->
                     <MudButton ButtonType="ButtonType.Submit"
@@ -74,15 +82,17 @@
                                Size="Size.Large"
                                FullWidth="true"
                                Class="mb-4"
-                               Disabled="isLoading">
+                               Disabled="isLoading"
+                               aria-label="@(isLoading ? "Fazendo login, aguarde..." : "Fazer login no painel administrativo")"
+                               data-cy="admin-login-button">
                         @if (isLoading)
                         {
-                            <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
+                            <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" aria-hidden="true" />
                             <span>Entrando...</span>
                         }
                         else
                         {
-                            <MudIcon Icon="@Icons.Material.Filled.Login" Class="mr-2" />
+                            <MudIcon Icon="@Icons.Material.Filled.Login" Class="mr-2" aria-hidden="true" />
                             <span>Entrar</span>
                         }
                     </MudButton>
@@ -117,10 +127,53 @@
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
         border-radius: 12px !important;
         animation: fadeInUp 0.6s ease-out;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        will-change: transform, box-shadow;
+    }
+
+    .admin-login-card:hover {
+        transform: translateY(-2px) translateZ(0);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25) !important;
     }
 
     .login-logo {
         animation: pulse 2s infinite;
+    }
+
+    /* Animações para campos de entrada */
+    .mud-input-outlined {
+        transition: transform 0.3s ease;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        will-change: transform;
+    }
+
+    .mud-input-outlined:hover {
+        transform: translateY(-1px) translateZ(0);
+    }
+
+    /* Animação para mensagens de erro */
+    .mud-alert {
+        animation: slideInFromTop 0.4s ease-out;
+    }
+
+    /* Animação para botões */
+    .mud-button {
+        transition: transform 0.3s ease !important;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        will-change: transform;
+    }
+
+    .mud-button:hover {
+        transform: translateY(-1px) translateZ(0);
+    }
+
+    /* Animação para loading */
+    .mud-progress-circular {
+        animation: spin 1s linear infinite;
     }
 
     @keyframes fadeInUp {
@@ -140,6 +193,61 @@
         }
         50% {
             transform: scale(1.05);
+        }
+    }
+
+    @keyframes slideInFromTop {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Animação para elementos que aparecem em sequência */
+    .mud-card-content > * {
+        animation: fadeIn 0.5s ease-out;
+        animation-fill-mode: both;
+    }
+
+    .mud-card-content > *:nth-child(1) { animation-delay: 0.1s; }
+    .mud-card-content > *:nth-child(2) { animation-delay: 0.2s; }
+    .mud-card-content > *:nth-child(3) { animation-delay: 0.3s; }
+    .mud-card-content > *:nth-child(4) { animation-delay: 0.4s; }
+    .mud-card-content > *:nth-child(5) { animation-delay: 0.5s; }
+
+    /* Suporte a prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+        .admin-login-card,
+        .login-logo,
+        .mud-input-outlined,
+        .mud-button,
+        .mud-alert,
+        .mud-progress-circular,
+        .mud-card-content > * {
+            animation: none !important;
+            transition: none !important;
         }
     }
 

@@ -1,0 +1,233 @@
+// ==========================================================================
+// Mobile Animation Performance Mixins
+// ==========================================================================
+
+// Mobile-optimized hardware acceleration
+@mixin mobile-hw-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform, opacity;
+  -webkit-transform: translateZ(0); // iOS Safari optimization
+}
+
+// Touch-optimized animations (shorter durations for mobile)
+@mixin mobile-gpu-animation($property: transform, $duration: 0.25s, $easing: ease-out) {
+  @include mobile-hw-accelerated;
+  transition: #{$property} #{$duration} #{$easing};
+  
+  // Optimize for mobile browsers
+  -webkit-transition: #{$property} #{$duration} #{$easing};
+}
+
+// Mobile fade animation (faster)
+@mixin mobile-fade-animation($duration: 0.25s) {
+  @include mobile-hw-accelerated;
+  transition: opacity #{$duration} ease-out;
+  -webkit-transition: opacity #{$duration} ease-out;
+  
+  &.mobile-fade-enter {
+    opacity: 0;
+  }
+  
+  &.mobile-fade-enter-active {
+    opacity: 1;
+  }
+  
+  &.mobile-fade-leave {
+    opacity: 1;
+  }
+  
+  &.mobile-fade-leave-active {
+    opacity: 0;
+  }
+}
+
+// Mobile slide animation (optimized for touch)
+@mixin mobile-slide-animation($direction: up, $distance: 15px, $duration: 0.25s) {
+  @include mobile-hw-accelerated;
+  transition: transform #{$duration} cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              opacity #{$duration} ease-out;
+  -webkit-transition: -webkit-transform #{$duration} cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                      opacity #{$duration} ease-out;
+  
+  @if $direction == up {
+    &.mobile-slide-enter {
+      transform: translateY(#{$distance});
+      -webkit-transform: translateY(#{$distance});
+      opacity: 0;
+    }
+    
+    &.mobile-slide-enter-active {
+      transform: translateY(0);
+      -webkit-transform: translateY(0);
+      opacity: 1;
+    }
+  } @else if $direction == down {
+    &.mobile-slide-enter {
+      transform: translateY(-#{$distance});
+      -webkit-transform: translateY(-#{$distance});
+      opacity: 0;
+    }
+    
+    &.mobile-slide-enter-active {
+      transform: translateY(0);
+      -webkit-transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+// Touch-friendly button animation
+@mixin mobile-button-animation($scale: 0.98, $duration: 0.15s) {
+  @include mobile-hw-accelerated;
+  transition: transform #{$duration} ease-out;
+  -webkit-transition: -webkit-transform #{$duration} ease-out;
+  
+  &:active {
+    transform: scale(#{$scale});
+    -webkit-transform: scale(#{$scale});
+  }
+  
+  &:not(:active) {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+  }
+}
+
+// Mobile loading animation (battery efficient)
+@mixin mobile-loading-animation($duration: 1.2s) {
+  @include mobile-hw-accelerated;
+  animation: mobileLoading #{$duration} ease-in-out infinite;
+  
+  @keyframes mobileLoading {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.02);
+      opacity: 1;
+    }
+  }
+  
+  // Respect battery saving preferences
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+// Mobile stagger animation (optimized)
+@mixin mobile-stagger-animation($delay: 0.08s, $duration: 0.3s) {
+  @include mobile-hw-accelerated;
+  
+  > * {
+    opacity: 0;
+    transform: translateY(15px);
+    -webkit-transform: translateY(15px);
+    animation: mobileStaggerFadeIn #{$duration} ease-out forwards;
+    
+    @for $i from 1 through 8 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$delay * ($i - 1)};
+      }
+    }
+  }
+  
+  @keyframes mobileStaggerFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      -webkit-transform: translateY(0);
+    }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    > * {
+      animation: none;
+      opacity: 1;
+      transform: translateY(0);
+      -webkit-transform: translateY(0);
+    }
+  }
+}
+
+// PWA-specific animations
+@mixin pwa-route-animation($duration: 0.3s) {
+  @include mobile-hw-accelerated;
+  
+  &.route-enter {
+    transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    opacity: 0;
+  }
+  
+  &.route-enter-active {
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    opacity: 1;
+    transition: transform #{$duration} cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity #{$duration} ease-out;
+    -webkit-transition: -webkit-transform #{$duration} cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        opacity #{$duration} ease-out;
+  }
+  
+  &.route-leave {
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    opacity: 1;
+  }
+  
+  &.route-leave-active {
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    opacity: 0;
+    transition: transform #{$duration} cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity #{$duration} ease-out;
+    -webkit-transition: -webkit-transform #{$duration} cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        opacity #{$duration} ease-out;
+  }
+}
+
+// Error shake animation (mobile-optimized)
+@mixin mobile-error-shake($intensity: 8px, $duration: 0.4s) {
+  @include mobile-hw-accelerated;
+  animation: mobileErrorShake #{$duration} ease-in-out;
+  
+  @keyframes mobileErrorShake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-#{$intensity}); }
+    20%, 40%, 60%, 80% { transform: translateX(#{$intensity}); }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+// Performance classes
+.mobile-smooth {
+  @include mobile-hw-accelerated;
+}
+
+.mobile-60fps {
+  @include mobile-hw-accelerated;
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+// Battery optimization
+@media (prefers-reduced-motion: reduce) {
+  .mobile-battery-save {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+// Low power mode detection (iOS Safari)
+@media (prefers-reduced-motion: reduce) {
+  .mobile-low-power {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

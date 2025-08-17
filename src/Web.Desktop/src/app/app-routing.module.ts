@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
+import { PoliticaPrivacidadeComponent } from './pages/politica-privacidade/politica-privacidade.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,14 @@ const routes: Routes = [
     path: 'development',
     loadChildren: () => import('./features/development/development.module').then(m => m.DevelopmentModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'politica-privacidade',
+    component: PoliticaPrivacidadeComponent
+  },
+  {
+    path: 'termos-uso',
+    component: PoliticaPrivacidadeComponent // Reutilizando o mesmo componente por simplicidade
   },
   {
     path: '**',

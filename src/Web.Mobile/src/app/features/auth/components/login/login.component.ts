@@ -8,11 +8,29 @@ import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '@core/services/auth.service';
 import { LoginRequest, AuthError } from '@core/models/auth.models';
 import { BarbeariaSelectionComponent } from '../barbearia-selection/barbearia-selection.component';
+import { 
+  mobileSlideIn, 
+  mobileFadeIn, 
+  mobileScaleIn, 
+  mobileSlideUp, 
+  mobileStagger,
+  loadingPulse,
+  errorShake
+} from '@shared/animations/animations';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  animations: [
+    mobileSlideIn, 
+    mobileFadeIn, 
+    mobileScaleIn, 
+    mobileSlideUp, 
+    mobileStagger,
+    loadingPulse,
+    errorShake
+  ]
 })
 export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;

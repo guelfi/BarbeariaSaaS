@@ -5,6 +5,7 @@
 // 1. Abstracts
 @import 'abstracts/variables';
 @import 'abstracts/mixins';
+@import 'abstracts/animation-mixins';
 
 // 2. Base
 @import 'base/reset';
@@ -37,3 +38,4 @@
 // 6. Themes
 @import 'themes/light';
 @import 'themes/dark';
+@import 'themes/high-contrast';

@@ -1,0 +1,188 @@
+// ==========================================================================
+// Animation Performance Mixins
+// ==========================================================================
+
+// Hardware acceleration for smooth animations
+@mixin hw-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform, opacity;
+}
+
+// GPU-accelerated animations using transform and opacity only
+@mixin gpu-animation($property: transform, $duration: 0.3s, $easing: ease-out) {
+  @include hw-accelerated;
+  transition: #{$property} #{$duration} #{$easing};
+}
+
+// Optimized fade animation
+@mixin fade-animation($duration: 0.3s) {
+  @include hw-accelerated;
+  transition: opacity #{$duration} ease-out;
+  
+  &.fade-enter {
+    opacity: 0;
+  }
+  
+  &.fade-enter-active {
+    opacity: 1;
+  }
+  
+  &.fade-leave {
+    opacity: 1;
+  }
+  
+  &.fade-leave-active {
+    opacity: 0;
+  }
+}
+
+// Optimized slide animation
+@mixin slide-animation($direction: up, $distance: 20px, $duration: 0.3s) {
+  @include hw-accelerated;
+  transition: transform #{$duration} ease-out, opacity #{$duration} ease-out;
+  
+  @if $direction == up {
+    &.slide-enter {
+      transform: translateY(#{$distance});
+      opacity: 0;
+    }
+    
+    &.slide-enter-active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  } @else if $direction == down {
+    &.slide-enter {
+      transform: translateY(-#{$distance});
+      opacity: 0;
+    }
+    
+    &.slide-enter-active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  } @else if $direction == left {
+    &.slide-enter {
+      transform: translateX(#{$distance});
+      opacity: 0;
+    }
+    
+    &.slide-enter-active {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  } @else if $direction == right {
+    &.slide-enter {
+      transform: translateX(-#{$distance});
+      opacity: 0;
+    }
+    
+    &.slide-enter-active {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
+
+// Optimized scale animation
+@mixin scale-animation($scale: 0.9, $duration: 0.3s) {
+  @include hw-accelerated;
+  transition: transform #{$duration} ease-out, opacity #{$duration} ease-out;
+  
+  &.scale-enter {
+    transform: scale(#{$scale});
+    opacity: 0;
+  }
+  
+  &.scale-enter-active {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// Reduced motion support
+@mixin respect-reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+// Performance-optimized button hover
+@mixin button-hover-optimized($lift: 2px, $shadow-blur: 8px) {
+  @include hw-accelerated;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  
+  &:hover {
+    transform: translateY(-#{$lift});
+    box-shadow: 0 #{$shadow-blur} #{$shadow-blur * 2} rgba(0, 0, 0, 0.15);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    transition-duration: 0.1s;
+  }
+  
+  @include respect-reduced-motion;
+}
+
+// Loading animation optimized
+@mixin loading-pulse-optimized($scale: 1.05, $duration: 1.5s) {
+  @include hw-accelerated;
+  animation: loadingPulse #{$duration} ease-in-out infinite;
+  
+  @keyframes loadingPulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(#{$scale});
+      opacity: 0.8;
+    }
+  }
+  
+  @include respect-reduced-motion;
+}
+
+// Stagger animation for lists
+@mixin stagger-animation($delay: 0.1s, $duration: 0.4s) {
+  @include hw-accelerated;
+  
+  > * {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: staggerFadeIn #{$duration} ease-out forwards;
+    
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$delay * ($i - 1)};
+      }
+    }
+  }
+  
+  @keyframes staggerFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @include respect-reduced-motion;
+}
+
+// 60fps animation class
+.smooth-60fps {
+  @include hw-accelerated;
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+// Battery saving mode
+@media (prefers-reduced-motion: reduce) {
+  .battery-save {
+    animation: none !important;
+    transition: none !important;
+  }
+}
