@@ -49,7 +49,26 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": true
+                },
+                "fonts": true
+              },
+              "buildOptimizer": true,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "commonChunk": false,
+              "namedChunks": false,
+              "sourceMap": false,
+              "deleteOutputPath": true,
+              "preserveSymlinks": false,
+              "extractCss": true,
+              "subresourceIntegrity": true
             },
             "development": {
               "buildOptimizer": false,
@@ -64,6 +83,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 1002,
+            "host": "localhost"
+          },
           "configurations": {
             "production": {
               "buildTarget": "barbearia-web-desktop:build:production"
@@ -102,5 +125,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "b623196d-dfc6-496b-8f00-d17252f6c8b2"
   }
 }
