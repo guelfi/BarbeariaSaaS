@@ -1,0 +1,92 @@
+# Plano de Implementação - Processo de Build do Projeto Barbearia SaaS
+
+- [ ] 1. Configuração e Verificação Inicial do Ambiente
+  - [ ] 1.1 Validar instalação e configuração das ferramentas de build
+    - Confirmar .NET CLI (dotnet) instalado e funcional
+    - Confirmar npm e Angular CLI instalados e funcionais
+    - _Requisitos: BD.1.1_
+
+- [ ] 2. Build do Web.Mobile (Angular PWA)
+  - [ ] 2.1 Resolver problema de `main.ts` ausente
+    - [ ] 2.1.1 Investigar a causa da ausência do `main.ts`
+    - [ ] 2.1.2 Se necessário, criar um arquivo `main.ts` básico e configurar o `angular.json`
+    - _Requisitos: BD.2.1.1_
+  - [ ] 2.2 Ajustar caminhos de importação SCSS
+    - [ ] 2.2.1 Identificar `@import` relativos problemáticos nos arquivos `.scss`
+    - [ ] 2.2.2 Corrigir os caminhos para serem absolutos ou relativos corretamente
+    - _Requisitos: BD.2.1.2_
+  - [ ] 2.3 Corrigir erros de TypeScript
+    - [ ] 2.3.1 Analisar mensagens de erro do compilador TypeScript
+    - [ ] 2.3.2 Resolver erros de tipagem e módulos não encontrados
+    - _Requisitos: BD.2.1.3_
+  - [ ] 2.4 Tratar erros de escape de HTML
+    - [ ] 2.4.1 Identificar caracteres especiais (`@`) em templates HTML que causam erros
+    - [ ] 2.4.2 Escapar ou ajustar a sintaxe para evitar conflitos
+    - _Requisitos: BD.2.1.4_
+  - [ ] 2.5 Garantir importação de módulos Angular Material
+    - [ ] 2.5.1 Verificar se todos os módulos do Angular Material necessários estão importados nos `NgModule`s
+    - [ ] 2.5.2 Adicionar importações ausentes
+    - _Requisitos: BD.2.1.5_
+  - [ ] 2.6 Executar e verificar o build do Web.Mobile
+    - [ ] 2.6.1 Executar `npm install` na pasta `src/Web.Mobile`
+    - [ ] 2.6.2 Executar `npm run build` na pasta `src/Web.Mobile`
+    - [ ] 2.6.3 Verificar a saída do build para erros e avisos
+    - _Requisitos: BD.2.1.6_
+
+- [ ] 3. Build do Web.Desktop (Angular)
+  - [ ] 3.1 Ajustar caminhos de importação SCSS
+    - [ ] 3.1.1 Identificar `@import` relativos problemáticos nos arquivos `.scss`
+    - [ ] 3.1.2 Corrigir os caminhos para serem absolutos ou relativos corretamente
+    - _Requisitos: BD.3.1.1_
+  - [ ] 3.2 Corrigir erros de TypeScript
+    - [ ] 3.2.1 Analisar mensagens de erro do compilador TypeScript
+    - [ ] 3.2.2 Resolver erros de tipagem e módulos não encontrados (ex: `dashboard.module`)
+    - _Requisitos: BD.3.1.2_
+  - [ ] 3.3 Tratar erros de escape de HTML
+    - [ ] 3.3.1 Identificar caracteres especiais (`@`) em templates HTML que causam erros
+    - [ ] 3.3.2 Escapar ou ajustar a sintaxe para evitar conflitos
+    - _Requisitos: BD.3.1.3_
+  - [ ] 3.4 Garantir importação de módulos Angular Material
+    - [ ] 3.4.1 Verificar se todos os módulos do Angular Material necessários estão importados nos `NgModule`s
+    - [ ] 3.4.2 Adicionar importações ausentes
+    - _Requisitos: BD.3.1.4_
+  - [ ] 3.5 Executar e verificar o build do Web.Desktop
+    - [ ] 3.5.1 Executar `npm install` na pasta `src/Web.Desktop`
+    - [ ] 3.5.2 Executar `npm run build` na pasta `src/Web.Desktop`
+    - [ ] 3.5.3 Verificar a saída do build para erros e avisos
+    - _Requisitos: BD.3.1.5_
+
+- [ ] 4. Build do Web.Admin (Blazor Server)
+  - [ ] 4.1 Confirmar sucesso do build
+    - [ ] 4.1.1 Navegar até `src/Web.Admin`
+    - [ ] 4.1.2 Executar `dotnet build`
+    - [ ] 4.1.3 Verificar que o build é bem-sucedido
+    - _Requisitos: BD.4.1.1_
+  - [ ] 4.2 Documentar avisos existentes
+    - [ ] 4.2.1 Registrar avisos de segurança (`System.Text.Json`)
+    - [ ] 4.2.2 Registrar avisos de depreciação de Sass
+    - _Requisitos: BD.4.1.2_
+
+- [ ] 5. Build da API (.NET Core 8)
+  - [ ] 5.1 Localizar e executar o build da API
+    - [ ] 5.1.1 Navegar até `src/Api/Presentation/Barbearia.Api/`
+    - [ ] 5.1.2 Executar `dotnet build`
+    - [ ] 5.1.3 Verificar a saída do build para erros e avisos
+    - _Requisitos: BD.5.1.1_
+
+- [ ] 6. Estratégia de Tratamento de Erros (Aplicável a todos os builds)
+  - [ ] 6.1 Analisar a saída do build para identificar a causa raiz dos erros
+  - [ ] 6.2 Propor e implementar soluções específicas para cada erro
+  - [ ] 6.3 Re-executar o build e verificar a resolução
+  - [ ] 6.4 Documentar erros e soluções no `tasks.md` (e, se aplicável, no código)
+  - _Requisitos: BD.6.1, BD.6.2, BD.6.3, BD.6.4_
+
+- [ ] 7. Verificação Pós-Build
+  - [ ] 7.1 Realizar verificação básica para garantir que o projeto está em estado executável após cada build bem-sucedido
+  - _Requisitos: BD.7.1_
+
+- [ ] 8. Considerações de Performance e Segurança
+  - [ ] 8.1 Avaliar otimizações de tempo de build se o processo se tornar excessivamente longo
+  - [ ] 8.2 Garantir que o processo de build não introduza vulnerabilidades conhecidas (ex: dependências desatualizadas)
+  - [ ] 8.3 Registrar avisos de segurança (como os do `System.Text.Json`) para resolução futura
+  - _Requisitos: BD.8.1, BD.8.2, BD.8.3_
