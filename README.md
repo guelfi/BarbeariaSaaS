@@ -52,8 +52,8 @@ Sistema completo de gestão para barbearias com três frontends especializados:
 ## 🔐 Credenciais de Teste
 
 ### Administrador (Web.Admin)
-- **Email:** guelfi@msn.com
-- **Senha:** @5ST73EA4x
+- **Email:** admin@barbearia.com
+- **Senha:** @246!588Ai
 - **Acesso:** Painel administrativo completo
 
 ### Barbeiro (Web.Desktop)
