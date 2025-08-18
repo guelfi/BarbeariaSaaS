@@ -34,3 +34,13 @@ appsettings.Development.json
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Build artifacts and installed dependencies
+src/Web.Admin/bin/
+src/Web.Admin/obj/
+src/Web.Admin/wwwroot/
+src/Web.Desktop/.angular/
+src/Web.Desktop/node_modules/
+src/Web.Mobile/.angular/
+src/Web.Mobile/node_modules/
+logs/
