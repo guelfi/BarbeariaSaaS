@@ -88,8 +88,8 @@ Este documento define os requisitos para o desenvolvimento de três telas de log
 4. WHEN em diferentes dispositivos THEN o sistema SHALL manter usabilidade e legibilidade em todas as resoluções
 5. WHEN elementos interativos são usados THEN o sistema SHALL fornecer feedback visual imediato (hover, focus, active states)
 6. WHEN carregamento ocorre THEN o sistema SHALL exibir indicadores de progresso elegantes e informativos
-
-### Requirement 7 - Cadastro de Barbearias (SaaS Onboarding)
+### R
+equirement 7 - Cadastro de Barbearias (SaaS Onboarding)
 
 **User Story:** Como proprietário de barbearia, eu quero me cadastrar na plataforma SaaS de forma simples e intuitiva, para que eu possa começar a usar o sistema de gestão da minha barbearia como um novo tenant.
 
