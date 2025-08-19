@@ -49,6 +49,7 @@ Sistema completo de gestão para barbearias com três frontends especializados:
 | **Web.Admin** | http://localhost:4001 | Painel administrativo do SaaS |
 | **Web.Desktop** | http://localhost:4002 | Sistema para barbearias |
 | **Web.Mobile** | http://localhost:4003 | App PWA para clientes |
+| **API** | http://localhost:4004 | Backend da aplicação |
 
 ## 🔐 Credenciais de Teste
 
