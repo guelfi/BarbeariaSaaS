@@ -35,6 +35,7 @@ Sistema completo de gestão para barbearias com três frontends especializados:
 ./start-admin.sh    # Web.Admin na porta 4001
 ./start-desktop.sh  # Web.Desktop na porta 4002
 ./start-mobile.sh   # Web.Mobile na porta 4003
+./start-api.sh      # API na porta 4004
 ```
 
 ### Parar Todos os Projetos
