@@ -2,7 +2,7 @@
 [![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat&logo=dotnet)](https://dotnet.microsoft.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Blazor](https://img.shields.io/badge/Blazor-512BD4?style=flat&logo=blazor&logoColor=white)](https://blazor.net/)
-[![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat&logo=angular&logoColor=white)](https://angular.io/)
+[![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=white)](https://react.dev/)
 [![Sass](https://img.shields.io/badge/Sass-CC6699?style=flat&logo=sass&logoColor=white)](https://sass-lang.com/)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat&logo=nginx&logoColor=white)](https://nginx.org/)
@@ -19,8 +19,8 @@
 Sistema completo de gestão para barbearias com três frontends especializados:
 
 - 🔧 **Web.Admin** (Blazor Server + MudBlazor) - Painel administrativo
-- 💻 **Web.Desktop** (Angular + Material UI) - Sistema para barbearias  
-- 📱 **Web.Mobile** (Angular PWA + Material UI) - App para clientes
+- 💻 **Web.Desktop** (React + Vite) - Sistema para barbearias  
+- 📱 **Web.Mobile** (React PWA + Vite) - App para clientes
 
 ## 🚀 Execução Rápida
 
@@ -72,10 +72,9 @@ Sistema completo de gestão para barbearias com três frontends especializados:
 - .NET 8.0 SDK
 - ASP.NET Core Runtime
 
-### Para Web.Desktop e Web.Mobile (Angular)
+### Para Web.Desktop e Web.Mobile (React)
 - Node.js 18+
 - npm ou yarn
-- Angular CLI 17+
 
 ## 📱 Funcionalidades Implementadas
 
@@ -131,8 +130,8 @@ Sistema completo de gestão para barbearias com três frontends especializados:
 BarbeariaSaaS/
 ├── src/
 │   ├── Web.Admin/          # Blazor Server + MudBlazor
-│   ├── Web.Desktop/        # Angular + Material UI
-│   └── Web.Mobile/         # Angular PWA + Material UI
+│   ├── Web.Desktop/        # React + Vite
+│   └── Web.Mobile/         # React PWA + Vite
 ├── tests/
 │   ├── cypress/            # Testes E2E
 │   └── Api/                # Testes unitários C#
@@ -143,22 +142,18 @@ BarbeariaSaaS/
 ## 🎨 Tecnologias Utilizadas
 
 ### Frontend
-- **Angular 17** (Desktop + Mobile)
+- **React 18** (Desktop + Mobile)
 - **Blazor Server** (Admin)
-- **Angular Material UI**
+- **React UI Library (e.g., Material UI for React or Ant Design)**
 - **MudBlazor**
 - **SCSS/Sass**
-- **TypeScript**
 
 ### Testes
 - **Cypress** (E2E)
-- **Jest** (Unitários Angular)
 - **xUnit** (Unitários C#)
 
 ### Ferramentas
-- **Angular CLI**
 - **.NET CLI**
-- **Webpack**
 - **ESLint**
 - **Prettier**
 
@@ -211,14 +206,7 @@ npm install
 npx cypress open
 ```
 
-### Testes Unitários Angular
-```bash
-cd src/Web.Desktop
-npm test
 
-cd src/Web.Mobile  
-npm test
-```
 
 ### Testes Unitários C#
 ```bash
@@ -238,13 +226,15 @@ Os logs de execução são salvos em `./logs/`:
 ### Estrutura de Pastas
 ```
 src/[Frontend]/
-├── src/app/
-│   ├── core/              # Serviços principais
-│   ├── shared/            # Componentes compartilhados
-│   ├── features/          # Módulos de funcionalidades
-│   └── styles/            # Estilos SCSS
-├── tests/                 # Testes específicos
-└── assets/                # Assets estáticos
+├── src/                   # Código fonte (React)
+├── public/                # Recursos estáticos (React)
+├── styles/                # Arquivos Sass/SCSS
+│   ├── abstracts/         # Variáveis, mixins, funções
+│   ├── base/              # Reset, tipografia, elementos base
+│   ├── components/        # Estilos de componentes
+│   ├── layout/            # Header, footer, sidebar, grid
+│   ├── pages/             # Estilos específicos de páginas
+│   └── themes/            # Temas claro/escuro
 ```
 
 ### Comandos Úteis
