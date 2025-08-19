@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Script para iniciar apenas o Web.Desktop (Angular)
+# Script para iniciar apenas o Web.Desktop (React + Vite)
 
-echo "🚀 Iniciando Web.Desktop (Angular) na porta 4002..."
+echo "🚀 Iniciando Web.Desktop (React + Vite) na porta 4002..."
 echo ""
 
 # Verificar se a porta está disponível
@@ -25,4 +25,4 @@ echo "📋 Credencial de barbeiro: barbeiro@barbearia.com / Barbeiro123!"
 echo ""
 
 # Iniciar o projeto
-npm start
+npm run dev

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Script para iniciar apenas o Web.Mobile (Angular PWA)
+# Script para iniciar apenas o Web.Mobile (React PWA + Vite)
 
-echo "🚀 Iniciando Web.Mobile (Angular PWA) na porta 4003..."
+echo "🚀 Iniciando Web.Mobile (React PWA + Vite) na porta 4003..."
 echo ""
 
 # Verificar se a porta está disponível
@@ -25,4 +25,4 @@ echo "📋 Credencial de cliente: cliente@email.com / Cliente123!"
 echo ""
 
 # Iniciar o projeto
-npm start
+npm run dev

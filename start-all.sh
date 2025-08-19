@@ -3,8 +3,9 @@
 # Script para iniciar todos os projetos da Barbearia SaaS
 # Portas configuradas:
 # - Web.Admin (Blazor): http://localhost:4001
-# - Web.Desktop (Angular): http://localhost:4002  
-# - Web.Mobile (Angular PWA): http://localhost:4003
+# - Web.Desktop (React + Vite): http://localhost:4002  
+# - Web.Mobile (React PWA + Vite): http://localhost:4003
+# - API (.NET Core): http://localhost:4004
 
 echo "🚀 Iniciando todos os projetos da Barbearia SaaS..."
 echo ""
@@ -24,6 +25,7 @@ echo "🔍 Verificando disponibilidade das portas..."
 check_port 4001 || exit 1
 check_port 4002 || exit 1
 check_port 4003 || exit 1
+check_port 4004 || exit 1 # Adicionado para a API
 echo "✅ Todas as portas estão disponíveis!"
 echo ""
 
@@ -60,14 +62,20 @@ start_project "Web.Admin" "src/Web.Admin" "dotnet run --urls=http://localhost:40
 # Aguardar um pouco antes de iniciar os próximos
 sleep 2
 
-# Iniciar Web.Desktop (Angular)
-start_project "Web.Desktop" "src/Web.Desktop" "npm start" "4002"
+# Iniciar Web.Desktop (React + Vite)
+start_project "Web.Desktop" "src/Web.Desktop" "npm run dev" "4002"
+
+# Aguardar um pouco antes de iniciar o próximo
+sleep 2
+
+# Iniciar Web.Mobile (React PWA + Vite)
+start_project "Web.Mobile" "src/Web.Mobile" "npm run dev" "4003"
 
 # Aguardar um pouco antes de iniciar o último
 sleep 2
 
-# Iniciar Web.Mobile (Angular PWA)
-start_project "Web.Mobile" "src/Web.Mobile" "npm start" "4003"
+# Iniciar API (.NET Core)
+start_project "API" "src/Api/Presentation/Barbearia.Api" "dotnet run --project temp_barbearia_api.csproj --urls=http://localhost:4004" "4004"
 
 echo ""
 echo "🎉 Todos os projetos foram iniciados!"
@@ -76,6 +84,7 @@ echo "📱 URLs dos projetos:"
 echo "   🔧 Web.Admin:   http://localhost:4001"
 echo "   💻 Web.Desktop: http://localhost:4002"
 echo "   📱 Web.Mobile:  http://localhost:4003"
+echo "   🌐 API:         http://localhost:4004" # Adicionado para a API
 echo ""
 echo "📋 Credenciais de teste:"
 echo "   👨‍💼 Admin:    guelfi@msn.com / @5ST73EA4x"
@@ -109,6 +118,7 @@ check_running() {
 check_running "Web.Admin" "4001"
 check_running "Web.Desktop" "4002"
 check_running "Web.Mobile" "4003"
+check_running "API" "4004" # Adicionado para a API
 
 echo ""
 echo "🌐 Abra os URLs acima no seu navegador para testar os projetos!"

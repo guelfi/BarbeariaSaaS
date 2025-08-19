@@ -30,6 +30,7 @@ stop_project() {
 stop_project "Web.Admin"
 stop_project "Web.Desktop"
 stop_project "Web.Mobile"
+stop_project "API" # Adicionado para a API
 
 # Matar qualquer processo restante nas portas específicas
 echo ""
@@ -48,6 +49,7 @@ kill_port() {
 kill_port 4001
 kill_port 4002
 kill_port 4003
+kill_port 4004 # Adicionado para a API
 
 echo ""
 echo "✅ Todos os projetos foram parados!"
