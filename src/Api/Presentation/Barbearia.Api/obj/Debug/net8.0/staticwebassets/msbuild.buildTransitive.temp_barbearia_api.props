@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/temp_barbearia_api.props" />
+</Project>
