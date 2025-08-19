@@ -31,9 +31,9 @@ Sistema completo de gestão para barbearias com três frontends especializados:
 
 ### Iniciar Projetos Individualmente
 ```bash
-./start-admin.sh    # Web.Admin na porta 1001
-./start-desktop.sh  # Web.Desktop na porta 1002
-./start-mobile.sh   # Web.Mobile na porta 1003
+./start-admin.sh    # Web.Admin na porta 4001
+./start-desktop.sh  # Web.Desktop na porta 4002
+./start-mobile.sh   # Web.Mobile na porta 4003
 ```
 
 ### Parar Todos os Projetos
@@ -45,9 +45,9 @@ Sistema completo de gestão para barbearias com três frontends especializados:
 
 | Frontend | URL | Descrição |
 |----------|-----|-----------|
-| **Web.Admin** | http://localhost:1001 | Painel administrativo do SaaS |
-| **Web.Desktop** | http://localhost:1002 | Sistema para barbearias |
-| **Web.Mobile** | http://localhost:1003 | App PWA para clientes |
+| **Web.Admin** | http://localhost:4001 | Painel administrativo do SaaS |
+| **Web.Desktop** | http://localhost:4002 | Sistema para barbearias |
+| **Web.Mobile** | http://localhost:4003 | App PWA para clientes |
 
 ## 🔐 Credenciais de Teste
 
@@ -272,7 +272,7 @@ Os projetos estão configurados para deploy com:
 Para dúvidas ou problemas:
 1. Verifique os logs em `./logs/`
 2. Execute `./stop-all.sh` e `./start-all.sh`
-3. Verifique se as portas 1001-1003 estão livres
+3. Verifique se as portas 4001-4003 estão livres
 
 ---
 

@@ -2,9 +2,9 @@
 
 # Script para iniciar todos os projetos da Barbearia SaaS
 # Portas configuradas:
-# - Web.Admin (Blazor): http://localhost:1001
-# - Web.Desktop (Angular): http://localhost:1002  
-# - Web.Mobile (Angular PWA): http://localhost:1003
+# - Web.Admin (Blazor): http://localhost:4001
+# - Web.Desktop (Angular): http://localhost:4002  
+# - Web.Mobile (Angular PWA): http://localhost:4003
 
 echo "🚀 Iniciando todos os projetos da Barbearia SaaS..."
 echo ""
@@ -21,9 +21,9 @@ check_port() {
 
 # Verificar se as portas estão disponíveis
 echo "🔍 Verificando disponibilidade das portas..."
-check_port 1001 || exit 1
-check_port 1002 || exit 1
-check_port 1003 || exit 1
+check_port 4001 || exit 1
+check_port 4002 || exit 1
+check_port 4003 || exit 1
 echo "✅ Todas as portas estão disponíveis!"
 echo ""
 
@@ -55,27 +55,27 @@ start_project() {
 mkdir -p logs
 
 # Iniciar Web.Admin (Blazor)
-start_project "Web.Admin" "src/Web.Admin" "dotnet run --urls=http://localhost:1001" "1001"
+start_project "Web.Admin" "src/Web.Admin" "dotnet run --urls=http://localhost:4001" "4001"
 
 # Aguardar um pouco antes de iniciar os próximos
 sleep 2
 
 # Iniciar Web.Desktop (Angular)
-start_project "Web.Desktop" "src/Web.Desktop" "npm start" "1002"
+start_project "Web.Desktop" "src/Web.Desktop" "npm start" "4002"
 
 # Aguardar um pouco antes de iniciar o último
 sleep 2
 
 # Iniciar Web.Mobile (Angular PWA)
-start_project "Web.Mobile" "src/Web.Mobile" "npm start" "1003"
+start_project "Web.Mobile" "src/Web.Mobile" "npm start" "4003"
 
 echo ""
 echo "🎉 Todos os projetos foram iniciados!"
 echo ""
 echo "📱 URLs dos projetos:"
-echo "   🔧 Web.Admin:   http://localhost:1001"
-echo "   💻 Web.Desktop: http://localhost:1002"
-echo "   📱 Web.Mobile:  http://localhost:1003"
+echo "   🔧 Web.Admin:   http://localhost:4001"
+echo "   💻 Web.Desktop: http://localhost:4002"
+echo "   📱 Web.Mobile:  http://localhost:4003"
 echo ""
 echo "📋 Credenciais de teste:"
 echo "   👨‍💼 Admin:    guelfi@msn.com / @5ST73EA4x"
@@ -106,9 +106,9 @@ check_running() {
     fi
 }
 
-check_running "Web.Admin" "1001"
-check_running "Web.Desktop" "1002"
-check_running "Web.Mobile" "1003"
+check_running "Web.Admin" "4001"
+check_running "Web.Desktop" "4002"
+check_running "Web.Mobile" "4003"
 
 echo ""
 echo "🌐 Abra os URLs acima no seu navegador para testar os projetos!"

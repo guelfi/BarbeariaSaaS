@@ -3,7 +3,7 @@
 [![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat&logo=dotnet)](https://dotnet.microsoft.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Blazor](https://img.shields.io/badge/Blazor-512BD4?style=flat&logo=blazor&logoColor=white)](https://blazor.net/)
-[![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat&logo=angular&logoColor=white)](https://angular.io/)
+[![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=white)](https://react.dev/)
 [![Sass](https://img.shields.io/badge/Sass-CC6699?style=flat&logo=sass&logoColor=white)](https://sass-lang.com/)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat&logo=nginx&logoColor=white)](https://nginx.org/)
@@ -73,11 +73,18 @@ A aplicação será construída desde o início para suportar múltiplos inquili
 | **UI Library** | MudBlazor | Componentes Material Design |
 | **Styling** | Material UI + Sass/SCSS | Design system do Google com pré-processador CSS |
 
+### 💻 Aplicação Desktop Web
+| Componente | Tecnologia | Descrição |
+|------------|------------|-----------|
+| **Framework** | React + Vite | Sistema para barbearias |
+| **UI Library** | React UI Library (e.g., Material UI for React or Ant Design) | Componentes Material Design |
+| **Styling** | Sass/SCSS | Pré-processador CSS para estilos modulares e reutilizáveis |
+
 ### 📱 Aplicação Mobile Web 
 | Componente | Tecnologia | Descrição |
 |------------|------------|-----------|
-| **Framework** | Angular | PWA para clientes |
-| **UI Library** | Angular Material | Componentes Material Design |
+| **Framework** | React + Vite | PWA para clientes |
+| **UI Library** | React UI Library (e.g., Material UI for React or Ant Design) | Componentes Material Design |
 | **Styling** | Sass/SCSS | Pré-processador CSS para estilos modulares e reutilizáveis |
 | **Tipo** | Progressive Web App | Experiência nativa no mobile |
 
@@ -177,9 +184,9 @@ A estrutura de pastas do projeto foi desenhada para separar claramente as respon
 |   |   |   └── Barbearia.Infrastructure.Identity/  # Autenticação JWT
 |   |   └── Presentation/                           # Camada de apresentação
 |   |       └── Barbearia.Api/                      # Controllers e configuração da API
-|   ├── Web.Desktop/                                # Aplicação Angular Desktop
-|   |   ├── src/                                    # Código fonte Angular
-|   |   ├── assets/                                 # Recursos estáticos
+|   ├── Web.Desktop/                                # Aplicação React Desktop
+|   |   ├── src/                                    # Código fonte React
+|   |   ├── public/                                 # Recursos estáticos
 |   |   └── styles/                                 # Arquivos Sass/SCSS
 |   |       ├── abstracts/                          # Variáveis, mixins, funções
 |   |       ├── base/                               # Reset, tipografia, elementos base
@@ -188,9 +195,9 @@ A estrutura de pastas do projeto foi desenhada para separar claramente as respon
 |   |       ├── pages/                              # Estilos específicos de páginas
 |   |       ├── themes/                             # Temas claro/escuro
 |   |       └── main.scss                           # Arquivo principal de importação
-|   ├── Web.Mobile/                                 # PWA Angular Mobile
-|   |   ├── src/                                    # Código fonte Angular PWA
-|   |   ├── assets/                                 # Recursos estáticos mobile
+|   ├── Web.Mobile/                                 # PWA React Mobile
+|   |   ├── src/                                    # Código fonte React PWA
+|   |   ├── public/                                 # Recursos estáticos mobile
 |   |   └── styles/                                 # Arquivos Sass/SCSS mobile
 |   |       ├── abstracts/                          # Variáveis mobile, breakpoints
 |   |       ├── base/                               # Reset mobile, tipografia touch
@@ -253,7 +260,7 @@ A estrutura de pastas do projeto foi desenhada para separar claramente as respon
 
 ### Pré-requisitos
 - .NET 8.0 SDK
-- Node.js 18+ (para Angular)
+- Node.js 18+ (para React)
 - Sass/SCSS (para pré-processamento CSS)
 - MongoDB 7.0+
 - Docker & Docker Compose
@@ -287,10 +294,13 @@ docker run -d -p 27017:27017 --name mongodb mongo:7.0
 dotnet run --project src/Api/Presentation/Barbearia.Api/
 
 # Executar aplicação Desktop (quando implementado)
-dotnet run --project src/Web.Desktop/
+npm run dev --prefix src/Web.Desktop
 
 # Executar aplicação Mobile (quando implementado)
-cd src/Web.Mobile && ng serve
+npm run dev --prefix src/Web.Mobile
+
+# Executar aplicação Admin (quando implementado)
+dotnet run --project src/Web.Admin/
 
 # Executar testes E2E com Cypress (quando implementado)
 npx cypress open

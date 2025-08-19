@@ -1,8 +1,0 @@
-<!-- PWA Status Component - Invisible but handles notifications -->
-<div class="pwa-status-container">
-  <!-- Connection status indicator -->
-  <div class="connection-indicator" [class.offline]="!isOnline" [class.online]="isOnline">
-    <mat-icon *ngIf="isOnline">wifi</mat-icon>
-    <mat-icon *ngIf="!isOnline">wifi_off</mat-icon>
-  </div>
-</div>

@@ -45,9 +45,9 @@ kill_port() {
     fi
 }
 
-kill_port 1001
-kill_port 1002
-kill_port 1003
+kill_port 4001
+kill_port 4002
+kill_port 4003
 
 echo ""
 echo "✅ Todos os projetos foram parados!"

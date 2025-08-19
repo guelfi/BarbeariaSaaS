@@ -2,12 +2,12 @@
 
 # Script para iniciar apenas o Web.Mobile (Angular PWA)
 
-echo "🚀 Iniciando Web.Mobile (Angular PWA) na porta 1003..."
+echo "🚀 Iniciando Web.Mobile (Angular PWA) na porta 4003..."
 echo ""
 
 # Verificar se a porta está disponível
-if lsof -Pi :1003 -sTCP:LISTEN -t >/dev/null ; then
-    echo "⚠️  Porta 1003 já está em uso!"
+if lsof -Pi :4003 -sTCP:LISTEN -t >/dev/null ; then
+    echo "⚠️  Porta 4003 já está em uso!"
     exit 1
 fi
 

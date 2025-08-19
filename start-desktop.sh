@@ -2,12 +2,12 @@
 
 # Script para iniciar apenas o Web.Desktop (Angular)
 
-echo "🚀 Iniciando Web.Desktop (Angular) na porta 1002..."
+echo "🚀 Iniciando Web.Desktop (Angular) na porta 4002..."
 echo ""
 
 # Verificar se a porta está disponível
-if lsof -Pi :1002 -sTCP:LISTEN -t >/dev/null ; then
-    echo "⚠️  Porta 1002 já está em uso!"
+if lsof -Pi :4002 -sTCP:LISTEN -t >/dev/null ; then
+    echo "⚠️  Porta 4002 já está em uso!"
     exit 1
 fi
 
