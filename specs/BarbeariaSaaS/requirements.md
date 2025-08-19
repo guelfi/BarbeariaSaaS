@@ -1,119 +1,164 @@
-# Requisitos de Telas e Fluxos - SaaS para Barbearias
+# Requisitos Funcionais e de Negócio - Barbearia SaaS
 
-Este documento detalha os requisitos funcionais para as telas e fluxos de usuário da plataforma SaaS para Barbearias, com base na análise das imagens de design para as versões Mobile e Desktop.
+## 1. Visão Geral
 
-## 1. Visão Geral e Personas
+Este documento detalha os requisitos funcionais e de negócio para a plataforma Barbearia SaaS. A plataforma é projetada para ser um sistema multi-tenant, atendendo a dois públicos principais:
 
-O sistema atende a duas personas principais:
+-   **Clientes Finais (Usuários do PWA Mobile):** Pessoas que buscam, agendam e gerenciam serviços em barbearias.
+-   **Barbearias (Usuários do Dashboard Desktop):** Proprietários e gerentes que utilizam a plataforma para administrar seus negócios.
 
--   **Cliente:** Pessoa que busca e agenda serviços em barbearias.
--   **Dono/Gerente da Barbearia:** Administra o perfil da sua barbearia, serviços e agendamentos (persona inferida, telas não fornecidas).
+A arquitetura do sistema, tecnologias e status de desenvolvimento estão detalhados no documento `ArquiteturaProjeto.md`.
 
-## 2. Requisitos Funcionais Globais
+## 2. Requisitos Globais e Não Funcionais
 
--   **Design Responsivo:** A interface deve se adaptar de forma fluida entre os layouts de Desktop e Mobile.
--   **Autenticação de Usuário:**
-    -   [ ] Fluxo de Login/Logout para Clientes.
-    -   [ ] Fluxo de Cadastro de novos Clientes.
-    -   [ ] (Inferido) Sistema de autenticação para proprietários de barbearias.
+-   **Multi-Tenancy:** O sistema deve garantir o isolamento de dados entre as barbearias (tenants). O `TenantId` será identificado via token JWT e todas as consultas ao banco de dados (MongoDB) devem ser filtradas por este ID.
+-   **LGPD (Lei Geral de Proteção de Dados):** A plataforma deve estar 100% em conformidade com a Lei 13.709/2018. Isso inclui:
+    -   Banner de consentimento de cookies com controle granular.
+    -   Página de Política de Privacidade.
+    -   Garantia dos direitos do titular (acesso, correção, exclusão, etc.).
+    -   Para mais detalhes, consultar o `LGPD-README.md`.
+-   **Performance:** Otimização de carregamento (lazy loading, tree shaking), visando 60fps em dispositivos móveis e Core Web Vitals otimizados.
+-   **Segurança:** Autenticação baseada em JWT, comunicação interna entre serviços em rede Docker privada e proteção contra vulnerabilidades comuns.
+-   **Design Responsivo:** As interfaces devem ser fluidas e adaptáveis a diferentes tamanhos de tela, seguindo os layouts do `MaterialDesign`.
+-   **Acessibilidade (WCAG 2.1 AA):** Suporte a leitores de tela, navegação por teclado e modo de alto contraste.
 
-## 3. Fluxo do Cliente
+---
 
-### 3.1. Tela Inicial (Home)
+## 3. Aplicação Mobile (PWA para Clientes)
 
-**Objetivo:** Apresentar ao cliente uma visão geral dos serviços, barbearias populares e seus agendamentos.
+**Público-alvo:** Clientes de barbearias.**Tecnologia:** React + Vite (PWA).**Fonte de Design:** `/MaterialDesign/BarbeariaMobile/`
 
-**Componentes:**
--   **Cabeçalho:**
-    -   **Mobile:** Menu hambúrguer e logo.
-    -   **Desktop:** Logo, campo de busca, link para "Agendamentos" e perfil do usuário.
--   **Boas-vindas:** Mensagem de saudação para usuários logados (e.g., "Olá, Miguel!").
--   **Busca Rápida:**
-    -   Campo de busca principal.
-    -   **Mobile:** Filtros rápidos por tipo de serviço (Cabelo, Barba, etc.).
--   **Banner Promocional:** Espaço para destaque de promoções ou novidades.
--   **Seção "Agendamentos":**
-    -   Exibe o próximo agendamento confirmado do usuário.
-    -   Card com nome do serviço, nome da barbearia, data e hora.
--   **Listas de Barbearias:**
-    -   Carrosséis horizontais para "Recomendados", "Populares" e "Mais Visitados".
-    -   Cada item é um "Card de Barbearia".
--   **Card de Barbearia:**
-    -   Imagem da barbearia.
-    -   Nome da barbearia.
-    -   Endereço.
-    -   Nota de avaliação (e.g., 5.0 estrelas).
-    -   Botão "Reservar".
+### 3.1. Autenticação e Cadastro
 
-### 3.2. Busca
+-    **Fluxo de Login:** Permitir que o cliente se autentique com email e senha.
+-    **Fluxo de Cadastro:** Permitir que novos clientes criem uma conta.
+-    **Menu de Usuário:** Exibir o nome do usuário logado e a opção "Sair". Para usuários não logados, exibir "Olá. Faça seu login!".
 
-**Objetivo:** Permitir que o cliente encontre barbearias pelo nome.
+### 3.2. Tela Inicial (Home)
 
-**Componentes:**
--   Campo de texto para inserir o nome da barbearia.
--   Botão de busca.
--   **Tela de Resultados:**
-    -   Exibe o termo buscado (e.g., "Resultados para 'Vintage Barber'").
-    -   Lista de "Cards de Barbearia" que correspondem à busca.
+-    **Busca Rápida:** Campo de busca principal e filtros rápidos por tipo de serviço (Cabelo, Barba).
+-    **Saudação:** Mensagem de boas-vindas personalizada para usuários logados.
+-    **Próximo Agendamento:** Exibir um card com o próximo agendamento confirmado.
+-    **Carrosséis de Barbearias:** Listar barbearias nas categorias "Recomendados", "Populares" e "Mais Visitados".
+-    **Card de Barbearia:** Componente reutilizável exibindo imagem, nome, endereço, avaliação e botão "Reservar".
 
-### 3.3. Perfil da Barbearia
+### 3.3. Busca de Barbearias
 
-**Objetivo:** Fornecer informações detalhadas sobre uma barbearia e os serviços que ela oferece.
+-    **Funcionalidade de Busca:** Permitir a busca de barbearias por nome.
+-    **Página de Resultados:** Exibir os resultados da busca em uma lista de "Cards de Barbearia".
 
-**Componentes:**
--   Imagem de destaque da barbearia.
--   Nome, endereço e nota de avaliação.
--   Seção "Sobre Nós" com texto descritivo.
--   **Lista de Serviços:**
-    -   Cada serviço contém: imagem, nome, descrição e preço.
-    -   Botão "Reservar" para cada serviço.
--   **Informações de Contato:**
-    -   Telefones com botão para "Copiar".
--   **Horário de Funcionamento:**
-    -   Lista dos dias da semana com seus respectivos horários.
--   **Mapa:**
-    -   Componente de mapa interativo mostrando a localização da barbearia.
+### 3.4. Perfil da Barbearia
 
-### 3.4. Fluxo de Agendamento
+-    **Detalhes da Barbearia:** Exibir imagem de capa, nome, endereço, avaliação e descrição ("Sobre Nós").
+-    **Lista de Serviços:** Apresentar todos os serviços oferecidos, com imagem, nome, descrição, preço e botão "Reservar".
+-    **Informações Adicionais:** Exibir informações de contato (com botão para copiar) e horário de funcionamento.
+-    **Mapa de Localização:** Integrar um mapa interativo mostrando a localização da barbearia.
 
-**Objetivo:** Guiar o cliente na criação de uma nova reserva de serviço.
+### 3.5. Fluxo de Agendamento
 
-**Etapas:**
-1.  **Seleção do Serviço:** O fluxo é iniciado ao clicar em "Reservar" na tela de perfil da barbearia ou em um card de barbearia.
-2.  **Painel/Modal "Fazer Reserva":**
-    -   Exibe o serviço selecionado e o preço.
-    -   **Calendário:** Permite a seleção do dia.
-    -   **Seleção de Horário:** Exibe os horários disponíveis para o dia selecionado.
-    -   **Resumo da Reserva:** Mostra o serviço, data, horário e nome da barbearia.
-3.  **Confirmação:**
-    -   Botão "Confirmar" para finalizar o agendamento.
-    -   Após a confirmação, um pop-up de sucesso é exibido ("Reserva Efetuada!").
+-    **Seleção de Serviço:** Iniciar o fluxo ao clicar em "Reservar".
+-    **Modal "Fazer Reserva":**
+    -   Exibir o serviço e preço selecionados.
+    -   Apresentar um **calendário** para seleção do dia.
+    -   Mostrar os **horários disponíveis** para a data escolhida.
+-    **Confirmação:** Após confirmar, exibir um pop-up de sucesso ("Reserva Efetuada!").
 
-### 3.5. Tela de Agendamentos
+### 3.6. Tela "Meus Agendamentos"
 
-**Objetivo:** Permitir que o cliente visualize e gerencie seus agendamentos.
+-    **Listagem de Agendamentos:** Separar os agendamentos em abas: "Confirmados" e "Finalizados".
+-    **Card de Agendamento:** Exibir status, nome do serviço, nome da barbearia, data e hora.
+-    **Cancelamento:** Permitir que o usuário cancele um agendamento "Confirmado" através de um modal de confirmação.
 
-**Componentes:**
--   **Listas separadas:**
-    -   **Confirmados:** Agendamentos futuros.
-    -   **Finalizados:** Histórico de agendamentos passados.
--   **Card de Agendamento:**
-    -   Mostra o status ("Confirmado" ou "Finalizado").
-    -   Nome do serviço, nome da barbearia, data e hora.
--   **Detalhes do Agendamento (Desktop):**
-    -   Ao selecionar um agendamento, uma área de detalhes exibe o mapa, informações da barbearia e um botão para **"Cancelar Reserva"**.
--   **Modal de Cancelamento:**
-    -   Ao clicar em "Cancelar Reserva", um modal de confirmação é exibido para evitar cancelamentos acidentais.
+### 3.7. Funcionalidades PWA
 
-### 3.6. Menu de Navegação (Mobile)
+-    **Service Worker:** Implementar para funcionamento offline básico.
+-    **Instalação:** Permitir que o usuário instale o PWA na tela inicial do dispositivo.
+-    **Notificações Push:** (Sugerido) Enviar lembretes de agendamentos.
 
-**Objetivo:** Fornecer acesso rápido às principais seções do aplicativo.
+---
 
-**Componentes:**
--   Acessado pelo ícone de menu hambúrguer.
--   Exibe o status de login do usuário ("Olá. Faça seu login!" ou nome/email do usuário).
--   **Links de Navegação:**
-    -   Início
-    -   Agendamentos
-    -   Categorias de serviço (Cabelo, Barba, etc.)
-    -   Login / Sair da conta.
+## 4. Aplicação Desktop (Dashboard para Barbearias)
+
+**Público-alvo:** Donos e gerentes de barbearias (Tenants).**Tecnologia:** React + Vite.**Fonte de Design:** `/MaterialDesign/BardeariaDesktop/`
+
+### 4.1. Autenticação
+
+-    **Fluxo de Login:** Permitir que o usuário da barbearia (ex: `barbeiro@barbearia.com`) se autentique.
+-    **Gerenciamento de Sessão:** Manter o usuário logado de forma segura.
+
+### 4.2. Dashboard (Home Page)
+
+-    **Visão Geral:** Apresentar um resumo dos principais indicadores do dia/semana (agendamentos, faturamento, etc.).
+-    **Próximos Agendamentos:** Listar os próximos clientes a serem atendidos.
+-    **Atalhos Rápidos:** Botões para as ações mais comuns (ex: "Novo Agendamento", "Cadastrar Cliente").
+
+### 4.3. Gestão de Agendamentos
+
+-    **Visualização em Calendário:** Exibir todos os agendamentos (passados e futuros) em uma visão de calendário (dia/semana/mês).
+-    **Detalhes do Agendamento:** Ao clicar em um agendamento, exibir detalhes do cliente, serviço, data, hora e status.
+-    **Ações de Agendamento:**
+    -    Criar um novo agendamento para um cliente.
+    -    Remarcar um agendamento existente.
+    -    Cancelar um agendamento (com modal de confirmação).
+    -    Marcar um agendamento como "Finalizado".
+
+### 4.4. Gestão de Clientes
+
+-    **Lista de Clientes:** Exibir todos os clientes cadastrados na barbearia.
+-    **Busca de Clientes:** Permitir a busca de clientes por nome ou telefone.
+-    **Cadastro de Cliente:** Formulário para adicionar novos clientes.
+-    **Perfil do Cliente:** Visualizar o histórico de agendamentos e serviços de um cliente específico.
+
+### 4.5. Gestão de Serviços
+
+-    **Lista de Serviços:** Exibir todos os serviços oferecidos pela barbearia.
+-    **CRUD de Serviços:** Permitir criar, editar e excluir serviços (nome, descrição, preço, duração).
+
+### 4.6. Relatórios e Análises
+
+-    **Relatório Financeiro:** Gerar relatórios de faturamento por período.
+-    **Relatório de Serviços:** Mostrar os serviços mais populares.
+-    **Relatório de Clientes:** Listar os clientes mais frequentes.
+
+---
+
+## 5. Aplicação de Administração (SaaS Admin Dashboard)
+
+**Público-alvo:** Administradores da plataforma SaaS.**Tecnologia:** Blazor Server + MudBlazor.
+
+### 5.1. Autenticação
+
+-    **Fluxo de Login:** Permitir que o administrador (ex: `admin@barbearia.com`) se autentique com segurança.
+
+### 5.2. Dashboard Principal
+
+-    **Analytics da Plataforma:** Exibir métricas globais: número de tenants (barbearias) ativos, total de agendamentos, receita total da plataforma, etc.
+-    **Tenants Recentes:** Listar as últimas barbearias que se cadastraram.
+-    **Atividade do Sistema:** Mostrar um log de atividades importantes na plataforma.
+
+### 5.3. Gestão de Tenants (Barbearias)
+
+-    **Lista de Tenants:** Exibir todas as barbearias cadastradas na plataforma.
+-    **Busca e Filtragem:** Permitir buscar barbearias por nome ou plano e filtrar por status (ativo, inativo, pendente).
+-    **Detalhes do Tenant:** Visualizar todas as informações de uma barbearia, incluindo usuários, plano atual e histórico de pagamentos.
+-    **Ações de Gestão:**
+    -    Ativar ou desativar um tenant.
+    -    Alterar o plano de um tenant.
+    -    Acessar o dashboard do tenant (impersonificação para suporte).
+
+### 5.4. Gestão de Planos e Assinaturas
+
+-    **CRUD de Planos:** Permitir que o administrador crie, edite e exclua os planos de assinatura (ex: Básico, Profissional, Premium).
+-    **Definição de Recursos:** Para cada plano, definir os limites e recursos disponíveis (ex: número de usuários, número de agendamentos/mês, acesso a relatórios avançados).
+-    **Gestão de Assinaturas:** Visualizar todas as assinaturas ativas e seu status de pagamento.
+
+### 5.5. Configurações Globais
+
+-    **Configurações da Plataforma:** Gerenciar configurações que se aplicam a todo o sistema (ex: integrações de pagamento, configurações de e-mail).
+-    **Anúncios e Notificações:** Ferramenta para enviar anúncios ou notificações para todos os tenants.
+
+## 6. Status do Desenvolvimento (Avaliação)
+
+-   **Backend (.NET API):** A estrutura baseada em Clean Architecture está criada. É necessário implementar os endpoints para dar suporte a todas as funcionalidades descritas acima, incluindo a lógica de negócio multi-tenant.
+-   **Frontend (React):** Os projetos `Web.Mobile` e `Web.Desktop` estão inicializados. O próximo passo é desenvolver os componentes reutilizáveis (Cards, Calendário, Modais) e as telas, integrando-os com a API.
+-   **Banco de Dados (MongoDB):** O schema para as coleções (Barbearias, Clientes, Servicos, Agendamentos) precisa ser modelado e implementado, garantindo que cada documento contenha o campo `TenantId`.
