@@ -1,0 +1,1 @@
+analisar os arquivos *.png que estão nas pastas /MaterialDesign/BarbeariaMobile e /MaterialDesign/BarbeariaDesktop para extrair um documento de requerimento de telas e fluxos de desenvolvimento de projeto SaaS voltado para Barbearias gravar esse arqruivo de requerimentos dentro da pasta specs/AnaliseSaaSBarbearia
