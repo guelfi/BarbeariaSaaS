@@ -1,33 +1,39 @@
-using Barbearia.Api.Models;
-using Barbearia.Api.Services;
+using Barbearia.Application.Dtos;
+using Barbearia.Application.Features.Users.Commands.Login;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
-namespace Barbearia.Api.Controllers
+namespace Barbearia.Api.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class AuthController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class AuthController : ControllerBase
+    private readonly LoginService _loginService;
+    private readonly ILogger<AuthController> _logger;
+
+    public AuthController(LoginService loginService, ILogger<AuthController> logger)
     {
-        private readonly AuthService _authService;
+        _loginService = loginService;
+        _logger = logger;
+    }
 
-        public AuthController(AuthService authService)
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(LoginRequestDto request)
+    {
+        _logger.LogInformation("Received login request for email {Email}", request.Email);
+
+        var response = await _loginService.LoginAsync(request);
+
+        if (response == null)
         {
-            _authService = authService;
+            _logger.LogWarning("Login failed for email {Email}", request.Email);
+            return Unauthorized();
         }
 
-        [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginRequest request)
-        {
-            var user = _authService.Authenticate(request.Email, request.Password);
+        _logger.LogInformation("Login successful for email {Email}", request.Email);
 
-            if (user == null)
-            {
-                return Unauthorized(new LoginResponse { Success = false, Message = "Credenciais inválidas." });
-            }
-
-            var token = _authService.GenerateJwtToken(user);
-
-            return Ok(new LoginResponse { Success = true, Token = token, User = user });
-        }
+        return Ok(response);
     }
 }

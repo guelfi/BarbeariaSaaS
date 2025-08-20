@@ -17,5 +17,11 @@ cd src/Api/Presentation/Barbearia.Api
 echo "🔄 Iniciando Barbearia.Api..."
 echo ""
 
-# Iniciar o projeto
-dotnet run --project temp_barbearia_api.csproj --urls=http://localhost:4004
+# Iniciar o projeto em segundo plano
+dotnet run --project Barbearia.Api.csproj --urls=http://0.0.0.0:4004 &
+
+# Aguardar 1 minuto para a API inicializar completamente
+echo "Aguardando 1 minuto para a API inicializar..."
+sleep 60
+
+echo "API iniciada. Você pode executar os testes agora."

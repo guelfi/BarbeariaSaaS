@@ -1,4 +1,8 @@
-using Barbearia.Api.Services;
+using Barbearia.Application.Features.Users.Commands.Login;
+using Barbearia.Application.Services;
+using Barbearia.Domain;
+using Barbearia.Infrastructure.Data.Repositories;
+using Barbearia.Infrastructure.Identity.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -10,8 +14,10 @@ builder.Services.AddControllers(); // Add controllers for API endpoints
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Register AuthService
-builder.Services.AddSingleton<AuthService>();
+// Register Services
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<LoginService>();
 
 // Configure JWT Authentication
 builder.Services.AddAuthentication(options =>
@@ -28,7 +34,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
     };
 });
 
